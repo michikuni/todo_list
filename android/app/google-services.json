@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1010025590957",
+    "project_id": "monkey-todo-list",
+    "storage_bucket": "monkey-todo-list.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010025590957:android:5de919f0bb80077a291624",
+        "android_client_info": {
+          "package_name": "com.example.todo_list"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgLpmTV27fyN_V82R_Ltu3UGDwOHls1Fg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
