@@ -1,8 +1,18 @@
-import 'package:todo_list/domain/entities/auth.dart';
+abstract class SignupEvent {}
 
-abstract class SignupEvent{}
+class SignupSubmitEvent extends SignupEvent {}
 
-class SignupSubmitEvent extends SignupEvent{
-  final AuthEntity auth;
-  SignupSubmitEvent({required this.auth});
+class OnUsernameChanged extends SignupEvent {
+  final String userName;
+  OnUsernameChanged({required this.userName});
+}
+
+class OnPasswordChanged extends SignupEvent {
+  final String password;
+  OnPasswordChanged({required this.password});
+}
+
+class OnConfirmPasswordChanged extends SignupEvent{
+  final String confirmPassword;
+  OnConfirmPasswordChanged({required this.confirmPassword});
 }

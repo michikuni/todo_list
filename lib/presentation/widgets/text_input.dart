@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 
 class TextInputWidget extends StatelessWidget {
-  const TextInputWidget({super.key, required this.hint, required this.title});
+  const TextInputWidget({
+    super.key,
+    required this.isObscure,
+    required this.hint,
+    required this.title,
+    required this.onValueChanged,
+  });
+  final ValueChanged onValueChanged;
   final String title;
   final String hint;
+  final bool isObscure;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +45,7 @@ class TextInputWidget extends StatelessWidget {
             style: Theme.of(
               context,
             ).textTheme.displayLarge?.copyWith(color: AppColors.pureWhite),
-            obscureText: true,
+            obscureText: isObscure,
             decoration: InputDecoration(
               hint: Text(
                 hint,
@@ -48,6 +55,7 @@ class TextInputWidget extends StatelessWidget {
               ),
               border: InputBorder.none,
             ),
+            onChanged: onValueChanged,
           ),
         ),
       ],

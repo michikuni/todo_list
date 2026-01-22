@@ -38,15 +38,26 @@ class SigninPageWidget extends StatelessWidget {
                 TextInputWidget(
                   hint: SigninText.usernameHint,
                   title: SigninText.usernameTitle,
+                  onValueChanged: (value) {
+                    
+                  },
+                  isObscure: false,
                 ),
                 SizedBox(height: AppSizes.padding24),
                 TextInputWidget(
+                  isObscure: true,
+                  onValueChanged: (value) {
+                    
+                  },
                   hint: SigninText.passwordHint,
                   title: SigninText.passwordTitle,
                 ),
                 SizedBox(height: AppSizes.padding24),
                 SizedBox(height: AppSizes.padding68),
                 PrimaryButtonWidget(
+                  onPressed: () {
+                    
+                  },
                   height: AppSizes.authPrimaryButtonHeight,
                   text: SigninText.header,
                   width: double.infinity,

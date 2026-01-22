@@ -8,15 +8,17 @@ class PrimaryButtonWidget extends StatelessWidget {
     required this.height,
     required this.text,
     required this.width,
+    required this.onPressed
   });
   final double width;
   final double height;
   final String text;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onPressed,
       child: Container(
         width: width,
         height: height,

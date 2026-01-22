@@ -5,13 +5,19 @@ import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/signup_text.dart';
 import 'package:todo_list/presentation/bloc/signup/signup_bloc.dart';
+import 'package:todo_list/presentation/bloc/signup/signup_event.dart';
 import 'package:todo_list/presentation/bloc/signup/signup_state.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 import 'package:todo_list/presentation/widgets/text_input.dart';
 
-class SignupPageWidget extends StatelessWidget {
+class SignupPageWidget extends StatefulWidget {
   const SignupPageWidget({super.key});
 
+  @override
+  State<SignupPageWidget> createState() => _SignupPageWidgetState();
+}
+
+class _SignupPageWidgetState extends State<SignupPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,21 +59,45 @@ class SignupPageWidget extends StatelessWidget {
                     ),
                     SizedBox(height: AppSizes.padding24),
                     TextInputWidget(
+                      isObscure: false,
                       hint: SignupText.usernameHint,
                       title: SignupText.usernameTitle,
+                      onValueChanged: (value) {
+                        context.read<SignupBloc>().add(
+                          OnUsernameChanged(userName: value),
+                        );
+                      },
                     ),
                     SizedBox(height: AppSizes.padding24),
                     TextInputWidget(
+                      isObscure: true,
                       hint: SignupText.passwordHint,
                       title: SignupText.passwordTitle,
+                      onValueChanged: (value) {
+                        context.read<SignupBloc>().add(
+                          OnPasswordChanged(password: value),
+                        );
+                      },
                     ),
                     SizedBox(height: AppSizes.padding24),
                     TextInputWidget(
+                      isObscure: true,
+                      onValueChanged: (value) {
+                        context.read<SignupBloc>().add(
+                          OnConfirmPasswordChanged(confirmPassword: value),
+                        );
+                      },
                       hint: SignupText.passwordHint,
                       title: SignupText.confirmPasswordTitle,
                     ),
                     SizedBox(height: AppSizes.padding68),
                     PrimaryButtonWidget(
+                      onPressed: () {
+                        // print(state.username);
+                        // print(state.password);
+                        context.read<SignupBloc>().add(SignupSubmitEvent());
+                        context.go('/');
+                      },
                       height: AppSizes.authPrimaryButtonHeight,
                       text: SignupText.header,
                       width: double.infinity,
@@ -96,7 +126,7 @@ class SignupPageWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: AppSizes.authPageBottomPadding,)
+                    SizedBox(height: AppSizes.authPageBottomPadding),
                   ],
                 ),
               ),
