@@ -1,12 +1,24 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todo_list/data/models/auth.dart';
+import 'package:todo_list/data/models/auth_response.dart';
+import 'package:todo_list/domain/entities/auth.dart';
+import 'package:todo_list/domain/entities/auth_response.dart';
 
 class AuthMapper {
-  static AuthModel fromFirebase(UserCredential firebaseUser) {
+  static AuthResponseEntity toEntity(AuthResponseModel auth) {
+    return AuthResponseEntity(
+      creationAt: auth.creationAt,
+      name: auth.name,
+      email: auth.email,
+      role: auth.role,
+      updatedAt: auth.updatedAt,
+      avatar: auth.avatar,
+    );
+  }
+
+  static AuthModel toModel(AuthEntity auth) {
     return AuthModel(
-      uid: firebaseUser.user?.uid ?? '',
-      email: firebaseUser.user?.email ?? '',
-      createdTime: firebaseUser.user?.metadata.creationTime?.toIso8601String() ?? '',
+      email: auth.email,
+      password: auth.password,
     );
   }
 }
