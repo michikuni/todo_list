@@ -2,26 +2,55 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo_list/core/constants/api_endpoints.dart';
 import 'package:todo_list/core/error/exception.dart';
+import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
 import 'package:todo_list/data/datasources/remote/auth.dart';
 import 'package:todo_list/data/models/auth.dart';
 import 'package:todo_list/data/models/auth_response.dart';
 
 @LazySingleton(as: AuthDatasource)
 class AuthDatasourceImpl implements AuthDatasource {
-  final Dio dio;
-  AuthDatasourceImpl(this.dio);
+  final Dio unTokenDio;
+  final Dio tokenDio;
+  final TokenStorage tokenStorage;
+  AuthDatasourceImpl(
+    @Named('unTokenDio') this.unTokenDio,
+    @Named('tokenDio') this.tokenDio,
+    this.tokenStorage,
+  );
 
   @override
-  Future<AuthResponseModel> signup(AuthModel auth) async {
+  Future<SignupResponseModel> signup(SignupModel auth) async {
     try {
-      final response = await dio.post(
+      final response = await unTokenDio.post(
         ApiEndpoints.signupEndpoint,
         data: auth.toJson(auth),
       );
-      return AuthResponseModel.fromJson(response.data);
+      return SignupResponseModel.fromJson(response.data);
     } on DioException catch (e) {
-      if(e.type == DioExceptionType.connectionError){
+      if (e.type == DioExceptionType.connectionError) {
         throw NetworkException('No internet');
+      }
+      throw ServerException(
+        e.response?.data['message'],
+        statusCode: e.response?.statusCode,
+      );
+    }
+  }
+
+  @override
+  Future<SigninResponseModel> signin(SigninModel auth) async {
+    try {
+      final loginRes = await unTokenDio.post(
+        ApiEndpoints.signinEndpoint,
+        data: auth.toJson(auth),
+      );
+      await tokenStorage.saveAccessToken(loginRes.data['access_token']);
+      await tokenStorage.saveRefreshToken(loginRes.data['refresh_token']);
+      final response = await tokenDio.get(ApiEndpoints.profileEndpoint);
+      return SigninResponseModel.fromJson(response.data);
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError) {
+        throw NetworkException('No Interner');
       }
       throw ServerException(
         e.response?.data['message'],

@@ -1,28 +1,28 @@
-import 'package:todo_list/domain/entities/auth_response.dart';
+import 'package:formz/formz.dart';
+import 'package:todo_list/domain/entities/auth/auth_response.dart';
 
-enum SignupStatus { initial, progress, success, failure }
 
 class SignupState {
   final String username;
   final String password;
   final String confirmPassword;
-  final AuthResponseEntity auth;
-  final SignupStatus status;
+  final SignupResponseEntity auth;
+  final FormzSubmissionStatus status;
 
   const SignupState({
     this.username = '',
     this.password = '',
     this.confirmPassword = '',
-    this.status = SignupStatus.initial,
-    this.auth = const AuthResponseEntity(email: '', name: '', role: '', avatar: '', creationAt: '', updatedAt: '')
+    this.status = FormzSubmissionStatus.initial,
+    this.auth = const SignupResponseEntity(email: '', name: '', role: '', avatar: '', creationAt: '', updatedAt: '')
   });
 
   SignupState copyWith({
     String? username,
     String? password,
     String? confirmPassword,
-    SignupStatus? status,
-    AuthResponseEntity? auth
+    FormzSubmissionStatus? status,
+    SignupResponseEntity? auth
   }){
     return SignupState(
       username: username ?? this.username,

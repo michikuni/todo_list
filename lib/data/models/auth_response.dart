@@ -1,9 +1,9 @@
-import 'package:todo_list/domain/entities/auth_response.dart';
+import 'package:todo_list/domain/entities/auth/auth_response.dart';
 
-class AuthResponseModel extends AuthResponseEntity {
-  final String? id;
+class SignupResponseModel extends SignupResponseEntity {
+  final int? id;
   final String password;
-  AuthResponseModel({
+  SignupResponseModel({
     this.id,
     required super.email,
     required this.password,
@@ -13,8 +13,35 @@ class AuthResponseModel extends AuthResponseEntity {
     required super.creationAt,
     required super.updatedAt
   });
-  factory AuthResponseModel.fromJson(Map<String, dynamic> json) {
-    return AuthResponseModel(
+  factory SignupResponseModel.fromJson(Map<String, dynamic> json) {
+    return SignupResponseModel(
+      id: json['id'],
+      email: json['email'],
+      password: json['password'],
+      name: json['name'],
+      role: json['role'],
+      avatar: json['avatar'],
+      creationAt: json['creationAt'],
+      updatedAt: json['updatedAt'],
+    );
+  }
+}
+
+class SigninResponseModel extends SigninResponseEntity {
+  final int? id;
+  final String password;
+  SigninResponseModel({
+    this.id,
+    required super.email,
+    required this.password,
+    required super.name,
+    required super.role,
+    required super.avatar,
+    required super.creationAt,
+    required super.updatedAt
+  });
+  factory SigninResponseModel.fromJson(Map<String, dynamic> json) {
+    return SigninResponseModel(
       id: json['id'],
       email: json['email'],
       password: json['password'],

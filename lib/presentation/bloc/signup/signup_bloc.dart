@@ -1,24 +1,25 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_list/domain/entities/auth.dart';
+import 'package:formz/formz.dart';
+import 'package:todo_list/domain/entities/auth/auth.dart';
 import 'package:todo_list/domain/usecases/auth.dart';
 import 'package:todo_list/presentation/bloc/signup/signup_event.dart';
 import 'package:todo_list/presentation/bloc/signup/signup_state.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
-  final CreateAuthUseCase createAuth;
-  SignupBloc({required this.createAuth}) : super(SignupState()) {
+  final SignupUseCase signup;
+  SignupBloc({required this.signup}) : super(SignupState()) {
     
     //Click register post data register
     on<SignupSubmitEvent>((event, emit) async {
-      emit(state.copyWith(status: SignupStatus.progress));
+      emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
       print(state.username);
-      final response = await createAuth(AuthEntity(email: state.username, password: state.password));
+      final response = await signup(SignupEntity(email: state.username, password: state.password));
       response.fold(
         (onLeft) {
-          emit(state.copyWith(status: SignupStatus.failure));
+          emit(state.copyWith(status: FormzSubmissionStatus.failure));
         },
         (onRight) {
-          emit(state.copyWith(auth: onRight, status: SignupStatus.success));
+          emit(state.copyWith(auth: onRight, status: FormzSubmissionStatus.success));
         },
       );
     });

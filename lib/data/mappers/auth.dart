@@ -1,11 +1,11 @@
 import 'package:todo_list/data/models/auth.dart';
 import 'package:todo_list/data/models/auth_response.dart';
-import 'package:todo_list/domain/entities/auth.dart';
-import 'package:todo_list/domain/entities/auth_response.dart';
+import 'package:todo_list/domain/entities/auth/auth.dart';
+import 'package:todo_list/domain/entities/auth/auth_response.dart';
 
 class AuthMapper {
-  static AuthResponseEntity toEntity(AuthResponseModel auth) {
-    return AuthResponseEntity(
+  static SignupResponseEntity toSignupEntity(SignupResponseModel auth) {
+    return SignupResponseEntity(
       creationAt: auth.creationAt,
       name: auth.name,
       email: auth.email,
@@ -15,10 +15,22 @@ class AuthMapper {
     );
   }
 
-  static AuthModel toModel(AuthEntity auth) {
-    return AuthModel(
+  static SignupModel toSignupModel(SignupEntity auth) {
+    return SignupModel(email: auth.email, password: auth.password);
+  }
+
+  static SigninModel toSigninModel(SigninEntity auth) {
+    return SigninModel(email: auth.email, password: auth.password);
+  }
+
+  static SigninResponseEntity toSigninEntity(SigninResponseModel auth) {
+    return SigninResponseEntity(
       email: auth.email,
-      password: auth.password,
+      name: auth.name,
+      role: auth.role,
+      avatar: auth.avatar,
+      creationAt: auth.creationAt,
+      updatedAt: auth.updatedAt
     );
   }
 }
