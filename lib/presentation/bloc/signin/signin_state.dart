@@ -10,6 +10,7 @@ class SigninState {
     this.username = '',
     this.password = '',
     this.userData = const SigninResponseEntity(
+      id: 1,
       email: '',
       name: '',
       role: '',

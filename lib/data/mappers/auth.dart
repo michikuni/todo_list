@@ -25,6 +25,7 @@ class AuthMapper {
 
   static SigninResponseEntity toSigninEntity(SigninResponseModel auth) {
     return SigninResponseEntity(
+      id: auth.id,
       email: auth.email,
       name: auth.name,
       role: auth.role,

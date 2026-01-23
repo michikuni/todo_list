@@ -28,10 +28,9 @@ class SignupResponseModel extends SignupResponseEntity {
 }
 
 class SigninResponseModel extends SigninResponseEntity {
-  final int? id;
   final String password;
   SigninResponseModel({
-    this.id,
+    required super.id,
     required super.email,
     required this.password,
     required super.name,

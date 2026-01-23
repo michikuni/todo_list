@@ -4,6 +4,7 @@ import 'package:todo_list/core/di/injection.dart';
 import 'package:todo_list/domain/usecases/auth.dart';
 import 'package:todo_list/presentation/bloc/signin/signin_bloc.dart';
 import 'package:todo_list/presentation/bloc/signup/signup_bloc.dart';
+import 'package:todo_list/presentation/pages/home/home.dart';
 import 'package:todo_list/presentation/pages/signin/signin.dart';
 import 'package:todo_list/presentation/pages/signup/signup.dart';
 
@@ -11,7 +12,7 @@ class AppRouter {
   AppRouter._();
 
   static final GoRouter appRouters = GoRouter(
-    initialLocation: '/',
+    initialLocation: '/home',
     routes: [
       GoRoute(
         path: '/',
@@ -26,6 +27,10 @@ class AppRouter {
           create: (_) => SignupBloc(signup: getIt<SignupUseCase>()),
           child: const SignupPageWidget(),
         ),
+      ),
+      GoRoute(
+        path: '/home',
+        builder: (context, state) => const HomePageWidget(),
       ),
     ],
   );
