@@ -72,16 +72,19 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: SizedBox(
-                      width: 140,
-                      height: 48,
-                      child: Center(
-                        child: Text(
-                          'Cancel',
-                          style: Theme.of(context).textTheme.displayLarge
-                              ?.copyWith(color: AppColors.mediumSlateBlue),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        context.pop();
+                      },
+                      child: SizedBox(
+                        height: 48,
+                        child: Center(
+                          child: Text(
+                            'Cancel',
+                            style: Theme.of(context).textTheme.displayLarge
+                                ?.copyWith(color: AppColors.mediumSlateBlue),
+                          ),
                         ),
                       ),
                     ),

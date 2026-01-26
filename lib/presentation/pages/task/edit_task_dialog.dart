@@ -98,16 +98,17 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: SizedBox(
-                    width: 152,
-                    height: 48,
-                    child: Center(
-                      child: Text(
-                        'Cancel',
-                        style: Theme.of(context).textTheme.displayLarge
-                            ?.copyWith(color: AppColors.mediumSlateBlue),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: SizedBox(
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          'Cancel',
+                          style: Theme.of(context).textTheme.displayLarge
+                              ?.copyWith(color: AppColors.mediumSlateBlue),
+                        ),
                       ),
                     ),
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/presentation/pages/home/date_picker_dialog.dart';
+import 'package:todo_list/presentation/pages/home/priority_dialog.dart';
 
 class AddTaskDialog extends StatefulWidget {
   const AddTaskDialog({super.key});
@@ -100,16 +101,39 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                 ).textTheme.bodySmall?.copyWith(color: AppColors.pureWhite87),
               ),
             ),
-            SizedBox(height: 8,),
+            SizedBox(height: 8),
             Row(
               children: [
-                IconButton(onPressed: (){
-                  showDialog(context: context, builder: (context) => const DatePickerDialogCustom(),);
-                }, icon: Icon(Icons.timer_outlined, color: AppColors.pureWhite87,)),
-                IconButton(onPressed: (){}, icon: Icon(Icons.sell_outlined, color: AppColors.pureWhite87)),
-                IconButton(onPressed: (){}, icon: Icon(Icons.flag_outlined, color: AppColors.pureWhite87)),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const DatePickerDialogCustom(),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.timer_outlined,
+                    color: AppColors.pureWhite87,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.sell_outlined, color: AppColors.pureWhite87),
+                ),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const PriorityDialog(),
+                    );
+                  },
+                  icon: Icon(Icons.flag_outlined, color: AppColors.pureWhite87),
+                ),
                 Expanded(child: Container()),
-                IconButton(onPressed: (){}, icon: SvgPicture.asset('assets/icons/send.svg')),
+                IconButton(
+                  onPressed: () {},
+                  icon: SvgPicture.asset('assets/icons/send.svg'),
+                ),
               ],
             ),
           ],
