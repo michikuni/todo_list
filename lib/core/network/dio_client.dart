@@ -5,7 +5,7 @@ import 'package:todo_list/data/datasources/interceptor/token_interceptor.dart';
 
 @module
 abstract class DioClient {
-  @Named('tokenDio')
+  @Named(ApiEndpoints.tokenDioName)
   @lazySingleton
   Dio dio(TokenInterceptor tokenInterceptor) {
     final dio = Dio(
@@ -19,7 +19,7 @@ abstract class DioClient {
     return dio;
   }
 
-  @Named('unTokenDio')
+  @Named(ApiEndpoints.unTokenDioName)
   @lazySingleton
   Dio unTokenDio() {
     return Dio(
@@ -31,7 +31,7 @@ abstract class DioClient {
     );
   }
 
-  @Named('refreshDio')
+  @Named(ApiEndpoints.refreshDioName)
   @lazySingleton
   Dio refreshDio() => Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
 }

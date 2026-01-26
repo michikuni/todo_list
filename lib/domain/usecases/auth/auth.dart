@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:todo_list/core/error/failure.dart';
 import 'package:todo_list/domain/entities/auth/auth.dart';
 import 'package:todo_list/domain/entities/auth/auth_response.dart';
-import 'package:todo_list/domain/repositories/auth.dart';
+import 'package:todo_list/domain/repositories/auth/auth.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract class AuthUseCase {}

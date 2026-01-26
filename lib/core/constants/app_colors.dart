@@ -39,4 +39,5 @@ class AppColors {
   static const aquaSoft = Color(0xFF80FFD1);
   static const emeraldDark = Color(0xFF00A369);
   static const black = Color(0xFF000000);
+  static const eerieBlack = Color(0xFF1D1D1D);
 }

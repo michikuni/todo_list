@@ -5,4 +5,8 @@ class ApiEndpoints{
   static const profileEndpoint = '/auth/profile';
   static const refreshTokenEndpoint = '/auth/refresh-token';
   static const timeOut = 15;
+  static const tokenDioName = 'tokenDio';
+  static const unTokenDioName = 'unTokenDio';
+  static const refreshDioName = 'refreshDio';
+
 }

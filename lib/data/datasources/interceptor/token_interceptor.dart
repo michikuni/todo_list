@@ -4,12 +4,12 @@ import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
 
 @lazySingleton
 class TokenInterceptor extends Interceptor {
-  final Dio refreshDio;
+  // final Dio refreshDio;
   // final Dio tokenDio;
   final TokenStorage tokenStograge;
 
   TokenInterceptor(
-    @Named('refreshDio') this.refreshDio,
+    // @Named(ApiEndpoints.refreshDioName) this.refreshDio,/
     // @Named('tokenDio') this.tokenDio,
     this.tokenStograge,
   );

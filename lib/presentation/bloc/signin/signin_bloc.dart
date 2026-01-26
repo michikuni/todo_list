@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:todo_list/domain/entities/auth/auth.dart';
-import 'package:todo_list/domain/usecases/auth.dart';
+import 'package:todo_list/domain/usecases/auth/auth.dart';
 import 'package:todo_list/presentation/bloc/signin/signin_event.dart';
 import 'package:todo_list/presentation/bloc/signin/signin_state.dart';
 

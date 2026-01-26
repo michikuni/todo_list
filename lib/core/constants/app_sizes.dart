@@ -26,4 +26,26 @@ class AppSizes {
   static const double homePageEmptyContentTop = 8;
   static const double homePageEmptyInstructionTop = 12;
 
+  static const double taskAppBarIconSize = 32;
+  static const double taskAppBarIconRadius = 4;
+  static const double taskPageHorizontalMargin = 24;
+  static const double taskPageBottomHorizontalMargin = 24;
+  static const double taskTitleCircleCheckPaddingTop = 16;
+  static const double taskTitleSpace = 24;
+  static const double taskTitleTextPaddingTop = 12;
+  static const int taskTitleTextMaxLine = 1;
+  static const double taskTitleTextSpace = 16;
+  static const double taskTitleIconSize = 48;
+  static const double taskTitleToRowSpace = 40;
+  static const double taskRowHeight = 36;
+  static const double taskRowTitleSpace = 8;
+  static const double taskRowRadius = 6;
+  static const double taskRowSpace = 36;
+  static const double taskRowTimeDetailWidth = 108;
+  static const double taskRowCategoryDetailWidth = 116;
+  static const double taskRowPriorityDetailWidth = 72;
+  static const double taskRowSubDetailWidth = 104;
+  static const double taskRowCategoryIconSize = 20;
+  static const double taskRowCategoryDetailSpace = 4;
+
 }

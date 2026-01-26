@@ -4,8 +4,8 @@ import 'package:todo_list/core/constants/api_endpoints.dart';
 import 'package:todo_list/core/error/exception.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
 import 'package:todo_list/data/datasources/remote/auth.dart';
-import 'package:todo_list/data/models/auth.dart';
-import 'package:todo_list/data/models/auth_response.dart';
+import 'package:todo_list/data/models/auth/auth.dart';
+import 'package:todo_list/data/models/auth/auth_response.dart';
 
 @LazySingleton(as: AuthDatasource)
 class AuthDatasourceImpl implements AuthDatasource {
@@ -13,8 +13,8 @@ class AuthDatasourceImpl implements AuthDatasource {
   final Dio tokenDio;
   final TokenStorage tokenStorage;
   AuthDatasourceImpl(
-    @Named('unTokenDio') this.unTokenDio,
-    @Named('tokenDio') this.tokenDio,
+    @Named(ApiEndpoints.unTokenDioName) this.unTokenDio,
+    @Named(ApiEndpoints.tokenDioName) this.tokenDio,
     this.tokenStorage,
   );
 
@@ -47,6 +47,7 @@ class AuthDatasourceImpl implements AuthDatasource {
       await tokenStorage.saveAccessToken(loginRes.data['access_token']);
       await tokenStorage.saveRefreshToken(loginRes.data['refresh_token']);
       final response = await tokenDio.get(ApiEndpoints.profileEndpoint);
+      await tokenStorage.saveUserId(SigninResponseModel.fromJson(response.data).id);
       return SigninResponseModel.fromJson(response.data);
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionError) {
