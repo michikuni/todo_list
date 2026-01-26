@@ -31,6 +31,9 @@ class AppSizes {
   static const double taskPageHorizontalMargin = 24;
   static const double taskPageBottomHorizontalMargin = 24;
   static const double taskTitleCircleCheckPaddingTop = 16;
+  static const double taskTitleCircleCheckSize = 16;
+  static const double taskTitleCenterCircleCheckSize = 16;
+  static const double taskTitleCircleCheckBorderWidth = 2;
   static const double taskTitleSpace = 24;
   static const double taskTitleTextPaddingTop = 12;
   static const int taskTitleTextMaxLine = 1;
@@ -47,5 +50,7 @@ class AppSizes {
   static const double taskRowSubDetailWidth = 104;
   static const double taskRowCategoryIconSize = 20;
   static const double taskRowCategoryDetailSpace = 4;
+  static const double taskPrimaryButtonHeight = 48;
+
 
 }

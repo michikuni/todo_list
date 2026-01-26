@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 
-class TaskRowWidget extends StatelessWidget {
-  const TaskRowWidget({
+class TaskRow extends StatelessWidget {
+  const TaskRow({
     super.key,
     required this.taskRowHeight,
     required this.titleSpace,

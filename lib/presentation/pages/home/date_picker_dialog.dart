@@ -1,0 +1,234 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/presentation/pages/home/choose_time_dialog.dart';
+import 'package:todo_list/presentation/widgets/primary_button.dart';
+
+class DatePickerDialogCustom extends StatefulWidget {
+  const DatePickerDialogCustom({super.key});
+
+  @override
+  State<DatePickerDialogCustom> createState() => _DatePickerDialogCustomState();
+}
+
+class _DatePickerDialogCustomState extends State<DatePickerDialogCustom> {
+  DateTime currentDate = DateTime(2022, 2);
+  DateTime selectedDate = DateTime(2022, 2, 9);
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: AppColors.darkGrey,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _header(),
+            const SizedBox(height: 12),
+            _weekDays(),
+            const SizedBox(height: 8),
+            _calendar(),
+            const SizedBox(height: 16),
+            _actions(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _header() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconButton(
+          icon: const Icon(Icons.chevron_left, color: Colors.white),
+          onPressed: _previousMonth,
+        ),
+        Center(
+          child: Column(
+            children: [
+              Text(
+                _monthName(currentDate.month).toUpperCase(),
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  color: AppColors.pureWhite87,
+                ),
+              ),
+              Text(
+                currentDate.year.toString(),
+                style: Theme.of(
+                  context,
+                ).textTheme.labelSmall?.copyWith(color: AppColors.grey),
+              ),
+            ],
+          ),
+        ),
+        IconButton(
+          icon: const Icon(Icons.chevron_right, color: Colors.white),
+          onPressed: _nextMonth,
+        ),
+      ],
+    );
+  }
+
+  Widget _weekDays() {
+    const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: days.map((e) {
+        return Padding(
+          padding: const EdgeInsets.all(10),
+          child: Text(
+            e,
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              color: e == 'SUN' || e == 'SAT'
+                  ? AppColors.coralRed
+                  : AppColors.pureWhite87,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _calendar() {
+    final daysInMonth = _daysInMonth(currentDate);
+    final leadingEmpty = _leadingEmptyDays(currentDate);
+    final totalItems = leadingEmpty + daysInMonth;
+
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: totalItems,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 7,
+        crossAxisSpacing: 6,
+        mainAxisSpacing: 6,
+      ),
+      itemBuilder: (_, index) {
+        if (index < leadingEmpty) {
+          return const SizedBox();
+        }
+
+        final day = index - leadingEmpty + 1;
+
+        final isSelected =
+            selectedDate.year == currentDate.year &&
+            selectedDate.month == currentDate.month &&
+            selectedDate.day == day;
+
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              selectedDate = DateTime(currentDate.year, currentDate.month, day);
+            });
+          },
+          child: Container(
+            width: 24,
+            height: 24,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? AppColors.mediumSlateBlue
+                  : AppColors.jetBlack,
+              borderRadius: BorderRadius.circular(6),
+            ),
+            margin: EdgeInsets.all(4),
+            child: Text(
+              '$day',
+              style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                color: AppColors.pureWhite87,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _actions() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+          onTap: () {},
+          child: SizedBox(
+            width: 140,
+            height: 48,
+            child: Center(
+              child: Text(
+                'Cancel',
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  color: AppColors.mediumSlateBlue,
+                ),
+              ),
+            ),
+          ),
+        ),
+        PrimaryButtonWidget(
+          height: 48,
+          text: 'Choose Time',
+          width: 140,
+          onPressed: () {
+            context.pop();
+            showDialog(context: context, builder: (context) => const ChooseTimeDialog(),);
+          },
+        ),
+      ],
+    );
+  }
+
+  void _previousMonth() {
+    setState(() {
+      currentDate = DateTime(
+        currentDate.month == 1 ? currentDate.year - 1 : currentDate.year,
+        currentDate.month == 1 ? 12 : currentDate.month - 1,
+      );
+    });
+  }
+
+  void _nextMonth() {
+    setState(() {
+      currentDate = DateTime(
+        currentDate.month == 12 ? currentDate.year + 1 : currentDate.year,
+        currentDate.month == 12 ? 1 : currentDate.month + 1,
+      );
+    });
+  }
+
+  int _daysInMonth(DateTime date) {
+    final firstDayNextMonth = DateTime(date.year, date.month + 1, 1);
+    return firstDayNextMonth.subtract(const Duration(days: 1)).day;
+  }
+
+  String _monthName(int month) {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+    return months[month - 1];
+  }
+
+  int _leadingEmptyDays(DateTime date) {
+    final firstWeekday = _firstWeekdayOfMonth(date);
+    return firstWeekday % 7;
+  }
+
+  int _firstWeekdayOfMonth(DateTime date) {
+    return DateTime(date.year, date.month, 1).weekday;
+  }
+}

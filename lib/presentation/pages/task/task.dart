@@ -108,6 +108,9 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 ),
                 SizedBox(width: AppSizes.taskTitleSpace),
                 GestureDetector(
+                  onTap: () {
+                    
+                  },
                   child: SizedBox(
                     width: AppSizes.taskTitleIconSize,
                     height: AppSizes.taskTitleIconSize,
@@ -123,7 +126,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
             ),
             SizedBox(height: AppSizes.taskTitleToRowSpace),
             //Task Time Row
-            TaskRowWidget(
+            TaskRow(
               taskRowHeight: AppSizes.taskRowHeight,
               titleSpace: AppSizes.taskRowTitleSpace,
               titleText: TaskText.taskTimeText,
@@ -135,7 +138,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
             SizedBox(height: AppSizes.taskRowSpace),
             
             //Task Category Row
-            TaskRowWidget(
+            TaskRow(
               taskRowHeight: AppSizes.taskRowHeight,
               titleSpace: AppSizes.taskRowTitleSpace,
               titleText: TaskText.taskCategoryText,
@@ -150,7 +153,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
             SizedBox(height: AppSizes.taskRowSpace),
             
             //Task Priority Row
-            TaskRowWidget(
+            TaskRow(
               taskRowHeight: AppSizes.taskRowHeight,
               titleSpace: AppSizes.taskRowTitleSpace,
               titleText: TaskText.taskPriorityText,
@@ -162,7 +165,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
             SizedBox(height: AppSizes.taskRowSpace),
 
             //Task Sub Row
-            TaskRowWidget(
+            TaskRow(
               taskRowHeight: AppSizes.taskRowHeight,
               titleSpace: AppSizes.taskRowTitleSpace,
               titleText: TaskText.taskSubText,
@@ -177,9 +180,9 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
             Row(
               children: [
                 Icon(Icons.delete_outline_rounded, color: AppColors.coralRed),
-                SizedBox(width: 8),
+                SizedBox(width: AppSizes.taskRowTitleSpace),
                 Text(
-                  'Delete Task',
+                  TaskText.taskDeleteText,
                   style: Theme.of(
                     context,
                   ).textTheme.displayLarge?.copyWith(color: AppColors.coralRed),
@@ -190,12 +193,12 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
 
             //Button
             PrimaryButtonWidget(
-              height: 48,
-              text: 'Edit Task',
+              height: AppSizes.taskPrimaryButtonHeight,
+              text: TaskText.taskButtonPrimaryText,
               width: double.infinity,
               onPressed: () {},
             ),
-            SizedBox(height: 24),
+            SizedBox(height: AppSizes.taskPageBottomHorizontalMargin),
           ],
         ),
       ),

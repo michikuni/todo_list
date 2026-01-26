@@ -13,5 +13,6 @@ class TaskText {
   static const taskDefaultCategoryText = 'University';
   static const taskDefaultPriorityText = 'Default';
   static const taskDefaultSubText = 'Add Sub - Task';
+  static const taskButtonPrimaryText = 'Edit Task';
 
 }

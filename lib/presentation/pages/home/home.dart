@@ -5,6 +5,7 @@ import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/home_text.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
+import 'package:todo_list/presentation/pages/home/add_task_dialog.dart';
 
 class HomePageWidget extends StatelessWidget {
   const HomePageWidget({super.key});
@@ -18,7 +19,9 @@ class HomePageWidget extends StatelessWidget {
             height: 64,
             width: 64,
             child: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(context: context, builder: (context) => AddTaskDialog(),);
+              },
               backgroundColor: AppColors.mediumSlateBlue,
               shape: const CircleBorder(),
               child: const Icon(

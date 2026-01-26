@@ -17,7 +17,7 @@ class AppRouter {
   AppRouter._();
 
   static final GoRouter appRouters = GoRouter(
-    initialLocation: '/task',
+    initialLocation: '/home',
     routes: [
       GoRoute(
         path: '/',

@@ -1,0 +1,188 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/presentation/widgets/primary_button.dart';
+
+class ChooseTimeDialog extends StatefulWidget {
+  const ChooseTimeDialog({super.key});
+
+  @override
+  State<ChooseTimeDialog> createState() => _ChooseTimeDialogState();
+}
+
+class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
+  int hour = 8;
+  int minute = 20;
+  bool isAm = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: AppColors.darkGrey,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Choose Time',
+              style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                color: AppColors.pureWhite87,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const Divider(color: AppColors.mediumGrey),
+
+            const SizedBox(height: 20),
+
+            /// TIME PICKER
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _numberPicker(
+                  value: hour,
+                  min: 1,
+                  max: 12,
+                  onChanged: (v) => setState(() => hour = v),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(
+                    ':',
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                ),
+                _numberPicker(
+                  value: minute,
+                  min: 0,
+                  max: 59,
+                  padZero: true,
+                  onChanged: (v) => setState(() => minute = v),
+                ),
+                const SizedBox(width: 16),
+                _amPmPicker(),
+              ],
+            ),
+
+            const SizedBox(height: 16),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: SizedBox(
+                      width: 140,
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          'Cancel',
+                          style: Theme.of(context).textTheme.displayLarge
+                              ?.copyWith(color: AppColors.mediumSlateBlue),
+                        ),
+                      ),
+                    ),
+                  ),
+                  PrimaryButtonWidget(
+                    height: 48,
+                    text: 'Save',
+                    width: 140,
+                    onPressed: () {
+                      context.pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _numberPicker({
+    required int value,
+    required int min,
+    required int max,
+    required ValueChanged<int> onChanged,
+    bool padZero = false,
+  }) {
+    final controller = FixedExtentScrollController(initialItem: value - min);
+
+    return Container(
+      width: 64,
+      height: 64,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        color: AppColors.jetBlack,
+      ),
+      child: ListWheelScrollView.useDelegate(
+        controller: controller,
+        itemExtent: 24,
+        physics: const FixedExtentScrollPhysics(),
+        onSelectedItemChanged: (index) {
+          onChanged(index + min);
+        },
+        childDelegate: ListWheelChildBuilderDelegate(
+          childCount: max - min + 1,
+          builder: (_, index) {
+            final val = index + min;
+            final isSelected = val == value;
+
+            return Center(
+              child: Transform.scale(
+                scale: isSelected ? 1.5 : 1.0,
+                child: Text(
+                  padZero ? val.toString().padLeft(2, '0') : '$val',
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                    height: 1,
+                    fontWeight: FontWeight.w600,
+                    color: isSelected
+                        ? AppColors.pureWhite87
+                        : AppColors.pureWhite10,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _amPmPicker() {
+    return Container(
+      width: 64,
+      height: 64,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        color: AppColors.jetBlack,
+      ),
+      child: ListWheelScrollView(
+        itemExtent: 24,
+        physics: const FixedExtentScrollPhysics(),
+        controller: FixedExtentScrollController(initialItem: isAm ? 0 : 1),
+        onSelectedItemChanged: (index) {
+          setState(() => isAm = index == 0);
+        },
+        children: [_amPmItem('AM', isAm), _amPmItem('PM', !isAm)],
+      ),
+    );
+  }
+
+  Widget _amPmItem(String text, bool selected) {
+    return Center(
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+          height: 1,
+          fontWeight: FontWeight.w600,
+          color: selected ? AppColors.pureWhite87 : AppColors.pureWhite10,
+        ),
+      ),
+    );
+  }
+}
