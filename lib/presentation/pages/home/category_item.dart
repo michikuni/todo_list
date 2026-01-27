@@ -6,39 +6,58 @@ class CategoryItem extends StatelessWidget {
   final String icon;
   final String label;
   final Color color;
+  final bool isSelected;
+  final VoidCallback onTap;
 
   const CategoryItem({
     super.key,
     required this.icon,
     required this.label,
     required this.color,
+    required this.isSelected,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 556,
-      child: Column(
-        children: [
-          Container(
-            height: 64,
-            width: 64,
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(4),
+    return GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+        height: 90,
+        child: Column(
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              height: 64,
+              width: 64,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(4),
+                border: isSelected
+                    ? Border.all(color: Colors.white, width: 2)
+                    : null,
+                boxShadow: isSelected
+                    ? [
+                        BoxShadow(
+                          color: color.withValues(alpha: 0.6),
+                          blurRadius: 10,
+                        ),
+                      ]
+                    : [],
+              ),
+              padding: const EdgeInsets.all(16),
+              child: SvgPicture.asset(icon),
             ),
-            padding: EdgeInsets.all(16),
-            child: SvgPicture.asset(icon),
-          ),
-          SizedBox(height: 4),
-          Text(
-            label,
-            style: Theme.of(context).textTheme.displayMedium?.copyWith(
-              color: AppColors.pureWhite87,
-              fontWeight: FontWeight.w500,
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                color: isSelected ? Colors.white : AppColors.pureWhite87,
+                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

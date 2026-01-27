@@ -18,7 +18,7 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
 
     on<SigninSubmitEvent>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-      print('Name: ${state.username}');
+
       final response = await signin(
         SigninEntity(email: state.username, password: state.password),
       );
@@ -35,7 +35,6 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
           );
         },
       );
-
     });
   }
 }

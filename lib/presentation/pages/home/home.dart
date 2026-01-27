@@ -20,7 +20,16 @@ class HomePageWidget extends StatelessWidget {
             width: 64,
             child: FloatingActionButton(
               onPressed: () {
-                showDialog(context: context, builder: (context) => AddTaskDialog(),);
+                final homeBloc = context.read<HomeBloc>();
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return BlocProvider.value(
+                      value: homeBloc,
+                      child: AddTaskDialog(),
+                    );
+                  },
+                );
               },
               backgroundColor: AppColors.mediumSlateBlue,
               shape: const CircleBorder(),

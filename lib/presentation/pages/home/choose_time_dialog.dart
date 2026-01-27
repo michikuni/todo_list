@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
+import 'package:todo_list/presentation/bloc/home/home_event.dart';
+import 'package:todo_list/presentation/bloc/home/home_state.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
 class ChooseTimeDialog extends StatefulWidget {
@@ -17,90 +21,97 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      backgroundColor: AppColors.darkGrey,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Choose Time',
-              style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                color: AppColors.pureWhite87,
-                fontWeight: FontWeight.w500,
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) => Dialog(
+        backgroundColor: AppColors.darkGrey,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Choose Time',
+                style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  color: AppColors.pureWhite87,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
-            const Divider(color: AppColors.mediumGrey),
-
-            const SizedBox(height: 20),
-
-            /// TIME PICKER
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _numberPicker(
-                  value: hour,
-                  min: 1,
-                  max: 12,
-                  onChanged: (v) => setState(() => hour = v),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    ':',
-                    style: TextStyle(color: Colors.white, fontSize: 24),
-                  ),
-                ),
-                _numberPicker(
-                  value: minute,
-                  min: 0,
-                  max: 59,
-                  padZero: true,
-                  onChanged: (v) => setState(() => minute = v),
-                ),
-                const SizedBox(width: 16),
-                _amPmPicker(),
-              ],
-            ),
-
-            const SizedBox(height: 16),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              const Divider(color: AppColors.mediumGrey),
+      
+              const SizedBox(height: 20),
+      
+              /// TIME PICKER
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        context.pop();
-                      },
-                      child: SizedBox(
-                        height: 48,
-                        child: Center(
-                          child: Text(
-                            'Cancel',
-                            style: Theme.of(context).textTheme.displayLarge
-                                ?.copyWith(color: AppColors.mediumSlateBlue),
+                  _numberPicker(
+                    value: hour,
+                    min: 1,
+                    max: 12,
+                    onChanged: (v) => setState(() => hour = v),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      ':',
+                      style: TextStyle(color: Colors.white, fontSize: 24),
+                    ),
+                  ),
+                  _numberPicker(
+                    value: minute,
+                    min: 0,
+                    max: 59,
+                    padZero: true,
+                    onChanged: (v) => setState(() => minute = v),
+                  ),
+                  const SizedBox(width: 16),
+                  _amPmPicker(),
+                ],
+              ),
+      
+              const SizedBox(height: 16),
+      
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          context.pop();
+                        },
+                        child: SizedBox(
+                          height: 48,
+                          child: Center(
+                            child: Text(
+                              'Cancel',
+                              style: Theme.of(context).textTheme.displayLarge
+                                  ?.copyWith(color: AppColors.mediumSlateBlue),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  PrimaryButtonWidget(
-                    height: 48,
-                    text: 'Save',
-                    width: 140,
-                    onPressed: () {
-                      context.pop();
-                    },
-                  ),
-                ],
+                    PrimaryButtonWidget(
+                      height: 48,
+                      text: 'Save',
+                      width: 140,
+                      onPressed: () {
+                        final time = TimeOfDay(
+                          hour: isAm ? hour % 12 : hour + 12,
+                          minute: minute,
+                        );
+                        context.read<HomeBloc>().add(OnTimeChanged(time));
+                        context.pop();
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

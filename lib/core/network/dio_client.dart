@@ -22,13 +22,24 @@ abstract class DioClient {
   @Named(ApiEndpoints.unTokenDioName)
   @lazySingleton
   Dio unTokenDio() {
-    return Dio(
+    final dio = Dio(
       BaseOptions(
         baseUrl: ApiEndpoints.baseUrl,
         connectTimeout: const Duration(seconds: ApiEndpoints.timeOut),
         receiveTimeout: const Duration(seconds: ApiEndpoints.timeOut),
       ),
     );
+    // dio.interceptors.add(
+    //   LogInterceptor(
+    //     request: true,
+    //     // requestBody: true,
+    //     // responseBody: true,
+    //     // responseHeader: true,
+    //     // error: true,
+    //   ),
+    // );
+
+    return dio;
   }
 
   @Named(ApiEndpoints.refreshDioName)

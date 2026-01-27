@@ -11,8 +11,43 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({
     required this.getProfile,
     required this.tokenStorage,
-  }) : super(HomeState()) {
+  }) : super(HomeState.initial()) {
+    
+
+    // emit date
+    on<OnDateChanged>((event, emit) {
+      emit(state.copyWith(date: event.date));
+    },);
+
+    // emit event
+    on<OnContentChanged>((event, emit) {
+      emit(state.copyWith(content: event.content));
+    },);
+
+    // emit time
+    on<OnTimeChanged>((event, emit) {
+      final minutes = event.time.hour * 60 + event.time.minute;
+      emit(state.copyWith(minutes: minutes));
+    },);
+
+    // emit description
+    on<OnDescriptionChanged>((event, emit) {
+      emit(state.copyWith(description: event.description));
+    },);
+
+    // emit priority
+    on<OnPriorityChanged>((event, emit) {
+      emit(state.copyWith(priority: event.priority));
+    },);
+
+    // emit category
+    on<OnCategoryChanged>((event, emit) {
+      emit(state.copyWith(category: event.catergory));
+    },);
+
+    // get profile user
     on<GetProfileEvent>((event, emit) async {
+      emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
       final token = await tokenStorage.getAccessToken();
       if (token != null) {
         final response = await getProfile();

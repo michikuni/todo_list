@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
@@ -62,6 +63,9 @@ class SigninPageWidget extends StatelessWidget {
                     PrimaryButtonWidget(
                       onPressed: () {
                         context.read<SigninBloc>().add(SigninSubmitEvent());
+                        if(state.status == FormzSubmissionStatus.success){
+                          context.go('/home');
+                        }
                       },
                       height: AppSizes.authPrimaryButtonHeight,
                       text: SigninText.header,

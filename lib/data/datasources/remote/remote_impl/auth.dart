@@ -40,6 +40,7 @@ class AuthDatasourceImpl implements AuthDatasource {
   @override
   Future<SigninResponseModel> signin(SigninModel auth) async {
     try {
+      // print(auth.toJson(auth));
       final loginRes = await unTokenDio.post(
         ApiEndpoints.signinEndpoint,
         data: auth.toJson(auth),
@@ -47,14 +48,25 @@ class AuthDatasourceImpl implements AuthDatasource {
       await tokenStorage.saveAccessToken(loginRes.data['access_token']);
       await tokenStorage.saveRefreshToken(loginRes.data['refresh_token']);
       final response = await tokenDio.get(ApiEndpoints.profileEndpoint);
-      await tokenStorage.saveUserId(SigninResponseModel.fromJson(response.data).id);
+      await tokenStorage.saveUserId(
+        SigninResponseModel.fromJson(response.data).id,
+      );
       return SigninResponseModel.fromJson(response.data);
     } on DioException catch (e) {
-      if (e.type == DioExceptionType.connectionError) {
-        throw NetworkException('No Interner');
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.sendTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        throw NetworkException("Request timeout");
       }
+
+      if (e.type == DioExceptionType.connectionError) {
+        throw NetworkException("No Internet connection");
+      }
+
       throw ServerException(
-        e.response?.data['message'],
+        e.response?.data is Map
+            ? e.response?.data['message']
+            : e.response?.data?.toString() ?? "Server error",
         statusCode: e.response?.statusCode,
       );
     }
