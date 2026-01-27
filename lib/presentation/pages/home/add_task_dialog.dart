@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/presentation/pages/home/choose_category_dialog.dart';
 import 'package:todo_list/presentation/pages/home/date_picker_dialog.dart';
 import 'package:todo_list/presentation/pages/home/priority_dialog.dart';
 
@@ -117,7 +118,9 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(context: context, builder: (context) => const ChooseCategoryDialog(),);
+                  },
                   icon: Icon(Icons.sell_outlined, color: AppColors.pureWhite87),
                 ),
                 IconButton(
