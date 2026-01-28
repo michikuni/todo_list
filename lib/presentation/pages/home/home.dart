@@ -11,6 +11,7 @@ import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
 import 'package:todo_list/presentation/pages/home/components/bottom_nav_item.dart';
 import 'package:todo_list/presentation/pages/home/components/dropdown_button.dart';
+import 'package:todo_list/presentation/pages/home/components/uncomplete_todo_item.dart';
 import 'package:todo_list/presentation/pages/home/dialogs/add_task_dialog.dart';
 
 class HomePageWidget extends StatelessWidget {
@@ -192,14 +193,21 @@ class HomePageWidget extends StatelessWidget {
                           ),
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: FilterDropdown()),
+                            child: FilterDropdown(),
+                          ),
                           SizedBox(height: 16),
                           Expanded(
-                            child: ListView.builder(
+                            child: ListView.separated(
+                              padding: EdgeInsets.only(bottom: 20),
+                              separatorBuilder: (context, index) => SizedBox(height: 16,),
                               itemCount: state.listTodo.length,
                               itemBuilder: (context, index) {
-                                return Text(
-                                  state.listTodo[index].key.toString(),
+                                return UncompletedTodoItem(
+                                  content: state.listTodo[index].todo.content,
+                                  category: state.listTodo[index].todo.category,
+                                  description:
+                                      state.listTodo[index].todo.minutes.toString(),
+                                  priority: state.listTodo[index].todo.priority,
                                 );
                               },
                             ),
