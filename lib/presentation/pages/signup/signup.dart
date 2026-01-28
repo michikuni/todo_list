@@ -96,7 +96,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                         // print(state.username);
                         // print(state.password);
                         context.read<SignupBloc>().add(SignupSubmitEvent());
-                        context.go('/');
+                        context.go('/sign-in');
                       },
                       height: AppSizes.authPrimaryButtonHeight,
                       text: SignupText.header,

@@ -1,13 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
-import 'package:todo_list/presentation/pages/home/choose_category_dialog.dart';
-import 'package:todo_list/presentation/pages/home/date_picker_dialog.dart';
-import 'package:todo_list/presentation/pages/home/priority_dialog.dart';
+import 'package:todo_list/presentation/pages/home/dialogs/choose_category_dialog.dart';
+import 'package:todo_list/presentation/pages/home/dialogs/choose_date_dialog.dart';
+import 'package:todo_list/presentation/pages/home/dialogs/choose_priority_dialog.dart';
 
 class AddTaskDialog extends StatefulWidget {
   const AddTaskDialog({super.key});
@@ -33,11 +37,15 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
   Widget build(BuildContext context) {
     return BlocListener<HomeBloc, HomeState>(
       listener: (context, state) {
+        log(state.status.name);
         if(contentTextController.text != state.content){
           contentTextController.text = state.content;
         }
         if(descriptionTextController.text != state.description){
           descriptionTextController.text = state.description;
+        }
+        if(state.status == FormzSubmissionStatus.success){
+          context.pop();
         }
       },
       child: Dialog(
@@ -154,7 +162,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                         builder: (context) {
                           return BlocProvider.value(
                             value: homeBloc,
-                            child: DatePickerDialogCustom(),
+                            child: ChooseDateDialog(),
                           );
                         },
                       );
@@ -189,7 +197,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                         context: context,
                         builder: (context) => BlocProvider.value(
                           value: homeBloc,
-                          child: PriorityDialog(),
+                          child: ChoosePriorityDialog(),
                         ),
                       );
                     },
@@ -200,7 +208,9 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                   ),
                   Expanded(child: Container()),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<HomeBloc>().add(OnSubmited());
+                    },
                     icon: SvgPicture.asset('assets/icons/send.svg'),
                   ),
                 ],

@@ -36,3 +36,9 @@ class OnCategoryChanged extends HomeEvent{
 }
 
 class OnSubmited extends HomeEvent{}
+
+class GetTodoEvent extends HomeEvent{}
+
+class ResetAddTodoEvent extends HomeEvent {}
+
+class OnLoggingOut extends HomeEvent{}

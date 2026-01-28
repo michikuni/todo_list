@@ -5,7 +5,7 @@ import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
-import 'package:todo_list/presentation/pages/home/category_item.dart';
+import 'package:todo_list/presentation/pages/home/components/category_item.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
 class ChooseCategoryDialog extends StatefulWidget {

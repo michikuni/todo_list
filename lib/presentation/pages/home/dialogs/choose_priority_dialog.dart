@@ -7,14 +7,14 @@ import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
-class PriorityDialog extends StatefulWidget {
-  const PriorityDialog({super.key});
+class ChoosePriorityDialog extends StatefulWidget {
+  const ChoosePriorityDialog({super.key});
 
   @override
-  State<PriorityDialog> createState() => _PriorityDialogState();
+  State<ChoosePriorityDialog> createState() => _ChoosePriorityDialogState();
 }
 
-class _PriorityDialogState extends State<PriorityDialog> {
+class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
   int selected = 1;
 
   @override

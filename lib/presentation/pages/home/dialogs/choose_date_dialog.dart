@@ -5,17 +5,17 @@
   import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
   import 'package:todo_list/presentation/bloc/home/home_state.dart';
-  import 'package:todo_list/presentation/pages/home/choose_time_dialog.dart';
+  import 'package:todo_list/presentation/pages/home/dialogs/choose_time_dialog.dart';
   import 'package:todo_list/presentation/widgets/primary_button.dart';
 
-  class DatePickerDialogCustom extends StatefulWidget {
-    const DatePickerDialogCustom({super.key});
+  class ChooseDateDialog extends StatefulWidget {
+    const ChooseDateDialog({super.key});
 
     @override
-    State<DatePickerDialogCustom> createState() => _DatePickerDialogCustomState();
+    State<ChooseDateDialog> createState() => _ChooseDateDialogState();
   }
 
-  class _DatePickerDialogCustomState extends State<DatePickerDialogCustom> {
+  class _ChooseDateDialogState extends State<ChooseDateDialog> {
     DateTime currentDate = DateTime.now();
     DateTime selectedDate = DateTime.now();
 
