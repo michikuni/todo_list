@@ -1,7 +1,7 @@
-  import 'package:formz/formz.dart';
+import 'package:formz/formz.dart';
+import 'package:todo_list/domain/entities/todo/todo.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
 
-  enum Category { grocery, work, sports, design, university, social, music, health, movie, home, create }
   class HomeState {
     final int id;
     final String email;
@@ -23,8 +23,8 @@ import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
       this.avatar = '',
       this.status = FormzSubmissionStatus.initial,
       required this.date,
-      this.minutes = 0,
-      this.category = Category.home,
+      this.minutes = 500,
+      this.category = const Category(name: 'Home', color: 0xFFFF8080, icon: 'assets/icons/home.svg'),
       this.priority = 1,
       this.content = '',
       this.description = '',

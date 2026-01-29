@@ -59,7 +59,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final data = TodoEntity(
         content: state.content,
         description: state.description,
-        category: state.category.name,
+        category: state.category,
         priority: state.priority,
         date: state.date,
         minutes: state.minutes,
@@ -67,6 +67,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         email: state.email,
         name: state.name,
         avatar: state.avatar,
+        isDone: false
       );
       await addTodo(data);
       final latestTodo = await getTodo();

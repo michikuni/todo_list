@@ -56,7 +56,10 @@ class AppSizes {
   static const double uncompleteTodoItemPriorityWidth =  44;
   static const double uncompleteTodoItemPriorityHeight =  28;
   static const double uncompleteTodoItemCategoryHeight =  28;
-  static const double uncompleteTodoItemCategoryWidth =  88;
+  static const double uncompleteTodoItemCategoryPaddingHorizontal =  8;
+  static const double uncompleteTodoItemCategoryPaddingVertical =  4;
+  static const double uncompleteTodoItemCategoryIconSize =  14;
+  static const double uncompleteTodoItemCategoryIconSpaceRight =  4;
   static const double uncompleteTodoItemRadius =  4;
 
   static const double addTaskDialogRadius = 4;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 
 class TaskRow extends StatelessWidget {
@@ -26,7 +27,7 @@ class TaskRow extends StatelessWidget {
   final Color? detailColor;
   final String detailText;
   final Icon rowIcon;
-  final Icon? categoryIcon;
+  final SvgPicture? categoryIcon;
 
   @override
   Widget build(BuildContext context) {

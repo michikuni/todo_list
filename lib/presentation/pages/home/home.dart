@@ -13,14 +13,43 @@ import 'package:todo_list/presentation/pages/home/components/bottom_nav_item.dar
 import 'package:todo_list/presentation/pages/home/components/dropdown_button.dart';
 import 'package:todo_list/presentation/pages/home/components/uncomplete_todo_item.dart';
 import 'package:todo_list/presentation/pages/home/dialogs/add_task_dialog.dart';
+import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dart';
 
-class HomePageWidget extends StatelessWidget {
+class HomePageWidget extends StatefulWidget {
   const HomePageWidget({super.key});
+
+  @override
+  State<HomePageWidget> createState() => _HomePageWidgetState();
+}
+
+class _HomePageWidgetState extends State<HomePageWidget> {
+  TimeFilter selectedFilter = TimeFilter.all;
+  late TextEditingController searchController;
+
+  @override
+  void initState() {
+    super.initState();
+    searchController = TextEditingController()
+      ..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    searchController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
+        final filteredTodos = filterTodos(
+          list: state.listTodo,
+          timeFilter: selectedFilter,
+          searchText: searchController.text,
+        );
         return Scaffold(
           floatingActionButton: SizedBox(
             height: AppSizes.homeAddButtonSize,
@@ -67,18 +96,18 @@ class HomePageWidget extends StatelessWidget {
                       marginLeft: AppSizes.homeBottomNavItemSpace,
                     ),
                   ),
-                  BottomNavItem(
+                  const BottomNavItem(
                     icon: Icons.calendar_month_outlined,
                     label: "Calendar",
                     marginLeft: AppSizes.homeBottomNavItemSpace,
                   ),
-                  Spacer(),
-                  BottomNavItem(
+                  const Spacer(),
+                  const BottomNavItem(
                     icon: Icons.access_time,
                     label: "Focus",
                     marginRight: AppSizes.homeBottomNavItemSpace,
                   ),
-                  BottomNavItem(
+                  const BottomNavItem(
                     icon: Icons.person_outline_rounded,
                     label: "Profile",
                     marginRight: AppSizes.homeBottomNavItemSpace,
@@ -94,7 +123,7 @@ class HomePageWidget extends StatelessWidget {
             backgroundColor: AppColors.black,
             centerTitle: true,
             actions: [
-              CircleAvatar(
+              const CircleAvatar(
                 radius: AppSizes.homeAppBarAvatarSize,
                 child: Icon(Icons.ac_unit_rounded),
               ),
@@ -105,8 +134,8 @@ class HomePageWidget extends StatelessWidget {
                 context,
               ).textTheme.bodyMedium?.copyWith(color: AppColors.pureWhite87),
             ),
-            leading: Padding(
-              padding: const EdgeInsets.only(
+            leading: const Padding(
+              padding: EdgeInsets.only(
                 left: AppSizes.homeHorizontalPadding,
               ),
               child: Icon(
@@ -124,7 +153,7 @@ class HomePageWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  if (state.listTodo.isEmpty)
+                  if (filteredTodos.isEmpty)
                     Expanded(
                       child: Center(
                         child: Column(
@@ -132,13 +161,13 @@ class HomePageWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(HomeText.emptyImageAssets),
-                            SizedBox(height: AppSizes.homeEmptyContentTop),
+                            const SizedBox(height: AppSizes.homeEmptyContentTop),
                             Text(
                               HomeText.emptyContent,
                               style: Theme.of(context).textTheme.bodyMedium
                                   ?.copyWith(color: AppColors.pureWhite87),
                             ),
-                            SizedBox(height: AppSizes.homeEmptyInstructionTop),
+                            const SizedBox(height: AppSizes.homeEmptyInstructionTop),
                             Text(
                               HomeText.emptyInstruction,
                               style: Theme.of(context).textTheme.displayLarge
@@ -148,7 +177,7 @@ class HomePageWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                  if (state.listTodo.isNotEmpty)
+                  if (filteredTodos.isNotEmpty)
                     Expanded(
                       child: Column(
                         children: [
@@ -163,17 +192,18 @@ class HomePageWidget extends StatelessWidget {
                                 AppSizes.authTextFieldBorderRadius,
                               ),
                             ),
-                            margin: EdgeInsets.only(
+                            margin: const EdgeInsets.only(
                               top: AppSizes.homeSearchMarginTop,
                               bottom: AppSizes.homeSearchMarginTop,
                             ),
-                            padding: EdgeInsets.all(AppSizes.homeSearchPadding),
+                            padding: const EdgeInsets.all(AppSizes.homeSearchPadding),
                             child: Row(
                               children: [
                                 SvgPicture.asset('assets/icons/search.svg'),
-                                SizedBox(width: AppSizes.homeSearchPadding),
+                                const SizedBox(width: AppSizes.homeSearchPadding),
                                 Expanded(
                                   child: TextFormField(
+                                    controller: searchController,
                                     style: Theme.of(context)
                                         .textTheme
                                         .displayLarge
@@ -197,25 +227,27 @@ class HomePageWidget extends StatelessWidget {
                           ),
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: FilterDropdown(),
+                            child: FilterDropdown(
+                              initialValue: selectedFilter,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedFilter = value;
+                                });
+                              },
+                            ),
                           ),
-                          SizedBox(height: AppSizes.homeListSpaceTop),
+                          const SizedBox(height: AppSizes.homeListSpaceTop),
                           Expanded(
                             child: ListView.separated(
-                              padding: EdgeInsets.only(bottom: AppSizes.homeListPaddingBottom),
+                              padding: const EdgeInsets.only(
+                                bottom: AppSizes.homeListPaddingBottom,
+                              ),
                               separatorBuilder: (context, index) =>
-                                  SizedBox(height: AppSizes.homeListItemSpace),
-                              itemCount: state.listTodo.length,
+                                  const SizedBox(height: AppSizes.homeListItemSpace),
+                              itemCount: filteredTodos.length,
                               itemBuilder: (context, index) {
                                 return UncompletedTodoItem(
-                                  content: state.listTodo[index].todo.content,
-                                  category: state.listTodo[index].todo.category,
-                                  description: state
-                                      .listTodo[index]
-                                      .todo
-                                      .minutes
-                                      .toString(),
-                                  priority: state.listTodo[index].todo.priority,
+                                  todo: filteredTodos[index],
                                 );
                               },
                             ),

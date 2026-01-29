@@ -11,7 +11,7 @@ class TodoMapper {
     return TodoEntity(
       content: todo.content,
       description: todo.description,
-      category: todo.category,
+      category: Category(name: todo.categoryName, color: todo.categoryColor, icon: todo.categoryIcon),
       priority: todo.priority,
       date: todo.date,
       minutes: todo.minutes,
@@ -19,6 +19,7 @@ class TodoMapper {
       email: todo.email,
       name: todo.name,
       avatar: todo.avatar,
+      isDone: todo.isDone
     );
   }
 
@@ -26,7 +27,9 @@ class TodoMapper {
     return TodoModel(
       content: todo.content,
       description: todo.description,
-      category: todo.category,
+      categoryName: todo.category.name,
+      categoryColor: todo.category.color,
+      categoryIcon: todo.category.icon,
       priority: todo.priority,
       date: todo.date,
       minutes: todo.minutes,
@@ -34,6 +37,7 @@ class TodoMapper {
       email: todo.email,
       name: todo.name,
       avatar: todo.avatar,
+      isDone: todo.isDone
     );
   }
 }

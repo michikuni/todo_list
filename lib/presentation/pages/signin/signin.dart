@@ -37,7 +37,7 @@ class SigninPageWidget extends StatelessWidget {
           builder: (context, state) {
             return SafeArea(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(
+                padding: EdgeInsets.fromLTRB(
                   AppSizes.authPageHorizontalPadding,
                   AppSizes.signinPageTopPadding,
                   AppSizes.authPageHorizontalPadding,

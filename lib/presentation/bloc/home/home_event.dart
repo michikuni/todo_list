@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/presentation/bloc/home/home_state.dart';
+import 'package:todo_list/domain/entities/todo/todo.dart';
 
 abstract class HomeEvent {}
 

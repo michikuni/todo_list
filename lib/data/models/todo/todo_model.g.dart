@@ -19,7 +19,9 @@ class TodoModelAdapter extends TypeAdapter<TodoModel> {
     return TodoModel(
       content: fields[0] as String,
       description: fields[1] as String,
-      category: fields[4] as String,
+      categoryName: fields[4] as String,
+      categoryColor: fields[10] as int,
+      categoryIcon: fields[11] as String,
       priority: fields[5] as int,
       date: fields[2] as DateTime,
       minutes: fields[3] as int,
@@ -27,13 +29,14 @@ class TodoModelAdapter extends TypeAdapter<TodoModel> {
       email: fields[7] as String,
       name: fields[8] as String,
       avatar: fields[9] as String,
+      isDone: fields[12] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, TodoModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.content)
       ..writeByte(1)
@@ -43,7 +46,7 @@ class TodoModelAdapter extends TypeAdapter<TodoModel> {
       ..writeByte(3)
       ..write(obj.minutes)
       ..writeByte(4)
-      ..write(obj.category)
+      ..write(obj.categoryName)
       ..writeByte(5)
       ..write(obj.priority)
       ..writeByte(6)
@@ -53,7 +56,13 @@ class TodoModelAdapter extends TypeAdapter<TodoModel> {
       ..writeByte(8)
       ..write(obj.name)
       ..writeByte(9)
-      ..write(obj.avatar);
+      ..write(obj.avatar)
+      ..writeByte(10)
+      ..write(obj.categoryColor)
+      ..writeByte(11)
+      ..write(obj.categoryIcon)
+      ..writeByte(12)
+      ..write(obj.isDone);
   }
 
   @override

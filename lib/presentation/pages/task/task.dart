@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/task_text.dart';
+import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
+import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dart';
 import 'package:todo_list/presentation/pages/task/components/task_row_component.dart';
 import 'package:todo_list/presentation/widgets/circle_check.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
 class TaskPageWidget extends StatefulWidget {
-  const TaskPageWidget({super.key});
+  const TaskPageWidget({super.key, required this.todo});
+  final TodoWithKeyEntity todo;
   @override
   State<TaskPageWidget> createState() => _TaskPageWidgetState();
 }
@@ -20,18 +25,21 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
       appBar: AppBar(
         backgroundColor: AppColors.black,
         leading: Center(
-          child: Container(
-            width: AppSizes.taskAppBarIconSize,
-            height: AppSizes.taskAppBarIconSize,
-            margin: EdgeInsets.only(left: AppSizes.taskPageHorizontalMargin),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                AppSizes.taskAppBarIconRadius,
+          child: GestureDetector(
+            onTap: () => context.pop(),
+            child: Container(
+              width: AppSizes.taskAppBarIconSize,
+              height: AppSizes.taskAppBarIconSize,
+              margin: EdgeInsets.only(left: AppSizes.taskPageHorizontalMargin),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  AppSizes.taskAppBarIconRadius,
+                ),
+                color: AppColors.eerieBlack,
               ),
-              color: AppColors.eerieBlack,
-            ),
-            child: Center(
-              child: Icon(Icons.close_rounded, color: AppColors.pureWhite87),
+              child: Center(
+                child: Icon(Icons.close_rounded, color: AppColors.pureWhite87),
+              ),
             ),
           ),
         ),
@@ -88,7 +96,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                     children: [
                       SizedBox(height: AppSizes.taskTitleTextPaddingTop),
                       Text(
-                        TaskText.taskTitleDefaultContentText,
+                        widget.todo.todo.content,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: AppColors.pureWhite87,
                         ),
@@ -97,7 +105,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                       ),
                       SizedBox(height: AppSizes.taskTitleTextSpace),
                       Text(
-                        TaskText.taskTitleDesciptText,
+                        widget.todo.todo.description,
                         style: Theme.of(context).textTheme.displayLarge
                             ?.copyWith(color: AppColors.grey),
                         maxLines: AppSizes.taskTitleTextMaxLine,
@@ -106,7 +114,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                     ],
                   ),
                 ),
-                SizedBox(width: AppSizes.taskTitleSpace),
+                const SizedBox(width: AppSizes.taskTitleSpace),
                 GestureDetector(
                   onTap: () {
                     
@@ -124,7 +132,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 ),
               ],
             ),
-            SizedBox(height: AppSizes.taskTitleToRowSpace),
+            const SizedBox(height: AppSizes.taskTitleToRowSpace),
             //Task Time Row
             TaskRow(
               taskRowHeight: AppSizes.taskRowHeight,
@@ -132,10 +140,10 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
               titleText: TaskText.taskTimeText,
               detailWidth: AppSizes.taskRowTimeDetailWidth,
               detailBorderRadius: AppSizes.taskRowRadius,
-              detailText: TaskText.taskDefaultTimeText,
+              detailText: formatDateWithMinutes(widget.todo.todo.date, widget.todo.todo.minutes),
               rowIcon: Icon(Icons.timer_outlined, color: AppColors.pureWhite87,),
             ),
-            SizedBox(height: AppSizes.taskRowSpace),
+            const SizedBox(height: AppSizes.taskRowSpace),
             
             //Task Category Row
             TaskRow(
@@ -144,13 +152,14 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
               titleText: TaskText.taskCategoryText,
               detailWidth: AppSizes.taskRowCategoryDetailWidth,
               detailBorderRadius: AppSizes.taskRowRadius,
-              detailText: TaskText.taskDefaultCategoryText,
+              detailText: widget.todo.todo.category.name,
               rowIcon: Icon(Icons.sell_outlined, color: AppColors.pureWhite87,),
               iconSize: AppSizes.taskRowCategoryIconSize,
-              detailColor: AppColors.royalBlue,
+              detailColor: Color(widget.todo.todo.category.color),
               detailSpace: AppSizes.taskRowCategoryDetailSpace,
+              categoryIcon: SvgPicture.asset(widget.todo.todo.category.icon),
             ),
-            SizedBox(height: AppSizes.taskRowSpace),
+            const SizedBox(height: AppSizes.taskRowSpace),
             
             //Task Priority Row
             TaskRow(
@@ -159,10 +168,10 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
               titleText: TaskText.taskPriorityText,
               detailWidth: AppSizes.taskRowPriorityDetailWidth,
               detailBorderRadius: AppSizes.taskRowRadius,
-              detailText: TaskText.taskDefaultPriorityText,
+              detailText: widget.todo.todo.priority.toString(),
               rowIcon: Icon(Icons.flag_outlined, color: AppColors.pureWhite87,),
             ),
-            SizedBox(height: AppSizes.taskRowSpace),
+            const SizedBox(height: AppSizes.taskRowSpace),
 
             //Task Sub Row
             TaskRow(

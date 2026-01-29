@@ -14,6 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(TodoModelAdapter());
+  await Hive.openBox<TodoModel>('todos');
   configureDependencies();
   runApp(
     BlocProvider(

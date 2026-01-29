@@ -34,8 +34,8 @@ class TodoLocalDataSource implements ITodoLocalDataSource {
 
   @override
   Future<List<TodoWithKeyModel>> getTodos() async {
-    final todoBox = await Hive.openBox<TodoModel>('todos');
-    return todoBox.toMap().entries.map((e) {
+    final box = Hive.box<TodoModel>('todos');
+    return box.toMap().entries.map((e) {
       return TodoWithKeyModel(
         key: e.key as int,
         todo: TodoMapper.toEntity(e.value),

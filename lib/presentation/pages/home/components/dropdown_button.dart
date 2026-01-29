@@ -2,15 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 
+enum TimeFilter {
+  today,
+  week,
+  month,
+  all,
+}
+
 class FilterDropdown extends StatefulWidget {
-  const FilterDropdown({super.key});
+  final TimeFilter initialValue;
+  final ValueChanged<TimeFilter> onChanged;
+
+  const FilterDropdown({
+    super.key,
+    required this.initialValue,
+    required this.onChanged,
+  });
 
   @override
   State<FilterDropdown> createState() => _FilterDropdownState();
 }
 
 class _FilterDropdownState extends State<FilterDropdown> {
-  String value = 'All';
+  late TimeFilter value;
+
+  @override
+  void initState() {
+    super.initState();
+    value = widget.initialValue;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +45,7 @@ class _FilterDropdownState extends State<FilterDropdown> {
         borderRadius: BorderRadius.circular(AppSizes.dropdownButtonRadius),
       ),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
+        child: DropdownButton<TimeFilter>(
           value: value,
           icon: const Icon(
             Icons.keyboard_arrow_down,
@@ -37,16 +57,16 @@ class _FilterDropdownState extends State<FilterDropdown> {
           style: Theme.of(
             context,
           ).textTheme.displaySmall?.copyWith(color: AppColors.pureWhite87),
-          items: const [
-            DropdownMenuItem(value: 'Today', child: Text('Today')),
-            DropdownMenuItem(value: 'Week', child: Text('Week')),
-            DropdownMenuItem(value: 'Month', child: Text('Month')),
-            DropdownMenuItem(value: 'All', child: Text('All')),
+          items: [
+            DropdownMenuItem(value: TimeFilter.today, child: Text('Today')),
+            DropdownMenuItem(value: TimeFilter.week, child: Text('Week')),
+            DropdownMenuItem(value: TimeFilter.month, child: Text('Month')),
+            DropdownMenuItem(value: TimeFilter.all, child: Text('All')),
           ],
           onChanged: (v) {
-            if (v != null) {
-              setState(() => value = v);
-            }
+            if (v == null) return;
+            setState(() => value = v);
+            widget.onChanged(v);
           },
         ),
       ),
