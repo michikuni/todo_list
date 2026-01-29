@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
@@ -52,12 +53,12 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
         backgroundColor: Colors.transparent,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(width: 1),
+            borderRadius: BorderRadius.circular(AppSizes.addTaskDialogRadius),
+            border: Border.all(width: AppSizes.addTaskDialogBorder),
             color: AppColors.darkGrey,
           ),
-          padding: EdgeInsets.all(24),
-          height: 240,
+          padding: EdgeInsets.all(AppSizes.addTaskDialogPadding),
+          height: AppSizes.addTaskDialogHeight,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -68,21 +69,21 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(height: 12),
+              SizedBox(height: AppSizes.addTaskDialogTitlePaddingBottom),
               Container(
                 decoration: contentSelected
                     ? BoxDecoration(
                         border: Border.all(
-                          width: 1,
+                          width: AppSizes.addTaskDialogBorder,
                           color: AppColors.mediumGrey,
                         ),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(AppSizes.addTaskDialogRadius),
                       )
                     : null,
-                height: 40,
+                height: AppSizes.addTaskDialogInputHeight,
                 padding: EdgeInsets.symmetric(
-                  horizontal: contentSelected ? 16 : 0,
-                  vertical: 8,
+                  horizontal: contentSelected ? AppSizes.addTaskDialogInputPaddingHorizontal : 0,
+                  vertical: AppSizes.addTaskDialogInputPaddingVertical,
                 ),
                 child: TextFormField(
                   controller: contentTextController,
@@ -109,7 +110,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                   ).textTheme.bodySmall?.copyWith(color: AppColors.pureWhite87),
                 ),
               ),
-              SizedBox(height: 12),
+              SizedBox(height: AppSizes.addTaskDialogTitlePaddingBottom),
 
               Container(
                 decoration: descriptSelected
@@ -118,13 +119,13 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                           width: 1,
                           color: AppColors.mediumGrey,
                         ),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(AppSizes.addTaskDialogRadius),
                       )
                     : null,
-                height: 40,
+                height: AppSizes.addTaskDialogInputHeight,
                 padding: EdgeInsets.symmetric(
-                  horizontal: descriptSelected ? 16 : 0,
-                  vertical: 8,
+                  horizontal: descriptSelected ? AppSizes.addTaskDialogInputPaddingHorizontal : 0,
+                  vertical: AppSizes.addTaskDialogInputPaddingVertical,
                 ),
                 child: TextFormField(
                   controller: descriptionTextController,
@@ -151,7 +152,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                   ).textTheme.bodySmall?.copyWith(color: AppColors.pureWhite87),
                 ),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: AppSizes.addTaskDialogInputPaddingBottom),
               Row(
                 children: [
                   IconButton(

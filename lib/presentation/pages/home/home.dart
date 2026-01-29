@@ -23,8 +23,8 @@ class HomePageWidget extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           floatingActionButton: SizedBox(
-            height: 64,
-            width: 64,
+            height: AppSizes.homeAddButtonSize,
+            width: AppSizes.homeAddButtonSize,
             child: FloatingActionButton(
               onPressed: () {
                 final homeBloc = context.read<HomeBloc>();
@@ -43,7 +43,7 @@ class HomePageWidget extends StatelessWidget {
               shape: const CircleBorder(),
               child: const Icon(
                 Icons.add,
-                size: 32,
+                size: AppSizes.homeAddButtonIconSize,
                 color: AppColors.pureWhite,
               ),
             ),
@@ -53,7 +53,7 @@ class HomePageWidget extends StatelessWidget {
           bottomNavigationBar: BottomAppBar(
             color: AppColors.darkGrey,
             child: SizedBox(
-              height: 64,
+              height: AppSizes.homeBottomNavHeight,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -64,24 +64,24 @@ class HomePageWidget extends StatelessWidget {
                     child: BottomNavItem(
                       icon: Icons.home_filled,
                       label: "Index",
-                      marginLeft: 20,
+                      marginLeft: AppSizes.homeBottomNavItemSpace,
                     ),
                   ),
                   BottomNavItem(
                     icon: Icons.calendar_month_outlined,
                     label: "Calendar",
-                    marginLeft: 20,
+                    marginLeft: AppSizes.homeBottomNavItemSpace,
                   ),
                   Spacer(),
                   BottomNavItem(
                     icon: Icons.access_time,
                     label: "Focus",
-                    marginRight: 20,
+                    marginRight: AppSizes.homeBottomNavItemSpace,
                   ),
                   BottomNavItem(
                     icon: Icons.person_outline_rounded,
                     label: "Profile",
-                    marginRight: 20,
+                    marginRight: AppSizes.homeBottomNavItemSpace,
                   ),
                 ],
               ),
@@ -89,12 +89,15 @@ class HomePageWidget extends StatelessWidget {
           ),
           appBar: AppBar(
             actionsPadding: EdgeInsets.only(
-              right: AppSizes.homePageHorizontalPadding,
+              right: AppSizes.homeHorizontalPadding,
             ),
             backgroundColor: AppColors.black,
             centerTitle: true,
             actions: [
-              CircleAvatar(radius: 20, child: Icon(Icons.ac_unit_rounded)),
+              CircleAvatar(
+                radius: AppSizes.homeAppBarAvatarSize,
+                child: Icon(Icons.ac_unit_rounded),
+              ),
             ],
             title: Text(
               HomeText.appBarTitle,
@@ -104,7 +107,7 @@ class HomePageWidget extends StatelessWidget {
             ),
             leading: Padding(
               padding: const EdgeInsets.only(
-                left: AppSizes.homePageHorizontalPadding,
+                left: AppSizes.homeHorizontalPadding,
               ),
               child: Icon(
                 Icons.filter_list_rounded,
@@ -117,7 +120,7 @@ class HomePageWidget extends StatelessWidget {
               width: double.infinity,
               height: double.infinity,
               color: AppColors.black,
-              padding: EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: AppSizes.homePadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -129,15 +132,13 @@ class HomePageWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(HomeText.emptyImageAssets),
-                            SizedBox(height: AppSizes.homePageEmptyContentTop),
+                            SizedBox(height: AppSizes.homeEmptyContentTop),
                             Text(
                               HomeText.emptyContent,
                               style: Theme.of(context).textTheme.bodyMedium
                                   ?.copyWith(color: AppColors.pureWhite87),
                             ),
-                            SizedBox(
-                              height: AppSizes.homePageEmptyInstructionTop,
-                            ),
+                            SizedBox(height: AppSizes.homeEmptyInstructionTop),
                             Text(
                               HomeText.emptyInstruction,
                               style: Theme.of(context).textTheme.displayLarge
@@ -162,12 +163,15 @@ class HomePageWidget extends StatelessWidget {
                                 AppSizes.authTextFieldBorderRadius,
                               ),
                             ),
-                            margin: EdgeInsets.only(top: 12, bottom: 20),
-                            padding: EdgeInsets.all(AppSizes.padding12),
+                            margin: EdgeInsets.only(
+                              top: AppSizes.homeSearchMarginTop,
+                              bottom: AppSizes.homeSearchMarginTop,
+                            ),
+                            padding: EdgeInsets.all(AppSizes.homeSearchPadding),
                             child: Row(
                               children: [
                                 SvgPicture.asset('assets/icons/search.svg'),
-                                SizedBox(width: AppSizes.padding12),
+                                SizedBox(width: AppSizes.homeSearchPadding),
                                 Expanded(
                                   child: TextFormField(
                                     style: Theme.of(context)
@@ -195,18 +199,22 @@ class HomePageWidget extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: FilterDropdown(),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: AppSizes.homeListSpaceTop),
                           Expanded(
                             child: ListView.separated(
-                              padding: EdgeInsets.only(bottom: 20),
-                              separatorBuilder: (context, index) => SizedBox(height: 16,),
+                              padding: EdgeInsets.only(bottom: AppSizes.homeListPaddingBottom),
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: AppSizes.homeListItemSpace),
                               itemCount: state.listTodo.length,
                               itemBuilder: (context, index) {
                                 return UncompletedTodoItem(
                                   content: state.listTodo[index].todo.content,
                                   category: state.listTodo[index].todo.category,
-                                  description:
-                                      state.listTodo[index].todo.minutes.toString(),
+                                  description: state
+                                      .listTodo[index]
+                                      .todo
+                                      .minutes
+                                      .toString(),
                                   priority: state.listTodo[index].todo.priority,
                                 );
                               },

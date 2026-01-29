@@ -57,7 +57,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                             ?.copyWith(color: AppColors.pureWhite87),
                       ),
                     ),
-                    SizedBox(height: AppSizes.padding24),
+                    SizedBox(height: AppSizes.authTextFieldSpace),
                     TextInputWidget(
                       isObscure: false,
                       hint: SignupText.usernameHint,
@@ -68,7 +68,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                         );
                       },
                     ),
-                    SizedBox(height: AppSizes.padding24),
+                    SizedBox(height: AppSizes.authTextFieldSpace),
                     TextInputWidget(
                       isObscure: true,
                       hint: SignupText.passwordHint,
@@ -79,7 +79,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                         );
                       },
                     ),
-                    SizedBox(height: AppSizes.padding24),
+                    SizedBox(height: AppSizes.authTextFieldSpace),
                     TextInputWidget(
                       isObscure: true,
                       onValueChanged: (value) {
@@ -90,7 +90,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                       hint: SignupText.passwordHint,
                       title: SignupText.confirmPasswordTitle,
                     ),
-                    SizedBox(height: AppSizes.padding68),
+                    SizedBox(height: AppSizes.authButtonSpaceTop),
                     PrimaryButtonWidget(
                       onPressed: () {
                         // print(state.username);

@@ -1,12 +1,13 @@
-  import 'package:flutter/material.dart';
-  import 'package:flutter_bloc/flutter_bloc.dart';
-  import 'package:go_router/go_router.dart';
-  import 'package:todo_list/core/constants/app_colors.dart';
-  import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
-  import 'package:todo_list/presentation/bloc/home/home_state.dart';
-  import 'package:todo_list/presentation/pages/home/dialogs/choose_time_dialog.dart';
-  import 'package:todo_list/presentation/widgets/primary_button.dart';
+import 'package:todo_list/presentation/bloc/home/home_state.dart';
+import 'package:todo_list/presentation/pages/home/dialogs/choose_time_dialog.dart';
+import 'package:todo_list/presentation/widgets/primary_button.dart';
 
   class ChooseDateDialog extends StatefulWidget {
     const ChooseDateDialog({super.key});
@@ -26,16 +27,16 @@ import 'package:todo_list/presentation/bloc/home/home_event.dart';
           backgroundColor: AppColors.darkGrey,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(AppSizes.chooseDateDialogPadding),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 _header(),
-                const SizedBox(height: 12),
+                const SizedBox(height: AppSizes.chooseDateDialogHeaderPaddingBottom),
                 _weekDays(),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSizes.chooseDateDialogWeekPaddingBottom),
                 _calendar(),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSizes.chooseDateDialogCalendarPaddingBottom),
                 _actions(),
               ],
             ),
@@ -49,7 +50,7 @@ import 'package:todo_list/presentation/bloc/home/home_event.dart';
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-            icon: const Icon(Icons.chevron_left, color: Colors.white),
+            icon: const Icon(Icons.chevron_left, color: AppColors.pureWhite87),
             onPressed: _previousMonth,
           ),
           Center(
@@ -85,7 +86,7 @@ import 'package:todo_list/presentation/bloc/home/home_event.dart';
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: days.map((e) {
           return Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(AppSizes.chooseDateDialogWeekPadding),
             child: Text(
               e,
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -111,8 +112,8 @@ import 'package:todo_list/presentation/bloc/home/home_event.dart';
         itemCount: totalItems,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 7,
-          crossAxisSpacing: 6,
-          mainAxisSpacing: 6,
+          crossAxisSpacing: AppSizes.chooseDateDialogCalendarItemSpace,
+          mainAxisSpacing: AppSizes.chooseDateDialogCalendarItemSpace,
         ),
         itemBuilder: (_, index) {
           if (index < leadingEmpty) {
@@ -135,16 +136,16 @@ import 'package:todo_list/presentation/bloc/home/home_event.dart';
               });
             },
             child: Container(
-              width: 24,
-              height: 24,
+              width: AppSizes.chooseDateDialogCalendarItemSize,
+              height: AppSizes.chooseDateDialogCalendarItemSize,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: isSelected
                     ? AppColors.mediumSlateBlue
                     : AppColors.jetBlack,
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(AppSizes.chooseDateDialogCalendarItemRadius),
               ),
-              margin: EdgeInsets.all(4),
+              margin: EdgeInsets.all(AppSizes.chooseDateDialogCalendarItemMargin),
               child: Text(
                 '$day',
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
@@ -168,7 +169,7 @@ import 'package:todo_list/presentation/bloc/home/home_event.dart';
                 context.pop();
               },
               child: SizedBox(
-                height: 48,
+                height: AppSizes.chooseDateDialogButtonHeight,
                 child: Center(
                   child: Text(
                     'Cancel',
@@ -181,9 +182,9 @@ import 'package:todo_list/presentation/bloc/home/home_event.dart';
             ),
           ),
           PrimaryButtonWidget(
-            height: 48,
+            height: AppSizes.chooseDateDialogButtonHeight,
             text: 'Choose Time',
-            width: 140,
+            width: AppSizes.chooseDateDialogPrimaryButtonWidth,
             onPressed: () {
               context.pop();
               final homeBloc = context.read<HomeBloc>();

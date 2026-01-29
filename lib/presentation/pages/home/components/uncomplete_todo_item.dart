@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/presentation/widgets/circle_check.dart';
 
 class UncompletedTodoItem extends StatelessWidget {
@@ -22,18 +23,16 @@ class UncompletedTodoItem extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: 72,
+          height: AppSizes.uncompleteTodoItemHeight,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
             color: AppColors.darkGrey,
           ),
-          padding: EdgeInsets.all(4),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(width: 12),
+              SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
               CircleCheck(value: false, onChanged: (value) {}),
-              SizedBox(width: 16),
+              SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +43,7 @@ class UncompletedTodoItem extends StatelessWidget {
                       color: AppColors.pureWhite87,
                     ),
                   ),
-                  SizedBox(height: 6),
+                  SizedBox(height: AppSizes.uncompleteTodoItemContentSpaceBottom),
                   Text(
                     description,
                     style: Theme.of(context).textTheme.displayMedium?.copyWith(
@@ -57,18 +56,18 @@ class UncompletedTodoItem extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: 4,
-          right: 12,
+          bottom: AppSizes.uncompleteTodoItemPrioritySpaceBottom,
+          right: AppSizes.uncompleteTodoItemPrioritySpaceRight,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                width: 88,
-                height: 28,
+                width: AppSizes.uncompleteTodoItemCategoryWidth,
+                height: AppSizes.uncompleteTodoItemCategoryHeight,
                 decoration: BoxDecoration(
                   color: AppColors.blueSkyLight,
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(AppSizes.uncompleteTodoItemRadius),
                 ),
                 child: Center(
                   child: Row(
@@ -83,12 +82,12 @@ class UncompletedTodoItem extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 12),
+              SizedBox(width: AppSizes.uncompleteTodoItemPrioritySpaceLeft),
               Container(
-                width: 44,
-                height: 28,
+                width: AppSizes.uncompleteTodoItemPriorityWidth,
+                height: AppSizes.uncompleteTodoItemPriorityHeight,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(AppSizes.uncompleteTodoItemRadius),
                   border: Border.all(
                     color: AppColors.mediumSlateBlue,
                     width: 1,

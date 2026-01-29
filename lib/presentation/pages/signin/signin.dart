@@ -55,7 +55,7 @@ class SigninPageWidget extends StatelessWidget {
                               ?.copyWith(color: AppColors.pureWhite87),
                         ),
                       ),
-                      SizedBox(height: AppSizes.padding24),
+                      SizedBox(height: AppSizes.authTextFieldSpace),
                       TextInputWidget(
                         hint: SigninText.usernameHint,
                         title: SigninText.usernameTitle,
@@ -66,7 +66,7 @@ class SigninPageWidget extends StatelessWidget {
                         },
                         isObscure: false,
                       ),
-                      SizedBox(height: AppSizes.padding24),
+                      SizedBox(height: AppSizes.authTextFieldSpace),
                       TextInputWidget(
                         isObscure: true,
                         onValueChanged: (value) {
@@ -77,8 +77,7 @@ class SigninPageWidget extends StatelessWidget {
                         hint: SigninText.passwordHint,
                         title: SigninText.passwordTitle,
                       ),
-                      SizedBox(height: AppSizes.padding24),
-                      SizedBox(height: AppSizes.padding68),
+                      SizedBox(height: AppSizes.authButtonSpaceTop),
                       PrimaryButtonWidget(
                         onPressed: () {
                           context.read<SigninBloc>().add(SigninSubmitEvent());

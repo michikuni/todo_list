@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
@@ -24,11 +25,11 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
         backgroundColor: AppColors.darkGrey,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         child: Padding(
-          padding: EdgeInsets.all(12),
+          padding: EdgeInsets.all(AppSizes.choosePriorityDialogPadding),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: 4),
+              SizedBox(height: AppSizes.choosePriorityDialogTitleSpaceTop),
               Text(
                 "Edit Task Priority",
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
@@ -36,17 +37,17 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(height: 12),
+              SizedBox(height: AppSizes.choosePriorityDialogDivideSpaceTop),
               Divider(height: 1),
-              SizedBox(height: 20),
+              SizedBox(height: AppSizes.choosePriorityDialogDivideSpaceBottom),
               // Grid numbers
               GridView.builder(
                 shrinkWrap: true,
                 itemCount: 10,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
+                  crossAxisSpacing: AppSizes.choosePriorityDialogItemSpace,
+                  mainAxisSpacing: AppSizes.choosePriorityDialogItemSpace,
                   childAspectRatio: 1,
                 ),
                 itemBuilder: (context, index) {
@@ -61,13 +62,13 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                       });
                     },
                     child: Container(
-                      width: 64,
-                      height: 64,
+                      width: AppSizes.choosePriorityDialogItemSize,
+                      height: AppSizes.choosePriorityDialogItemSize,
                       decoration: BoxDecoration(
                         color: isSelected
                             ? AppColors.mediumSlateBlue
                             : AppColors.jetBlack,
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(AppSizes.choosePriorityDialogItemRadius),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -77,9 +78,9 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                             color: isSelected
                                 ? Colors.white
                                 : Colors.grey.shade400,
-                            size: 22,
+                            size: AppSizes.choosePriorityDialogItemIconSize,
                           ),
-                          const SizedBox(height: 4),
+                          const SizedBox(height: AppSizes.choosePriorityDialogItemSpaceBottom),
                           Text(
                             "$number",
                             style: TextStyle(
@@ -94,7 +95,7 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                 },
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: AppSizes.choosePriorityDialogButtonSpaceTop),
 
               // Buttons
               Row(
@@ -105,7 +106,7 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                         context.pop();
                       },
                       child: SizedBox(
-                        height: 48,
+                        height: AppSizes.choosePriorityDialogButtonHeight,
                         child: Center(
                           child: Text(
                             'Cancel',
@@ -116,12 +117,12 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: AppSizes.choosePriorityDialogButtonSpaceBetween),
                   Expanded(
                     child: PrimaryButtonWidget(
-                      height: 48,
+                      height: AppSizes.choosePriorityDialogButtonHeight,
                       text: 'Save',
-                      width: 140,
+                      width: AppSizes.choosePriorityDialogPrimaryButtonWidth,
                       onPressed: () {
                         context.pop();
                       },

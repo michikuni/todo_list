@@ -28,7 +28,7 @@ class TextInputWidget extends StatelessWidget {
             ).textTheme.displayLarge?.copyWith(color: AppColors.pureWhite87),
           ),
         ),
-        SizedBox(height: AppSizes.padding8),
+        SizedBox(height: AppSizes.textInputTitleSpaceBottom),
         Container(
           height: AppSizes.authTextFieldHeight,
           decoration: BoxDecoration(
@@ -40,7 +40,7 @@ class TextInputWidget extends StatelessWidget {
               AppSizes.authTextFieldBorderRadius,
             ),
           ),
-          padding: EdgeInsets.all(AppSizes.padding12),
+          padding: EdgeInsets.all(AppSizes.textInputPadding),
           child: TextFormField(
             style: Theme.of(
               context,

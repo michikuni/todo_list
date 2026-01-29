@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/task_text.dart';
-import 'package:todo_list/presentation/pages/task/task_row_component.dart';
+import 'package:todo_list/presentation/pages/task/components/task_row_component.dart';
 import 'package:todo_list/presentation/widgets/circle_check.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
@@ -174,7 +174,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
               detailText: TaskText.taskDefaultSubText,
               rowIcon: Icon(Icons.account_tree_outlined, color: AppColors.pureWhite87,),
             ),
-            SizedBox(height: 28),
+            SizedBox(height: AppSizes.taskDeleteSpaceTop),
 
             //Delete Task Row
             Row(

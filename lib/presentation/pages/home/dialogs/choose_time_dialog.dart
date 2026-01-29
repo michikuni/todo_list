@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
@@ -26,7 +28,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
         backgroundColor: AppColors.darkGrey,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(AppSizes.chooseTimeDialogPadding),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -38,9 +40,11 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                 ),
               ),
               const Divider(color: AppColors.mediumGrey),
-      
-              const SizedBox(height: 20),
-      
+
+              const SizedBox(
+                height: AppSizes.chooseTimeDialogDivideSpaceBottom,
+              ),
+
               /// TIME PICKER
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -51,12 +55,12 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                     max: 12,
                     onChanged: (v) => setState(() => hour = v),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      ':',
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal:
+                          AppSizes.chooseTimeDialogColonPaddingHorizontal,
                     ),
+                    child: SvgPicture.asset('assets/icons/colon.svg'),
                   ),
                   _numberPicker(
                     value: minute,
@@ -65,15 +69,19 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                     padZero: true,
                     onChanged: (v) => setState(() => minute = v),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(
+                    width: AppSizes.chooseTimeDialogColonPaddingHorizontal,
+                  ),
                   _amPmPicker(),
                 ],
               ),
-      
-              const SizedBox(height: 16),
-      
+
+              SizedBox(height: AppSizes.chooseTimeDialogButtonSpaceTop),
+
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSizes.chooseTimeDialogButtonPaddingHorizontal,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -83,7 +91,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                           context.pop();
                         },
                         child: SizedBox(
-                          height: 48,
+                          height: AppSizes.chooseTimeDialogButtonHeight,
                           child: Center(
                             child: Text(
                               'Cancel',
@@ -95,9 +103,9 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                       ),
                     ),
                     PrimaryButtonWidget(
-                      height: 48,
+                      height: AppSizes.chooseTimeDialogButtonHeight,
                       text: 'Save',
-                      width: 140,
+                      width: AppSizes.chooseTimeDialogPrimaryButtonWidth,
                       onPressed: () {
                         final time = TimeOfDay(
                           hour: isAm ? hour % 12 : hour + 12,
@@ -127,10 +135,10 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
     final controller = FixedExtentScrollController(initialItem: value - min);
 
     return Container(
-      width: 64,
-      height: 64,
+      width: AppSizes.chooseTimeDialogTimeSize,
+      height: AppSizes.chooseTimeDialogTimeSize,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(AppSizes.chooseTimeDialogTimeRadius),
         color: AppColors.jetBlack,
       ),
       child: ListWheelScrollView.useDelegate(
@@ -169,10 +177,10 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
 
   Widget _amPmPicker() {
     return Container(
-      width: 64,
-      height: 64,
+      width: AppSizes.chooseTimeDialogTimeSize,
+      height: AppSizes.chooseTimeDialogTimeSize,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(AppSizes.chooseTimeDialogTimeRadius),
         color: AppColors.jetBlack,
       ),
       child: ListWheelScrollView(

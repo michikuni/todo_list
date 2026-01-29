@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_sizes.dart';
 
 class CategoryItem extends StatelessWidget {
   final String icon;
@@ -23,37 +24,34 @@ class CategoryItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        height: 90,
+        height: AppSizes.categoryItemHeight,
         child: Column(
           children: [
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              height: 64,
-              width: 64,
+            Container(
+              height: AppSizes.categoryItemIconSize,
+              width: AppSizes.categoryItemIconSize,
               decoration: BoxDecoration(
                 color: color,
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(
+                  AppSizes.categoryItemIconRadius,
+                ),
                 border: isSelected
-                    ? Border.all(color: Colors.white, width: 2)
+                    ? Border.all(color: AppColors.pureWhite, width: 1)
                     : null,
-                boxShadow: isSelected
-                    ? [
-                        BoxShadow(
-                          color: color.withValues(alpha: 0.6),
-                          blurRadius: 10,
-                        ),
-                      ]
-                    : [],
               ),
-              padding: const EdgeInsets.all(16),
+              margin: EdgeInsets.only(
+                bottom: AppSizes.categoryItemIconMarginBottom,
+              ),
+              padding: const EdgeInsets.all(
+                AppSizes.categoryItemIconPadding,
+              ),
               child: SvgPicture.asset(icon),
             ),
-            const SizedBox(height: 4),
             Text(
               label,
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                color: isSelected ? Colors.white : AppColors.pureWhite87,
-                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                color: AppColors.pureWhite87,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],
