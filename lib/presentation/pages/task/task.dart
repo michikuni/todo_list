@@ -11,6 +11,10 @@ import 'package:todo_list/presentation/bloc/task/task_event.dart';
 import 'package:todo_list/presentation/bloc/task/task_state.dart';
 import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dart';
 import 'package:todo_list/presentation/pages/task/components/task_row_component.dart';
+import 'package:todo_list/presentation/pages/task/dialogs/delete_dialog.dart';
+import 'package:todo_list/presentation/pages/task/dialogs/edit_category_dialog.dart';
+import 'package:todo_list/presentation/pages/task/dialogs/edit_date_dialog.dart';
+import 'package:todo_list/presentation/pages/task/dialogs/edit_priority_dialog.dart';
 import 'package:todo_list/presentation/pages/task/dialogs/edit_task_dialog.dart';
 import 'package:todo_list/presentation/widgets/circle_check.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
@@ -135,9 +139,13 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                   const SizedBox(width: AppSizes.taskTitleSpace),
                   GestureDetector(
                     onTap: () {
+                      final taskBloc = context.read<TaskBloc>();
                       showDialog(
                         context: context,
-                        builder: (context) => EditTaskDialog(),
+                        builder: (context) => BlocProvider.value(
+                          value: taskBloc,
+                          child: EditTaskDialog(),
+                        ),
                       );
                     },
                     child: SizedBox(
@@ -156,6 +164,18 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
               const SizedBox(height: AppSizes.taskTitleToRowSpace),
               //Task Time Row
               TaskRow(
+                onTap: () {
+                  final taskBloc = context.read<TaskBloc>();
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return BlocProvider.value(
+                        value: taskBloc,
+                        child: EditDateDialog(),
+                      );
+                    },
+                  );
+                },
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
                 titleText: TaskText.taskTimeText,
@@ -174,6 +194,18 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
 
               //Task Category Row
               TaskRow(
+                onTap: () {
+                  final taskBloc = context.read<TaskBloc>();
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return BlocProvider.value(
+                        value: taskBloc,
+                        child: EditCategoryDialog(),
+                      );
+                    },
+                  );
+                },
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
                 titleText: TaskText.taskCategoryText,
@@ -197,6 +229,12 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
 
               //Task Priority Row
               TaskRow(
+                onTap: () {
+                  final taskBloc = context.read<TaskBloc>();
+                  showDialog(context: context, builder: (context) {
+                    return BlocProvider.value(value: taskBloc, child: EditPriorityDialog(),);
+                  },);
+                },
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
                 titleText: TaskText.taskPriorityText,
@@ -212,6 +250,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
 
               //Task Sub Row
               TaskRow(
+                onTap: () {},
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
                 titleText: TaskText.taskSubText,
@@ -226,17 +265,28 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
               SizedBox(height: AppSizes.taskDeleteSpaceTop),
 
               //Delete Task Row
-              Row(
-                children: [
-                  Icon(Icons.delete_outline_rounded, color: AppColors.coralRed),
-                  SizedBox(width: AppSizes.taskRowTitleSpace),
-                  Text(
-                    TaskText.taskDeleteText,
-                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
+              GestureDetector(
+                onTap: () {
+                  final taskBloc = context.read<TaskBloc>();
+                  showDialog(context: context, builder: (context) {
+                    return BlocProvider.value(value: taskBloc, child: DeleteTaskDialog(todo: widget.todo),);
+                  },);
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.delete_outline_rounded,
                       color: AppColors.coralRed,
                     ),
-                  ),
-                ],
+                    SizedBox(width: AppSizes.taskRowTitleSpace),
+                    Text(
+                      TaskText.taskDeleteText,
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        color: AppColors.coralRed,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Expanded(child: Container()),
 
@@ -245,7 +295,10 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 height: AppSizes.taskPrimaryButtonHeight,
                 text: TaskText.taskButtonPrimaryText,
                 width: double.infinity,
-                onPressed: () {},
+                onPressed: () {
+                  context.read<TaskBloc>().add(OnSubmit(widget.todo.key));
+                  context.push('/');
+                },
               ),
               SizedBox(height: AppSizes.taskPageBottomHorizontalMargin),
             ],

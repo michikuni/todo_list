@@ -17,6 +17,7 @@ class TaskRow extends StatelessWidget {
     required this.detailText,
     required this.rowIcon,
     this.categoryIcon,
+    required this.onTap
   });
   final double taskRowHeight;
   final double titleSpace;
@@ -29,6 +30,7 @@ class TaskRow extends StatelessWidget {
   final String detailText;
   final Icon rowIcon;
   final SvgPicture? categoryIcon;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -46,34 +48,37 @@ class TaskRow extends StatelessWidget {
             ).textTheme.displayLarge?.copyWith(color: AppColors.pureWhite87),
           ),
           Expanded(child: Container()),
-          Container(
-            height: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(detailBorderRadius),
-              color: AppColors.pureWhite21,
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: AppSizes.taskRowDetailPaddingHorizontal,
-              vertical: AppSizes.taskRowDetailPaddingVertical,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (iconSize != null)
-                  categoryIcon ??
-                      Icon(
-                        Icons.school_outlined,
-                        color: detailColor,
-                        size: iconSize,
-                      ),
-                if (detailSpace != null) SizedBox(width: detailSpace),
-                Text(
-                  detailText,
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                    color: AppColors.pureWhite87,
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              height: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(detailBorderRadius),
+                color: AppColors.pureWhite21,
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSizes.taskRowDetailPaddingHorizontal,
+                vertical: AppSizes.taskRowDetailPaddingVertical,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (iconSize != null)
+                    categoryIcon ??
+                        Icon(
+                          Icons.school_outlined,
+                          color: detailColor,
+                          size: iconSize,
+                        ),
+                  if (detailSpace != null) SizedBox(width: detailSpace),
+                  Text(
+                    detailText,
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      color: AppColors.pureWhite87,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

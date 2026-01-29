@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:todo_list/domain/entities/todo/todo.dart';
 
 abstract class TaskEvent{}
@@ -17,7 +18,7 @@ class OnDateChanged extends TaskEvent{
 }
 
 class OnTimeChanged extends TaskEvent{
-  final int time;
+  final TimeOfDay time;
   OnTimeChanged(this.time);
 }
 
