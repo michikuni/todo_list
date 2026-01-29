@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/task_text.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
+import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
+import 'package:todo_list/presentation/bloc/task/task_event.dart';
+import 'package:todo_list/presentation/bloc/task/task_state.dart';
 import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dart';
 import 'package:todo_list/presentation/pages/task/components/task_row_component.dart';
+import 'package:todo_list/presentation/pages/task/dialogs/edit_task_dialog.dart';
 import 'package:todo_list/presentation/widgets/circle_check.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
@@ -19,6 +24,19 @@ class TaskPageWidget extends StatefulWidget {
 
 class _TaskPageWidgetState extends State<TaskPageWidget> {
   bool isSelected = false;
+  @override
+  void initState() {
+    super.initState();
+    context.read<TaskBloc>().add(
+      LoadData(
+        widget.todo.todo.avatar,
+        widget.todo.todo.email,
+        widget.todo.todo.name,
+        widget.todo.todo.userId,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,155 +78,178 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
           ),
         ],
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: AppColors.black,
-        padding: EdgeInsets.symmetric(
-          horizontal: AppSizes.taskPageHorizontalMargin,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            //Content, description
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: AppSizes.taskTitleCircleCheckPaddingTop,
+      body: BlocBuilder<TaskBloc, TaskState>(
+        builder: (context, state) => Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: AppColors.black,
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSizes.taskPageHorizontalMargin,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              //Content, description
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: AppSizes.taskTitleCircleCheckPaddingTop,
+                    ),
+                    child: CircleCheck(
+                      value: state.isDone,
+                      onChanged: (val) {
+                        setState(() {
+                          context.read<TaskBloc>().add(OnDone(val));
+                        });
+                      },
+                    ),
                   ),
-                  child: CircleCheck(
-                    value: isSelected,
-                    onChanged: (val) {
-                      setState(() {
-                        isSelected = val;
-                      });
+                  const SizedBox(width: AppSizes.taskTitleSpace),
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: AppSizes.taskTitleTextPaddingTop),
+                        Text(
+                          widget.todo.todo.content,
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: AppColors.pureWhite87),
+                          maxLines: AppSizes.taskTitleTextMaxLine,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: AppSizes.taskTitleTextSpace),
+                        Text(
+                          widget.todo.todo.description,
+                          style: Theme.of(context).textTheme.displayLarge
+                              ?.copyWith(color: AppColors.grey),
+                          maxLines: AppSizes.taskTitleTextMaxLine,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: AppSizes.taskTitleSpace),
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => EditTaskDialog(),
+                      );
                     },
-                  ),
-                ),
-                const SizedBox(width: AppSizes.taskTitleSpace),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: AppSizes.taskTitleTextPaddingTop),
-                      Text(
-                        widget.todo.todo.content,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    child: SizedBox(
+                      width: AppSizes.taskTitleIconSize,
+                      height: AppSizes.taskTitleIconSize,
+                      child: Center(
+                        child: Icon(
+                          Icons.border_color_outlined,
                           color: AppColors.pureWhite87,
                         ),
-                        maxLines: AppSizes.taskTitleTextMaxLine,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: AppSizes.taskTitleTextSpace),
-                      Text(
-                        widget.todo.todo.description,
-                        style: Theme.of(context).textTheme.displayLarge
-                            ?.copyWith(color: AppColors.grey),
-                        maxLines: AppSizes.taskTitleTextMaxLine,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: AppSizes.taskTitleSpace),
-                GestureDetector(
-                  onTap: () {
-                    
-                  },
-                  child: SizedBox(
-                    width: AppSizes.taskTitleIconSize,
-                    height: AppSizes.taskTitleIconSize,
-                    child: Center(
-                      child: Icon(
-                        Icons.border_color_outlined,
-                        color: AppColors.pureWhite87,
                       ),
                     ),
                   ),
+                ],
+              ),
+              const SizedBox(height: AppSizes.taskTitleToRowSpace),
+              //Task Time Row
+              TaskRow(
+                taskRowHeight: AppSizes.taskRowHeight,
+                titleSpace: AppSizes.taskRowTitleSpace,
+                titleText: TaskText.taskTimeText,
+                detailWidth: AppSizes.taskRowTimeDetailWidth,
+                detailBorderRadius: AppSizes.taskRowRadius,
+                detailText: formatDateWithMinutes(
+                  widget.todo.todo.date,
+                  widget.todo.todo.minutes,
                 ),
-              ],
-            ),
-            const SizedBox(height: AppSizes.taskTitleToRowSpace),
-            //Task Time Row
-            TaskRow(
-              taskRowHeight: AppSizes.taskRowHeight,
-              titleSpace: AppSizes.taskRowTitleSpace,
-              titleText: TaskText.taskTimeText,
-              detailWidth: AppSizes.taskRowTimeDetailWidth,
-              detailBorderRadius: AppSizes.taskRowRadius,
-              detailText: formatDateWithMinutes(widget.todo.todo.date, widget.todo.todo.minutes),
-              rowIcon: Icon(Icons.timer_outlined, color: AppColors.pureWhite87,),
-            ),
-            const SizedBox(height: AppSizes.taskRowSpace),
-            
-            //Task Category Row
-            TaskRow(
-              taskRowHeight: AppSizes.taskRowHeight,
-              titleSpace: AppSizes.taskRowTitleSpace,
-              titleText: TaskText.taskCategoryText,
-              detailWidth: AppSizes.taskRowCategoryDetailWidth,
-              detailBorderRadius: AppSizes.taskRowRadius,
-              detailText: widget.todo.todo.category.name,
-              rowIcon: Icon(Icons.sell_outlined, color: AppColors.pureWhite87,),
-              iconSize: AppSizes.taskRowCategoryIconSize,
-              detailColor: Color(widget.todo.todo.category.color),
-              detailSpace: AppSizes.taskRowCategoryDetailSpace,
-              categoryIcon: SvgPicture.asset(widget.todo.todo.category.icon),
-            ),
-            const SizedBox(height: AppSizes.taskRowSpace),
-            
-            //Task Priority Row
-            TaskRow(
-              taskRowHeight: AppSizes.taskRowHeight,
-              titleSpace: AppSizes.taskRowTitleSpace,
-              titleText: TaskText.taskPriorityText,
-              detailWidth: AppSizes.taskRowPriorityDetailWidth,
-              detailBorderRadius: AppSizes.taskRowRadius,
-              detailText: widget.todo.todo.priority.toString(),
-              rowIcon: Icon(Icons.flag_outlined, color: AppColors.pureWhite87,),
-            ),
-            const SizedBox(height: AppSizes.taskRowSpace),
-
-            //Task Sub Row
-            TaskRow(
-              taskRowHeight: AppSizes.taskRowHeight,
-              titleSpace: AppSizes.taskRowTitleSpace,
-              titleText: TaskText.taskSubText,
-              detailWidth: AppSizes.taskRowSubDetailWidth,
-              detailBorderRadius: AppSizes.taskAppBarIconRadius,
-              detailText: TaskText.taskDefaultSubText,
-              rowIcon: Icon(Icons.account_tree_outlined, color: AppColors.pureWhite87,),
-            ),
-            SizedBox(height: AppSizes.taskDeleteSpaceTop),
-
-            //Delete Task Row
-            Row(
-              children: [
-                Icon(Icons.delete_outline_rounded, color: AppColors.coralRed),
-                SizedBox(width: AppSizes.taskRowTitleSpace),
-                Text(
-                  TaskText.taskDeleteText,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.displayLarge?.copyWith(color: AppColors.coralRed),
+                rowIcon: Icon(
+                  Icons.timer_outlined,
+                  color: AppColors.pureWhite87,
                 ),
-              ],
-            ),
-            Expanded(child: Container()),
+              ),
+              const SizedBox(height: AppSizes.taskRowSpace),
 
-            //Button
-            PrimaryButtonWidget(
-              height: AppSizes.taskPrimaryButtonHeight,
-              text: TaskText.taskButtonPrimaryText,
-              width: double.infinity,
-              onPressed: () {},
-            ),
-            SizedBox(height: AppSizes.taskPageBottomHorizontalMargin),
-          ],
+              //Task Category Row
+              TaskRow(
+                taskRowHeight: AppSizes.taskRowHeight,
+                titleSpace: AppSizes.taskRowTitleSpace,
+                titleText: TaskText.taskCategoryText,
+                detailWidth: AppSizes.taskRowCategoryDetailWidth,
+                detailBorderRadius: AppSizes.taskRowRadius,
+                detailText: widget.todo.todo.category.name,
+                rowIcon: Icon(
+                  Icons.sell_outlined,
+                  color: AppColors.pureWhite87,
+                ),
+                iconSize: AppSizes.taskRowCategoryIconSize,
+                detailColor: Color(widget.todo.todo.category.color),
+                detailSpace: AppSizes.taskRowCategoryDetailSpace,
+                categoryIcon: SvgPicture.asset(
+                  widget.todo.todo.category.icon,
+                  width: 24,
+                  height: 24,
+                ),
+              ),
+              const SizedBox(height: AppSizes.taskRowSpace),
+
+              //Task Priority Row
+              TaskRow(
+                taskRowHeight: AppSizes.taskRowHeight,
+                titleSpace: AppSizes.taskRowTitleSpace,
+                titleText: TaskText.taskPriorityText,
+                detailWidth: AppSizes.taskRowPriorityDetailWidth,
+                detailBorderRadius: AppSizes.taskRowRadius,
+                detailText: widget.todo.todo.priority.toString(),
+                rowIcon: Icon(
+                  Icons.flag_outlined,
+                  color: AppColors.pureWhite87,
+                ),
+              ),
+              const SizedBox(height: AppSizes.taskRowSpace),
+
+              //Task Sub Row
+              TaskRow(
+                taskRowHeight: AppSizes.taskRowHeight,
+                titleSpace: AppSizes.taskRowTitleSpace,
+                titleText: TaskText.taskSubText,
+                detailWidth: AppSizes.taskRowSubDetailWidth,
+                detailBorderRadius: AppSizes.taskAppBarIconRadius,
+                detailText: TaskText.taskDefaultSubText,
+                rowIcon: Icon(
+                  Icons.account_tree_outlined,
+                  color: AppColors.pureWhite87,
+                ),
+              ),
+              SizedBox(height: AppSizes.taskDeleteSpaceTop),
+
+              //Delete Task Row
+              Row(
+                children: [
+                  Icon(Icons.delete_outline_rounded, color: AppColors.coralRed),
+                  SizedBox(width: AppSizes.taskRowTitleSpace),
+                  Text(
+                    TaskText.taskDeleteText,
+                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                      color: AppColors.coralRed,
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(child: Container()),
+
+              //Button
+              PrimaryButtonWidget(
+                height: AppSizes.taskPrimaryButtonHeight,
+                text: TaskText.taskButtonPrimaryText,
+                width: double.infinity,
+                onPressed: () {},
+              ),
+              SizedBox(height: AppSizes.taskPageBottomHorizontalMargin),
+            ],
+          ),
         ),
       ),
     );

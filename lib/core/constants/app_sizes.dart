@@ -136,6 +136,8 @@ class AppSizes {
   static const double taskRowTitleSpace = 8;
   static const double taskRowRadius = 6;
   static const double taskRowSpace = 36;
+  static const double taskRowDetailPaddingVertical = 8;
+  static const double taskRowDetailPaddingHorizontal = 16;
   static const double taskRowTimeDetailWidth = 108;
   static const double taskRowCategoryDetailWidth = 116;
   static const double taskRowPriorityDetailWidth = 72;

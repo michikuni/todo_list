@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
@@ -100,7 +101,9 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
               children: [
                 Expanded(
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      context.pop();
+                    },
                     child: SizedBox(
                       height: 48,
                       child: Center(
@@ -117,7 +120,9 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                   height: 48,
                   text: 'Edit',
                   width: 152,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pop();
+                  },
                 ),
               ],
             ),

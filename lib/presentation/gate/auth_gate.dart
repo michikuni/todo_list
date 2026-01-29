@@ -29,14 +29,17 @@ class AuthGate extends StatelessWidget {
 
           case AuthAuthenticated():
             return BlocProvider(
-              create: (_) => HomeBloc(
-                getProfile: getIt<GetProfileUseCase>(),
-                tokenStorage: getIt<TokenStorage>(),
-                getTodo: getIt<GetTodoUseCase>(),
-                addTodo: getIt<AddTodoUseCase>(),
-                deleteTodo: getIt<DeleteTodoUseCase>(),
-                updateTodo: getIt<UpdateTodoUseCase>(),
-              )..add(GetTodoEvent()),
+              create: (_) =>
+                  HomeBloc(
+                      getProfile: getIt<GetProfileUseCase>(),
+                      tokenStorage: getIt<TokenStorage>(),
+                      getTodo: getIt<GetTodoUseCase>(),
+                      addTodo: getIt<AddTodoUseCase>(),
+                      deleteTodo: getIt<DeleteTodoUseCase>(),
+                      updateTodo: getIt<UpdateTodoUseCase>(),
+                    )
+                    ..add(GetTodoEvent())
+                    ..add(GetProfileEvent()),
               child: const HomePageWidget(),
             );
 

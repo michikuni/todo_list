@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_sizes.dart';
 
 class TaskRow extends StatelessWidget {
   const TaskRow({
@@ -46,11 +47,14 @@ class TaskRow extends StatelessWidget {
           ),
           Expanded(child: Container()),
           Container(
-            width: detailWidth,
             height: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(detailBorderRadius),
               color: AppColors.pureWhite21,
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSizes.taskRowDetailPaddingHorizontal,
+              vertical: AppSizes.taskRowDetailPaddingVertical,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
