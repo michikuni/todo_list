@@ -78,3 +78,10 @@ String formatDateWithMinutes(DateTime date, int minutes) {
   return '$dd/$MM/$yyyy At $hh:$mm';
 }
 
+int handlerPmHour(int hour){
+  if(hour == 12){
+    return 0;
+  } else {
+    return hour + 12;
+  }
+}

@@ -22,11 +22,11 @@ import 'package:todo_list/data/datasources/local/token/token_stograge.dart'
     as _i927;
 import 'package:todo_list/data/datasources/local/token/token_stograge_impl.dart'
     as _i440;
-import 'package:todo_list/data/datasources/remote/auth.dart' as _i344;
-import 'package:todo_list/data/datasources/remote/profile.dart' as _i718;
-import 'package:todo_list/data/datasources/remote/remote_impl/auth.dart'
+import 'package:todo_list/data/datasources/remote/auth/auth.dart' as _i344;
+import 'package:todo_list/data/datasources/remote/profile/profile.dart' as _i718;
+import 'package:todo_list/data/datasources/remote/remote_impl/auth/auth.dart'
     as _i159;
-import 'package:todo_list/data/datasources/remote/remote_impl/profile.dart'
+import 'package:todo_list/data/datasources/remote/remote_impl/profile/profile.dart'
     as _i710;
 import 'package:todo_list/data/repositories/auth/auth_impl.dart' as _i294;
 import 'package:todo_list/data/repositories/profile/profile_impl.dart' as _i669;

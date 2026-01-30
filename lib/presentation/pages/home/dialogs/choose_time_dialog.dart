@@ -7,6 +7,7 @@ import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
+import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
 class ChooseTimeDialog extends StatefulWidget {
@@ -108,7 +109,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                       width: AppSizes.chooseTimeDialogPrimaryButtonWidth,
                       onPressed: () {
                         final time = TimeOfDay(
-                          hour: isAm ? hour % 12 : hour + 12,
+                          hour: isAm ? hour % 12 : handlerPmHour(hour),
                           minute: minute,
                         );
                         context.read<HomeBloc>().add(OnTimeChanged(time));

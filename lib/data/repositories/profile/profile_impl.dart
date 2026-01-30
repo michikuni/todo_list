@@ -2,7 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo_list/core/error/exception.dart';
 import 'package:todo_list/core/error/failure.dart';
-import 'package:todo_list/data/datasources/remote/profile.dart';
+import 'package:todo_list/data/datasources/remote/profile/profile.dart';
 import 'package:todo_list/data/mappers/profile/profile.dart';
 import 'package:todo_list/domain/entities/profile/profile_response.dart';
 import 'package:todo_list/domain/repositories/profile/profile.dart';

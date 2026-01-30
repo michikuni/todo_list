@@ -93,15 +93,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      context.read<AuthBloc>().add(AuthLoggedOut());
-                    },
-                    child: BottomNavItem(
-                      icon: Icons.home_filled,
-                      label: "Index",
-                      marginLeft: AppSizes.homeBottomNavItemSpace,
-                    ),
+                  BottomNavItem(
+                    icon: Icons.home_filled,
+                    label: "Index",
+                    marginLeft: AppSizes.homeBottomNavItemSpace,
                   ),
                   const BottomNavItem(
                     icon: Icons.calendar_month_outlined,
@@ -130,9 +125,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             backgroundColor: AppColors.black,
             centerTitle: true,
             actions: [
-              const CircleAvatar(
-                radius: AppSizes.homeAppBarAvatarSize,
-                child: Icon(Icons.ac_unit_rounded),
+              GestureDetector(
+                onTap: () {
+                  context.read<AuthBloc>().add(AuthLoggedOut());
+                },
+                child: const CircleAvatar(
+                  radius: AppSizes.homeAppBarAvatarSize,
+                  child: Icon(Icons.ac_unit_rounded),
+                ),
               ),
             ],
             title: Text(

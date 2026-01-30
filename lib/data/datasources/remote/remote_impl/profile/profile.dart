@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo_list/core/constants/api_endpoints.dart';
 import 'package:todo_list/core/error/exception.dart';
-import 'package:todo_list/data/datasources/remote/profile.dart';
+import 'package:todo_list/data/datasources/remote/profile/profile.dart';
 import 'package:todo_list/data/models/profile/profile_response.dart';
 
 @LazySingleton(as: IProfileDataSource)

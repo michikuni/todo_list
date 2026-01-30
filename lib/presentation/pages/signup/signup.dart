@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
@@ -7,6 +8,9 @@ import 'package:todo_list/core/constants/signup_text.dart';
 import 'package:todo_list/presentation/bloc/signup/signup_bloc.dart';
 import 'package:todo_list/presentation/bloc/signup/signup_event.dart';
 import 'package:todo_list/presentation/bloc/signup/signup_state.dart';
+import 'package:todo_list/presentation/pages/signup/dialogs/fail_dialog.dart';
+import 'package:todo_list/presentation/pages/signup/dialogs/success_dialog.dart';
+import 'package:todo_list/presentation/widgets/loading_dialog.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 import 'package:todo_list/presentation/widgets/text_input.dart';
 
@@ -35,9 +39,20 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
           ),
         ),
       ),
-      body: BlocBuilder<SignupBloc, SignupState>(
-        builder: (context, state) {
-          return SafeArea(
+      body: BlocListener<SignupBloc, SignupState>(
+        listenWhen: (previous, current) => previous.status != current.status,
+        listener: (context, state) {
+          if(state.status == FormzSubmissionStatus.success){
+            showDialog(context: context, builder: (context) => const SignupSuccessDialog(),);
+          }
+          if(state.status == FormzSubmissionStatus.failure){
+            showDialog(context: context, builder: (context) => const SignupFailDialog(),);
+          }
+          if(state.status == FormzSubmissionStatus.inProgress){
+            showDialog(context: context, builder: (context) => const LoadingDialog(),);
+          }
+        },
+        child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(
                 AppSizes.authPageHorizontalPadding,
@@ -93,10 +108,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                     SizedBox(height: AppSizes.authButtonSpaceTop),
                     PrimaryButtonWidget(
                       onPressed: () {
-                        // print(state.username);
-                        // print(state.password);
                         context.read<SignupBloc>().add(SignupSubmitEvent());
-                        context.go('/sign-in');
                       },
                       height: AppSizes.authPrimaryButtonHeight,
                       text: SignupText.header,
@@ -131,8 +143,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                 ),
               ),
             ),
-          );
-        },
+          ),
       ),
     );
   }

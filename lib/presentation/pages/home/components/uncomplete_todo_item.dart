@@ -29,28 +29,30 @@ class UncompletedTodoItem extends StatelessWidget {
                 SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
                 CircleCheck(value: false, onChanged: (value) {}),
                 SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      todo.todo.content,
-                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        color: AppColors.pureWhite87,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        todo.todo.content,
+                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                          color: AppColors.pureWhite87,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(
-                      height: AppSizes.uncompleteTodoItemContentSpaceBottom,
-                    ),
-                    Text(
-                      formatDateWithMinutes(todo.todo.date, todo.todo.minutes),
-                      style: Theme.of(context).textTheme.displayMedium
-                          ?.copyWith(color: AppColors.pureWhite87),
-                      maxLines: 1,
-                    ),
-                  ],
+                      SizedBox(
+                        height: AppSizes.uncompleteTodoItemContentSpaceBottom,
+                      ),
+                      Text(
+                        formatDateWithMinutes(todo.todo.date, todo.todo.minutes),
+                        style: Theme.of(context).textTheme.displayMedium
+                            ?.copyWith(color: AppColors.pureWhite87),
+                        maxLines: 1,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

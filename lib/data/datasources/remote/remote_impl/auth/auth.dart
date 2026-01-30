@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:todo_list/core/constants/api_endpoints.dart';
 import 'package:todo_list/core/error/exception.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
-import 'package:todo_list/data/datasources/remote/auth.dart';
+import 'package:todo_list/data/datasources/remote/auth/auth.dart';
 import 'package:todo_list/data/models/auth/auth.dart';
 import 'package:todo_list/data/models/auth/auth_response.dart';
 

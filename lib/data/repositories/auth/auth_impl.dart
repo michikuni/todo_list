@@ -2,7 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo_list/core/error/exception.dart';
 import 'package:todo_list/core/error/failure.dart';
-import 'package:todo_list/data/datasources/remote/auth.dart';
+import 'package:todo_list/data/datasources/remote/auth/auth.dart';
 import 'package:todo_list/data/mappers/auth/auth.dart';
 import 'package:todo_list/domain/entities/auth/auth.dart';
 import 'package:todo_list/domain/entities/auth/auth_response.dart';
@@ -22,7 +22,8 @@ class AuthRepositoryImpl implements IAuthRepository {
       final response = await authDatasource.signup(data);
       return Right(AuthMapper.toSignupEntity(response));
     } on ServerException catch (e) {
-      if (e.statusCode == 400) {
+      if (e.statusCode == 401) {
+        print(e.message);
         return Left(ValidationFailure(e.message));
       }
       return Left(ServerFailure(e.message));

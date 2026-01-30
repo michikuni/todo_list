@@ -29,15 +29,6 @@ abstract class DioClient {
         receiveTimeout: const Duration(seconds: ApiEndpoints.timeOut),
       ),
     );
-    // dio.interceptors.add(
-    //   LogInterceptor(
-    //     request: true,
-    //     // requestBody: true,
-    //     // responseBody: true,
-    //     // responseHeader: true,
-    //     // error: true,
-    //   ),
-    // );
 
     return dio;
   }

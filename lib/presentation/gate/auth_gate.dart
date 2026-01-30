@@ -12,6 +12,7 @@ import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/signin/signin_bloc.dart';
 import 'package:todo_list/presentation/pages/home/home.dart';
 import 'package:todo_list/presentation/pages/signin/signin.dart';
+import 'package:todo_list/presentation/widgets/loading_dialog.dart';
 
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
@@ -23,9 +24,7 @@ class AuthGate extends StatelessWidget {
         switch (state) {
           case AuthLoading():
           case AuthInitial():
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
+            return const LoadingDialog();
 
           case AuthAuthenticated():
             return BlocProvider(

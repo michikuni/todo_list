@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -12,6 +10,8 @@ import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
 import 'package:todo_list/presentation/bloc/signin/signin_bloc.dart';
 import 'package:todo_list/presentation/bloc/signin/signin_event.dart';
 import 'package:todo_list/presentation/bloc/signin/signin_state.dart';
+import 'package:todo_list/presentation/pages/signin/dialogs/fail_dialog.dart';
+import 'package:todo_list/presentation/widgets/loading_dialog.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 import 'package:todo_list/presentation/widgets/text_input.dart';
 
@@ -26,11 +26,15 @@ class SigninPageWidget extends StatelessWidget {
         listenWhen: (prev, curr) => prev.status != curr.status,
         listener: (context, state) {
           if (state.status == FormzSubmissionStatus.success) {
+            Navigator.of(context, rootNavigator: true).pop();
             context.read<AuthBloc>().add(AuthCheckEvent());
           }
-
+          if(state.status == FormzSubmissionStatus.inProgress){
+            showDialog(context: context, builder: (context) => LoadingDialog(),);
+          }
           if (state.status == FormzSubmissionStatus.failure) {
-            log('login fail');
+            Navigator.of(context, rootNavigator: true).pop();
+            showDialog(context: context, builder: (context) => LoginFailDialog(),);
           }
         },
         child: BlocBuilder<SigninBloc, SigninState>(
