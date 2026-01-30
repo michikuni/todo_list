@@ -60,9 +60,12 @@ class AuthDatasourceImpl implements AuthDatasource {
       }
 
       if (e.type == DioExceptionType.connectionError) {
+        // log("No Internet connection");
         throw NetworkException("No Internet connection");
       }
 
+      // log(e.response?.data['message']);
+      // log('${e.response?.statusCode}');
       throw ServerException(
         e.response?.data is Map
             ? e.response?.data['message']

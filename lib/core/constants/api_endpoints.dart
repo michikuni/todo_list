@@ -8,5 +8,6 @@ class ApiEndpoints{
   static const tokenDioName = 'tokenDio';
   static const unTokenDioName = 'unTokenDio';
   static const refreshDioName = 'refreshDio';
-
+  static const interceptorHeader = 'Authorization';
+  static const interceptorTokenType = 'Bearer';
 }

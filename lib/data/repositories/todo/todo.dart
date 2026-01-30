@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'dart:developer';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo_list/data/datasources/local/hive/todo.dart';
@@ -14,13 +14,12 @@ class TodoRepositoryImpl implements ITodoRepository {
   @override
   Future<void> addTodo(TodoEntity todo) async {
     if (todo.content.isEmpty || todo.description.isEmpty) {
-      print('Content or desciption is empty');
       return;
     }
     try {
       await localData.addTodo(TodoMapper.toModel(todo));
     } catch (e) {
-      debugPrint(e.toString());
+      log(e.toString());
       rethrow;
     }
   }
@@ -30,7 +29,7 @@ class TodoRepositoryImpl implements ITodoRepository {
     try {
       await localData.deleteTodo(key);
     } catch (e) {
-      debugPrint(e.toString());
+      log(e.toString());
       rethrow;
     }
   }
@@ -44,6 +43,7 @@ class TodoRepositoryImpl implements ITodoRepository {
       }).toList();
       return Option.fromNullable(result);
     } catch (e) {
+      log(e.toString());
       return None();
     }
   }
@@ -52,8 +52,8 @@ class TodoRepositoryImpl implements ITodoRepository {
   Future<void> updateTodo(int key, TodoEntity todo) async {
     try {
       await localData.updateTodo(TodoMapper.toModel(todo), key);
-    } catch (e){
-      debugPrint(e.toString());
+    } catch (e) {
+      log(e.toString());
       rethrow;
     }
   }

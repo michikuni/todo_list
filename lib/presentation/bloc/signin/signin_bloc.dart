@@ -27,6 +27,7 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
       );
       response.fold(
         (onLeft) {
+          // log(onLeft.message);
           emit(state.copyWith(status: FormzSubmissionStatus.failure));
         },
         (onRight) {

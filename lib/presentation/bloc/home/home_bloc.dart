@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
@@ -24,7 +26,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     required this.deleteTodo,
     required this.updateTodo,
   }) : super(HomeState.initial()) {
-    //reset status
+
+    //reset status if out add todo dialog to reset state
     on<ResetAddTodoEvent>((event, emit) {
       final initial = HomeState.initial();
       emit(
@@ -34,7 +37,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       );
     });
 
-    //get todo
+    //get all todo
     on<GetTodoEvent>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
       final response = await getTodo();
@@ -126,11 +129,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith(category: event.catergory));
     });
 
-    // get profile user
+    // get user profile
     on<GetProfileEvent>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
       final token = await tokenStorage.getAccessToken();
-      print('Token: ${token}');
+      log('Token: ${token}');
       if (token != null) {
         final response = await getProfile();
         response.fold(
@@ -138,10 +141,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             emit(state.copyWith(status: FormzSubmissionStatus.failure));
           },
           (onRight) {
-            // print('ID: ${onRight.id}');
-            // print('Avatar: ${onRight.avatar}');
-            // print('Email: ${onRight.email}');
-            // print('Name: ${onRight.name}');
             emit(
               state.copyWith(
                 id: onRight.id,

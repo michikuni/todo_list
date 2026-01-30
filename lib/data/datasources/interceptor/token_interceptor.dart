@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:todo_list/core/constants/api_endpoints.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
 
 @lazySingleton
@@ -18,7 +19,7 @@ class TokenInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     final token = await tokenStograge.getAccessToken();
     if (token != null) {
-      options.headers['Authorization'] = 'Bearer $token';
+      options.headers[ApiEndpoints.interceptorHeader] = '${ApiEndpoints.interceptorTokenType} $token';
     }
     handler.next(options);
   }

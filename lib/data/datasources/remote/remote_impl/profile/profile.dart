@@ -19,7 +19,9 @@ class ProfileDatasourceImpl extends IProfileDataSource {
         throw NetworkException('No Internet');
       }
       throw ServerException(
-        e.response?.data['message'],
+        e.response?.data is Map
+            ? e.response?.data['message']
+            : e.response?.data?.toString() ?? "Server error",
         statusCode: e.response?.statusCode,
       );
     }

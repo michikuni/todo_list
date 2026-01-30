@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/di/injection.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
 import 'package:todo_list/domain/usecases/auth/auth.dart';
@@ -14,11 +15,14 @@ class AppRouter {
   AppRouter._();
 
   static final GoRouter appRouters = GoRouter(
-    initialLocation: '/',
+    initialLocation: AppRouterPath.gateRouter,
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const AuthGate()),
       GoRoute(
-        path: '/task',
+        path: AppRouterPath.gateRouter,
+        builder: (context, state) => const AuthGate(),
+      ),
+      GoRoute(
+        path: AppRouterPath.taskRouter,
         builder: (context, state) {
           final TodoWithKeyEntity todo = state.extra as TodoWithKeyEntity;
           return BlocProvider(
@@ -31,7 +35,7 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: '/sign-up',
+        path: AppRouterPath.signupRouter,
         builder: (context, state) {
           return BlocProvider(
             create: (context) => SignupBloc(signup: getIt<SignupUseCase>()),

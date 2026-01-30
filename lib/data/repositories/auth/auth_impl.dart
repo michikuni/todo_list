@@ -23,7 +23,6 @@ class AuthRepositoryImpl implements IAuthRepository {
       return Right(AuthMapper.toSignupEntity(response));
     } on ServerException catch (e) {
       if (e.statusCode == 401) {
-        print(e.message);
         return Left(ValidationFailure(e.message));
       }
       return Left(ServerFailure(e.message));
@@ -39,10 +38,12 @@ class AuthRepositoryImpl implements IAuthRepository {
     try{
       final data = AuthMapper.toSigninModel(auth);
       final response = await authDatasource.signin(data);
-      // print(response);
+      // log(response);
       return Right(AuthMapper.toSigninEntity(response));
     } on ServerException catch(e){
-      if(e.statusCode == 400){
+      if(e.statusCode == 401){
+        // log(e.message);
+        // log(e.statusCode.toString());
         return Left(ValidationFailure(e.message));
       }
       return Left(ServerFailure(e.message));
