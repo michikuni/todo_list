@@ -42,141 +42,173 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
       body: BlocListener<SignupBloc, SignupState>(
         listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
-          if(state.status == FormzSubmissionStatus.success){
-            showDialog(context: context, builder: (context) => const SignupSuccessDialog(),);
+          if (state.status == FormzSubmissionStatus.success) {
+            showDialog(
+              context: context,
+              builder: (context) => const SignupSuccessDialog(),
+            );
           }
-          if(state.status == FormzSubmissionStatus.failure){
-            showDialog(context: context, builder: (context) => const SignupFailDialog(),);
+          if (state.status == FormzSubmissionStatus.failure) {
+            showDialog(
+              context: context,
+              builder: (context) => const SignupFailDialog(),
+            );
           }
-          if(state.status == FormzSubmissionStatus.inProgress){
-            showDialog(context: context, builder: (context) => const LoadingDialog(),);
+          if (state.status == FormzSubmissionStatus.inProgress) {
+            showDialog(
+              context: context,
+              builder: (context) => const LoadingDialog(),
+            );
           }
         },
         child: BlocBuilder<SignupBloc, SignupState>(
           builder: (context, state) => SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  AppSizes.authPageHorizontalPadding,
-                  0,
-                  AppSizes.authPageHorizontalPadding,
-                  0,
-                ),
-                child: Form(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSizes.authPageHorizontalPadding,
+                0,
+                AppSizes.authPageHorizontalPadding,
+                0,
+              ),
+              child: Form(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        SignupText.header,
+                        style: Theme.of(context).textTheme.headlineLarge
+                            ?.copyWith(color: AppColors.pureWhite87),
+                      ),
+                    ),
+                    SizedBox(height: AppSizes.authTextFieldSpace),
+                    TextInputWidget(
+                      isObscure: false,
+                      hint: SignupText.usernameHint,
+                      title: SignupText.usernameTitle,
+                      onValueChanged: (value) {
+                        context.read<SignupBloc>().add(
+                          OnUsernameChanged(userName: value),
+                        );
+                      },
+                    ),
+                    if (state.username.isNotValid && !state.username.isPure)
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          SignupText.header,
-                          style: Theme.of(context).textTheme.headlineLarge
-                              ?.copyWith(color: AppColors.pureWhite87),
-                        ),
-                      ),
-                      SizedBox(height: AppSizes.authTextFieldSpace),
-                      TextInputWidget(
-                        isObscure: false,
-                        hint: SignupText.usernameHint,
-                        title: SignupText.usernameTitle,
-                        onValueChanged: (value) {
-                          context.read<SignupBloc>().add(
-                            OnUsernameChanged(userName: value),
-                          );
-                        },
-                      ),
-                      if(state.username.isNotValid && !state.username.isPure)
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 8,),
-                              Text('Email invalid!', style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.mediumSlateBlue50),)
-                            ],
-                          ),
-                        ),
-                      SizedBox(height: AppSizes.authTextFieldSpace),
-                      TextInputWidget(
-                        isObscure: true,
-                        hint: SignupText.passwordHint,
-                        title: SignupText.passwordTitle,
-                        onValueChanged: (value) {
-                          context.read<SignupBloc>().add(
-                            OnPasswordChanged(password: value),
-                          );
-                        },
-                      ),
-                      if(state.password.isNotValid && !state.password.isPure)
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 8,),
-                              Text('Password invalid!', style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.mediumSlateBlue50),)
-                            ],
-                          ),
-                        ),
-                      SizedBox(height: AppSizes.authTextFieldSpace),
-                      TextInputWidget(
-                        isObscure: true,
-                        onValueChanged: (value) {
-                          context.read<SignupBloc>().add(
-                            OnConfirmPasswordChanged(confirmPassword: value),
-                          );
-                        },
-                        hint: SignupText.passwordHint,
-                        title: SignupText.confirmPasswordTitle,
-                      ),
-                      if(state.confirmPassword.isNotValid && !state.confirmPassword.isPure)
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 8,),
-                              Text('Password not match!', style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.mediumSlateBlue50),)
-                            ],
-                          ),
-                        ),
-                      SizedBox(height: AppSizes.authButtonSpaceTop),
-                      PrimaryButtonWidget(
-                        onPressed: () {
-                          context.read<SignupBloc>().add(SignupSubmitEvent());
-                        },
-                        height: AppSizes.authPrimaryButtonHeight,
-                        text: SignupText.header,
-                        width: double.infinity,
-                      ),
-                      Expanded(child: Container()),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            SignupText.bottomText,
-                            style: Theme.of(context).textTheme.displaySmall
-                                ?.copyWith(color: AppColors.pureWhite50),
-                          ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              minimumSize: Size.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            ),
-                            onPressed: () {
-                              context.pop();
-                            },
-                            child: Text(
-                              SignupText.bottomTextButton,
+                        child: Column(
+                          children: [
+                            SizedBox(height: 8),
+                            Text(
+                              'Email invalid!',
                               style: Theme.of(context).textTheme.displaySmall
-                                  ?.copyWith(color: AppColors.pureWhite87),
+                                  ?.copyWith(
+                                    color: AppColors.mediumSlateBlue50,
+                                  ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                      SizedBox(height: AppSizes.authPageBottomPadding),
-                    ],
-                  ),
+                    SizedBox(height: AppSizes.authTextFieldSpace),
+                    TextInputWidget(
+                      isObscure: true,
+                      hint: SignupText.passwordHint,
+                      title: SignupText.passwordTitle,
+                      onValueChanged: (value) {
+                        context.read<SignupBloc>().add(
+                          OnPasswordChanged(password: value),
+                        );
+                      },
+                    ),
+                    if (state.password.isNotValid && !state.password.isPure)
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          children: [
+                            SizedBox(height: 8),
+                            Text(
+                              'Password invalid!',
+                              style: Theme.of(context).textTheme.displaySmall
+                                  ?.copyWith(
+                                    color: AppColors.mediumSlateBlue50,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    SizedBox(height: AppSizes.authTextFieldSpace),
+                    TextInputWidget(
+                      isObscure: true,
+                      onValueChanged: (value) {
+                        context.read<SignupBloc>().add(
+                          OnConfirmPasswordChanged(confirmPassword: value),
+                        );
+                      },
+                      hint: SignupText.passwordHint,
+                      title: SignupText.confirmPasswordTitle,
+                    ),
+                    if (state.confirmPassword.isNotValid &&
+                        !state.confirmPassword.isPure)
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          children: [
+                            SizedBox(height: 8),
+                            Text(
+                              'Password not match!',
+                              style: Theme.of(context).textTheme.displaySmall
+                                  ?.copyWith(
+                                    color: AppColors.mediumSlateBlue50,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    SizedBox(height: AppSizes.authButtonSpaceTop),
+                    PrimaryButtonWidget(
+                      isValid:
+                          (state.username.isValid &&
+                          (state.password.isValid &&
+                          state.confirmPassword.isValid)),
+                      onPressed: () {
+                        context.read<SignupBloc>().add(SignupSubmitEvent());
+                      },
+                      height: AppSizes.authPrimaryButtonHeight,
+                      text: SignupText.header,
+                      width: double.infinity,
+                    ),
+                    Expanded(child: Container()),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          SignupText.bottomText,
+                          style: Theme.of(context).textTheme.displaySmall
+                              ?.copyWith(color: AppColors.pureWhite50),
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            minimumSize: Size.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          onPressed: () {
+                            context.pop();
+                          },
+                          child: Text(
+                            SignupText.bottomTextButton,
+                            style: Theme.of(context).textTheme.displaySmall
+                                ?.copyWith(color: AppColors.pureWhite87),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppSizes.authPageBottomPadding),
+                  ],
                 ),
               ),
             ),
+          ),
         ),
       ),
     );

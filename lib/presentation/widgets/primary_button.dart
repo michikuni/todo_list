@@ -8,8 +8,10 @@ class PrimaryButtonWidget extends StatelessWidget {
     required this.height,
     required this.text,
     required this.width,
-    required this.onPressed
+    required this.onPressed,
+    required this.isValid
   });
+  final bool isValid;
   final double width;
   final double height;
   final String text;
@@ -18,7 +20,7 @@ class PrimaryButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap: isValid ? onPressed : null,
       child: Container(
         width: width,
         height: height,
@@ -30,7 +32,7 @@ class PrimaryButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             AppSizes.authTextFieldBorderRadius,
           ),
-          color: AppColors.mediumSlateBlue,
+          color: isValid ? AppColors.mediumSlateBlue : AppColors.mediumSlateBlue50,
         ),
         child: Center(
           child: Text(

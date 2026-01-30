@@ -103,6 +103,7 @@ class _EditCategoryDialogState extends State<EditCategoryDialog> {
                     ),
                   ),
                   PrimaryButtonWidget(
+                    isValid: true,
                     height: AppSizes.chooseCategoryDialogButtonHeight,
                     text: 'Edit',
                     width: AppSizes.chooseCategoryDialogPrimaryButtonWidth,

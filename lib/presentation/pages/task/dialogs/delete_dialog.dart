@@ -87,6 +87,7 @@ class DeleteTaskDialog extends StatelessWidget {
                   Expanded(
                     child: PrimaryButtonWidget(
                       height: 48,
+                      isValid: true,
                       text: 'Delete',
                       width: 140,
                       onPressed: () {

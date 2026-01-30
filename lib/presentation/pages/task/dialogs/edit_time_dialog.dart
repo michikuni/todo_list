@@ -103,6 +103,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
                       ),
                     ),
                     PrimaryButtonWidget(
+                      isValid: true,
                       height: AppSizes.chooseTimeDialogButtonHeight,
                       text: 'Edit',
                       width: AppSizes.chooseTimeDialogPrimaryButtonWidth,

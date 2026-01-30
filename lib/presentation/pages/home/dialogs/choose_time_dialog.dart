@@ -104,6 +104,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                       ),
                     ),
                     PrimaryButtonWidget(
+                      isValid: true,
                       height: AppSizes.chooseTimeDialogButtonHeight,
                       text: 'Save',
                       width: AppSizes.chooseTimeDialogPrimaryButtonWidth,

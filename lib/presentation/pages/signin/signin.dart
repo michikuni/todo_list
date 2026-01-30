@@ -29,12 +29,15 @@ class SigninPageWidget extends StatelessWidget {
             Navigator.of(context, rootNavigator: true).pop();
             context.read<AuthBloc>().add(AuthCheckEvent());
           }
-          if(state.status == FormzSubmissionStatus.inProgress){
-            showDialog(context: context, builder: (context) => LoadingDialog(),);
+          if (state.status == FormzSubmissionStatus.inProgress) {
+            showDialog(context: context, builder: (context) => LoadingDialog());
           }
           if (state.status == FormzSubmissionStatus.failure) {
             Navigator.of(context, rootNavigator: true).pop();
-            showDialog(context: context, builder: (context) => LoginFailDialog(),);
+            showDialog(
+              context: context,
+              builder: (context) => LoginFailDialog(),
+            );
           }
         },
         child: BlocBuilder<SigninBloc, SigninState>(
@@ -70,13 +73,19 @@ class SigninPageWidget extends StatelessWidget {
                         },
                         isObscure: false,
                       ),
-                      if(state.username.isNotValid && !state.username.isPure)
+                      if (state.username.isNotValid && !state.username.isPure)
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Column(
                             children: [
-                              SizedBox(height: 8,),
-                              Text('Email invalid!', style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.mediumSlateBlue50),)
+                              SizedBox(height: 8),
+                              Text(
+                                'Email invalid!',
+                                style: Theme.of(context).textTheme.displaySmall
+                                    ?.copyWith(
+                                      color: AppColors.mediumSlateBlue50,
+                                    ),
+                              ),
                             ],
                           ),
                         ),
@@ -91,18 +100,26 @@ class SigninPageWidget extends StatelessWidget {
                         hint: SigninText.passwordHint,
                         title: SigninText.passwordTitle,
                       ),
-                      if(state.password.isNotValid && !state.password.isPure)
+                      if (state.password.isNotValid && !state.password.isPure)
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Column(
                             children: [
-                              SizedBox(height: 8,),
-                              Text('Password invalid!', style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.mediumSlateBlue50),)
+                              SizedBox(height: 8),
+                              Text(
+                                'Password invalid!',
+                                style: Theme.of(context).textTheme.displaySmall
+                                    ?.copyWith(
+                                      color: AppColors.mediumSlateBlue50,
+                                    ),
+                              ),
                             ],
                           ),
                         ),
                       SizedBox(height: AppSizes.authButtonSpaceTop),
                       PrimaryButtonWidget(
+                        isValid:
+                            (state.username.isValid && state.password.isValid),
                         onPressed: () {
                           context.read<SigninBloc>().add(SigninSubmitEvent());
                         },

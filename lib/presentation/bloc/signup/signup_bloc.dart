@@ -45,8 +45,16 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     //emit password
     on<OnPasswordChanged>((event, emit) {
       final password = PasswordInput.dirty(event.password);
+      final confirmPassword = ConfirmPasswordInput.dirty(
+        password: password.value,
+        value: state.confirmPassword.value,
+      );
       emit(
-        state.copyWith(password: password, isValid: Formz.validate([password])),
+        state.copyWith(
+          password: password,
+          confirmPassword: confirmPassword,
+          isValid: Formz.validate([state.username, password, confirmPassword]),
+        ),
       );
     });
 
@@ -59,7 +67,11 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       emit(
         state.copyWith(
           confirmPassword: confirmPassword,
-          isValid: Formz.validate([confirmPassword]),
+          isValid: Formz.validate([
+            state.username,
+            state.password,
+            confirmPassword,
+          ]),
         ),
       );
     });

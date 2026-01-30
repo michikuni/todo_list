@@ -43,6 +43,7 @@ class LoginFailDialog extends StatelessWidget {
               children: [
                 Expanded(
                   child: PrimaryButtonWidget(
+                    isValid: true,
                     height: 48,
                     text: 'OK!',
                     width: 140,

@@ -158,6 +158,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                   ),
                   Expanded(
                     child: PrimaryButtonWidget(
+                      isValid: true,
                       height: 48,
                       text: 'Edit',
                       width: 152,

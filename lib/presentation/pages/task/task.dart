@@ -300,6 +300,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
 
               //Button
               PrimaryButtonWidget(
+                isValid: true,
                 height: AppSizes.taskPrimaryButtonHeight,
                 text: TaskText.taskButtonPrimaryText,
                 width: double.infinity,

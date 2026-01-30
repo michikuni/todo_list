@@ -182,6 +182,7 @@ import 'package:todo_list/presentation/widgets/primary_button.dart';
             ),
           ),
           PrimaryButtonWidget(
+            isValid: true,
             height: AppSizes.chooseDateDialogButtonHeight,
             text: 'Choose Time',
             width: AppSizes.chooseDateDialogPrimaryButtonWidth,

@@ -103,6 +103,7 @@ class _ChooseCategoryDialogState extends State<ChooseCategoryDialog> {
                     ),
                   ),
                   PrimaryButtonWidget(
+                    isValid: true,
                     height: AppSizes.chooseCategoryDialogButtonHeight,
                     text: 'Save',
                     width: AppSizes.chooseCategoryDialogPrimaryButtonWidth,

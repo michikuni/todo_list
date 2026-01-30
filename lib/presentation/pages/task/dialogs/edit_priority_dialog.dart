@@ -120,6 +120,7 @@ class _EditPriorityDialogState extends State<EditPriorityDialog> {
                   SizedBox(width: AppSizes.choosePriorityDialogButtonSpaceBetween),
                   Expanded(
                     child: PrimaryButtonWidget(
+                      isValid: true,
                       height: AppSizes.choosePriorityDialogButtonHeight,
                       text: 'Edit',
                       width: AppSizes.choosePriorityDialogPrimaryButtonWidth,
