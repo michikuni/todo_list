@@ -70,6 +70,16 @@ class SigninPageWidget extends StatelessWidget {
                         },
                         isObscure: false,
                       ),
+                      if(state.username.isNotValid && !state.username.isPure)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 8,),
+                              Text('Email invalid!', style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.mediumSlateBlue50),)
+                            ],
+                          ),
+                        ),
                       SizedBox(height: AppSizes.authTextFieldSpace),
                       TextInputWidget(
                         isObscure: true,
@@ -81,6 +91,16 @@ class SigninPageWidget extends StatelessWidget {
                         hint: SigninText.passwordHint,
                         title: SigninText.passwordTitle,
                       ),
+                      if(state.password.isNotValid && !state.password.isPure)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 8,),
+                              Text('Password invalid!', style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.mediumSlateBlue50),)
+                            ],
+                          ),
+                        ),
                       SizedBox(height: AppSizes.authButtonSpaceTop),
                       PrimaryButtonWidget(
                         onPressed: () {
