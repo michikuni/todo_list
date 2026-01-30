@@ -38,7 +38,15 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
         widget.todo.todo.name,
         widget.todo.todo.userId,
       ),
+
     );
+    context.read<TaskBloc>().add(OnCategoryChanged(widget.todo.todo.category));
+    context.read<TaskBloc>().add(OnDone(widget.todo.todo.isDone));
+    context.read<TaskBloc>().add(OnContentChanged(widget.todo.todo.content));
+    context.read<TaskBloc>().add(OnDateChanged(widget.todo.todo.date));
+    context.read<TaskBloc>().add(OnDesciptionChanged(widget.todo.todo.description));
+    context.read<TaskBloc>().add(OnPriorityChanged(widget.todo.todo.priority));
+    context.read<TaskBloc>().add(OnTimeChanged(widget.todo.todo.minutes));
   }
 
   @override
@@ -119,7 +127,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                       children: [
                         SizedBox(height: AppSizes.taskTitleTextPaddingTop),
                         Text(
-                          widget.todo.todo.content,
+                          state.content,
                           style: Theme.of(context).textTheme.bodyMedium
                               ?.copyWith(color: AppColors.pureWhite87),
                           maxLines: AppSizes.taskTitleTextMaxLine,
@@ -127,7 +135,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                         ),
                         SizedBox(height: AppSizes.taskTitleTextSpace),
                         Text(
-                          widget.todo.todo.description,
+                         state.description,
                           style: Theme.of(context).textTheme.displayLarge
                               ?.copyWith(color: AppColors.grey),
                           maxLines: AppSizes.taskTitleTextMaxLine,
@@ -182,8 +190,8 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 detailWidth: AppSizes.taskRowTimeDetailWidth,
                 detailBorderRadius: AppSizes.taskRowRadius,
                 detailText: formatDateWithMinutes(
-                  widget.todo.todo.date,
-                  widget.todo.todo.minutes,
+                  state.date,
+                  state.minutes,
                 ),
                 rowIcon: Icon(
                   Icons.timer_outlined,
@@ -211,7 +219,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 titleText: TaskText.taskCategoryText,
                 detailWidth: AppSizes.taskRowCategoryDetailWidth,
                 detailBorderRadius: AppSizes.taskRowRadius,
-                detailText: widget.todo.todo.category.name,
+                detailText: state.category.name,
                 rowIcon: Icon(
                   Icons.sell_outlined,
                   color: AppColors.pureWhite87,
@@ -240,7 +248,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 titleText: TaskText.taskPriorityText,
                 detailWidth: AppSizes.taskRowPriorityDetailWidth,
                 detailBorderRadius: AppSizes.taskRowRadius,
-                detailText: widget.todo.todo.priority.toString(),
+                detailText: state.priority.toString(),
                 rowIcon: Icon(
                   Icons.flag_outlined,
                   color: AppColors.pureWhite87,

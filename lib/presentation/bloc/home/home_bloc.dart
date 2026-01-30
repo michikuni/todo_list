@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
 import 'package:todo_list/domain/entities/todo/todo.dart';
+import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
 import 'package:todo_list/domain/usecases/profile/profile.dart';
 import 'package:todo_list/domain/usecases/todo/todo.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
@@ -28,7 +29,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final initial = HomeState.initial();
       emit(
         initial.copyWith(
-          listTodo: state.listTodo, // 👈 giữ list
+          listTodo: state.listTodo,
         ),
       );
     });
@@ -42,9 +43,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           emit(state.copyWith(status: FormzSubmissionStatus.failure));
         },
         (onSome) {
+          final data = onSome.map((e) {
+            return TodoWithKeyEntity(
+              key: e.key,
+              todo: e.todo.copyWith(
+                name: state.name,
+                userId: state.id,
+                avatar: state.avatar,
+                email: state.email,
+              ),
+            );
+          }).toList();
           emit(
             state.copyWith(
-              listTodo: onSome,
+              listTodo: data,
               status: FormzSubmissionStatus.success,
             ),
           );
@@ -67,7 +79,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         email: state.email,
         name: state.name,
         avatar: state.avatar,
-        isDone: false
+        isDone: false,
       );
       await addTodo(data);
       final latestTodo = await getTodo();
@@ -118,7 +130,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<GetProfileEvent>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
       final token = await tokenStorage.getAccessToken();
-      print(token);
+      print('Token: ${token}');
       if (token != null) {
         final response = await getProfile();
         response.fold(
@@ -126,6 +138,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             emit(state.copyWith(status: FormzSubmissionStatus.failure));
           },
           (onRight) {
+            // print('ID: ${onRight.id}');
+            // print('Avatar: ${onRight.avatar}');
+            // print('Email: ${onRight.email}');
+            // print('Name: ${onRight.name}');
             emit(
               state.copyWith(
                 id: onRight.id,
@@ -137,7 +153,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             );
           },
         );
+        add(GetTodoEvent());
       }
+      // print(state.status);
     });
   }
 }

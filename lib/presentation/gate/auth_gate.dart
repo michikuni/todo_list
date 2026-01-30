@@ -38,7 +38,6 @@ class AuthGate extends StatelessWidget {
                       deleteTodo: getIt<DeleteTodoUseCase>(),
                       updateTodo: getIt<UpdateTodoUseCase>(),
                     )
-                    ..add(GetTodoEvent())
                     ..add(GetProfileEvent()),
               child: const HomePageWidget(),
             );

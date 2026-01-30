@@ -13,7 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthCheckEvent>((event, emit) async {
       emit(AuthLoading());
       final token = await storage.getAccessToken();
-      print(token);
+      // print(token);
       if (token != null) {
         final response = await getProfile();
         response.fold(

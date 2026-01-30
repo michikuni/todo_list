@@ -39,13 +39,13 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
     return BlocListener<HomeBloc, HomeState>(
       listener: (context, state) {
         log(state.status.name);
-        if(contentTextController.text != state.content){
+        if (contentTextController.text != state.content) {
           contentTextController.text = state.content;
         }
-        if(descriptionTextController.text != state.description){
+        if (descriptionTextController.text != state.description) {
           descriptionTextController.text = state.description;
         }
-        if(state.status == FormzSubmissionStatus.success){
+        if (state.status == FormzSubmissionStatus.success) {
           context.pop();
         }
       },
@@ -77,13 +77,16 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                           width: AppSizes.addTaskDialogBorder,
                           color: AppColors.mediumGrey,
                         ),
-                        borderRadius: BorderRadius.circular(AppSizes.addTaskDialogRadius),
+                        borderRadius: BorderRadius.circular(
+                          AppSizes.addTaskDialogRadius,
+                        ),
                       )
                     : null,
                 height: AppSizes.addTaskDialogInputHeight,
                 padding: EdgeInsets.symmetric(
-                  horizontal: contentSelected ? AppSizes.addTaskDialogInputPaddingHorizontal : 0,
-                  vertical: AppSizes.addTaskDialogInputPaddingVertical,
+                  horizontal: contentSelected
+                      ? AppSizes.addTaskDialogInputPaddingHorizontal
+                      : 0,
                 ),
                 child: TextFormField(
                   controller: contentTextController,
@@ -98,6 +101,10 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                       context.read<HomeBloc>().add(OnContentChanged(value));
                     });
                   },
+                  expands: false,
+                  scrollPadding: EdgeInsets.zero,
+                  textAlignVertical: TextAlignVertical.center,
+                  maxLines: 1,
                   decoration: InputDecoration(
                     hintText: 'Content',
                     hintStyle: Theme.of(
@@ -119,13 +126,16 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                           width: 1,
                           color: AppColors.mediumGrey,
                         ),
-                        borderRadius: BorderRadius.circular(AppSizes.addTaskDialogRadius),
+                        borderRadius: BorderRadius.circular(
+                          AppSizes.addTaskDialogRadius,
+                        ),
                       )
                     : null,
                 height: AppSizes.addTaskDialogInputHeight,
                 padding: EdgeInsets.symmetric(
-                  horizontal: descriptSelected ? AppSizes.addTaskDialogInputPaddingHorizontal : 0,
-                  vertical: AppSizes.addTaskDialogInputPaddingVertical,
+                  horizontal: descriptSelected
+                      ? AppSizes.addTaskDialogInputPaddingHorizontal
+                      : 0,
                 ),
                 child: TextFormField(
                   controller: descriptionTextController,
@@ -140,6 +150,10 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                       context.read<HomeBloc>().add(OnDescriptionChanged(value));
                     });
                   },
+                  expands: false,
+                  scrollPadding: EdgeInsets.zero,
+                  textAlignVertical: TextAlignVertical.center,
+                  maxLines: 1,
                   decoration: InputDecoration(
                     hintText: 'Description',
                     hintStyle: Theme.of(

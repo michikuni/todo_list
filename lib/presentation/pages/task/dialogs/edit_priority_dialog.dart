@@ -121,7 +121,7 @@ class _EditPriorityDialogState extends State<EditPriorityDialog> {
                   Expanded(
                     child: PrimaryButtonWidget(
                       height: AppSizes.choosePriorityDialogButtonHeight,
-                      text: 'Save',
+                      text: 'Edit',
                       width: AppSizes.choosePriorityDialogPrimaryButtonWidth,
                       onPressed: () {
                         context.pop();

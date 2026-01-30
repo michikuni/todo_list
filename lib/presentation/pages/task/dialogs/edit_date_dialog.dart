@@ -183,7 +183,7 @@ import 'package:todo_list/presentation/widgets/primary_button.dart';
           ),
           PrimaryButtonWidget(
             height: AppSizes.chooseDateDialogButtonHeight,
-            text: 'Choose Time',
+            text: 'Edit Time',
             width: AppSizes.chooseDateDialogPrimaryButtonWidth,
             onPressed: () {
               context.pop();

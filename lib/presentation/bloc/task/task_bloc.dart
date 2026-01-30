@@ -11,10 +11,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc({required this.update, required this.delete})
     : super(TaskState(date: DateTime.now())) {
     on<LoadData>((event, emit) {
-      print('Name: ${event.name}');
-      print('Avatar: ${event.avatar}');
-      print('Email: ${event.email}');
-      print('User ID: ${event.userId}');
       emit(
         state.copyWith(
           avatar: event.avatar,
@@ -25,33 +21,25 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       );
     });
     on<OnDone>((event, emit) {
-      print('Is Done: ${event.isDone}');
       emit(state.copyWith(isDone: event.isDone));
     },);
     on<OnCategoryChanged>((event, emit) {
-      print('Category: ${event.category}');
       emit(state.copyWith(category: event.category));
     });
     on<OnContentChanged>((event, emit) {
-      print('Content: ${event.content}');
       emit(state.copyWith(content: event.content));
     });
     on<OnDateChanged>((event, emit) {
-      print('Date: ${event.date}');
       emit(state.copyWith(date: event.date));
     });
     on<OnDesciptionChanged>((event, emit) {
-      print('Description: ${event.description}');
       emit(state.copyWith(description: event.description));
     });
     on<OnPriorityChanged>((event, emit) {
-      print('Priority: ${event.priority}');
       emit(state.copyWith(priority: event.priority));
     });
     on<OnTimeChanged>((event, emit) {
-      final minutes = event.time.hour * 60 + event.time.minute;
-      print('Minutes: $minutes');
-      emit(state.copyWith(minutes: minutes));
+      emit(state.copyWith(minutes: event.time));
     });
     on<OnSubmit>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
@@ -68,7 +56,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         avatar: state.avatar,
         isDone: state.isDone,
       );
-      print('Data: $data');
       await update(event.id, data);
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     });

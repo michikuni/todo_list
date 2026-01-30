@@ -104,14 +104,16 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
                     ),
                     PrimaryButtonWidget(
                       height: AppSizes.chooseTimeDialogButtonHeight,
-                      text: 'Save',
+                      text: 'Edit',
                       width: AppSizes.chooseTimeDialogPrimaryButtonWidth,
                       onPressed: () {
                         final time = TimeOfDay(
                           hour: isAm ? hour % 12 : hour + 12,
                           minute: minute,
                         );
-                        context.read<TaskBloc>().add(OnTimeChanged(time));
+                        final minutes = time.hour * 60 + time.minute;
+
+                        context.read<TaskBloc>().add(OnTimeChanged(minutes));
                         context.pop();
                       },
                     ),
@@ -138,7 +140,9 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
       width: AppSizes.chooseTimeDialogTimeSize,
       height: AppSizes.chooseTimeDialogTimeSize,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppSizes.chooseTimeDialogTimeRadius),
+        borderRadius: BorderRadius.circular(
+          AppSizes.chooseTimeDialogTimeRadius,
+        ),
         color: AppColors.jetBlack,
       ),
       child: ListWheelScrollView.useDelegate(
@@ -180,7 +184,9 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
       width: AppSizes.chooseTimeDialogTimeSize,
       height: AppSizes.chooseTimeDialogTimeSize,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppSizes.chooseTimeDialogTimeRadius),
+        borderRadius: BorderRadius.circular(
+          AppSizes.chooseTimeDialogTimeRadius,
+        ),
         color: AppColors.jetBlack,
       ),
       child: ListWheelScrollView(

@@ -104,7 +104,7 @@ class _EditCategoryDialogState extends State<EditCategoryDialog> {
                   ),
                   PrimaryButtonWidget(
                     height: AppSizes.chooseCategoryDialogButtonHeight,
-                    text: 'Save',
+                    text: 'Edit',
                     width: AppSizes.chooseCategoryDialogPrimaryButtonWidth,
                     onPressed: () {
                       context.pop();

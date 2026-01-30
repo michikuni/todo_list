@@ -23,8 +23,10 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
   @override
   void initState() {
     super.initState();
-    contentController = TextEditingController();
-    desciptionController = TextEditingController();
+    final state = context.read<TaskBloc>().state;
+    contentController = TextEditingController(text: state.content);
+    desciptionController = TextEditingController(text: state.description);
+    
   }
 
   @override
@@ -70,8 +72,12 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                       )
                     : null,
                 height: 40,
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: TextFormField(
+                  expands: false,
+                  scrollPadding: EdgeInsets.zero,
+                  textAlignVertical: TextAlignVertical.center,
+                  maxLines: 1,
                   controller: contentController,
                   onTap: () {
                     setState(() {
@@ -103,8 +109,12 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                       )
                     : null,
                 height: 40,
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: TextFormField(
+                  expands: false,
+                  scrollPadding: EdgeInsets.zero,
+                  textAlignVertical: TextAlignVertical.center,
+                  maxLines: 1,
                   controller: desciptionController,
                   onTap: () {
                     setState(() {
@@ -146,15 +156,21 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                       ),
                     ),
                   ),
-                  PrimaryButtonWidget(
-                    height: 48,
-                    text: 'Edit',
-                    width: 152,
-                    onPressed: () {
-                      context.read<TaskBloc>().add(OnContentChanged(contentController.text));
-                      context.read<TaskBloc>().add(OnDesciptionChanged(desciptionController.text));
-                      context.pop();
-                    },
+                  Expanded(
+                    child: PrimaryButtonWidget(
+                      height: 48,
+                      text: 'Edit',
+                      width: 152,
+                      onPressed: () {
+                        context.read<TaskBloc>().add(
+                          OnContentChanged(contentController.text),
+                        );
+                        context.read<TaskBloc>().add(
+                          OnDesciptionChanged(desciptionController.text),
+                        );
+                        context.pop();
+                      },
+                    ),
                   ),
                 ],
               ),

@@ -32,5 +32,28 @@ class Category {
   final String icon;
   const Category({required this.name, required this.color, required this.icon});
 }
+extension TodoEntityCopy on TodoEntity {
+  TodoEntity copyWith({
+    int? userId,
+    String? name,
+    String? email,
+    String? avatar,
+  }) {
+    return TodoEntity(
+      content: content,
+      description: description,
+      date: date,
+      minutes: minutes,
+      category: category,
+      priority: priority,
+      userId: userId ?? this.userId,
+      email: email ?? this.email,
+      name: name ?? this.name,
+      avatar: avatar ?? this.avatar,
+      isDone: isDone,
+    );
+  }
+}
+
 
 
