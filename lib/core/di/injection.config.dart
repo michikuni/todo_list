@@ -22,12 +22,13 @@ import 'package:todo_list/data/datasources/local/token/token_stograge.dart'
     as _i927;
 import 'package:todo_list/data/datasources/local/token/token_stograge_impl.dart'
     as _i440;
-import 'package:todo_list/data/datasources/remote/auth/auth.dart' as _i344;
-import 'package:todo_list/data/datasources/remote/profile/profile.dart' as _i718;
+import 'package:todo_list/data/datasources/remote/auth/auth.dart' as _i868;
+import 'package:todo_list/data/datasources/remote/profile/profile.dart'
+    as _i515;
 import 'package:todo_list/data/datasources/remote/remote_impl/auth/auth.dart'
-    as _i159;
+    as _i484;
 import 'package:todo_list/data/datasources/remote/remote_impl/profile/profile.dart'
-    as _i710;
+    as _i299;
 import 'package:todo_list/data/repositories/auth/auth_impl.dart' as _i294;
 import 'package:todo_list/data/repositories/profile/profile_impl.dart' as _i669;
 import 'package:todo_list/data/repositories/todo/todo.dart' as _i769;
@@ -61,10 +62,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => dioClient.unTokenDio(),
       instanceName: 'unTokenDio',
     );
-    gh.lazySingleton<_i301.ITodoLocalDataSource>(
-        () => _i1072.TodoLocalDataSource());
     gh.lazySingleton<_i927.TokenStorage>(
         () => _i440.TokenStorageImpl(gh<_i558.FlutterSecureStorage>()));
+    gh.lazySingleton<_i301.ITodoLocalDataSource>(
+        () => _i1072.TodoLocalDataSource(gh<_i927.TokenStorage>()));
     gh.lazySingleton<_i1022.ITodoRepository>(
         () => _i769.TodoRepositoryImpl(gh<_i301.ITodoLocalDataSource>()));
     gh.lazySingleton<_i597.TokenInterceptor>(
@@ -73,9 +74,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => dioClient.dio(gh<_i597.TokenInterceptor>()),
       instanceName: 'tokenDio',
     );
-    gh.lazySingleton<_i718.IProfileDataSource>(() =>
-        _i710.ProfileDatasourceImpl(gh<_i361.Dio>(instanceName: 'tokenDio')));
-    gh.lazySingleton<_i344.AuthDatasource>(() => _i159.AuthDatasourceImpl(
+    gh.lazySingleton<_i868.AuthDatasource>(() => _i484.AuthDatasourceImpl(
           gh<_i361.Dio>(instanceName: 'unTokenDio'),
           gh<_i361.Dio>(instanceName: 'tokenDio'),
           gh<_i927.TokenStorage>(),
@@ -88,16 +87,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i435.UpdateTodoUseCase(gh<_i1022.ITodoRepository>()));
     gh.lazySingleton<_i435.DeleteTodoUseCase>(
         () => _i435.DeleteTodoUseCase(gh<_i1022.ITodoRepository>()));
-    gh.lazySingleton<_i827.IProfileRepository>(
-        () => _i669.ProfileRepositoryImpl(gh<_i718.IProfileDataSource>()));
-    gh.lazySingleton<_i1029.GetProfileUseCase>(
-        () => _i1029.GetProfileUseCase(gh<_i827.IProfileRepository>()));
     gh.lazySingleton<_i360.IAuthRepository>(
-        () => _i294.AuthRepositoryImpl(gh<_i344.AuthDatasource>()));
+        () => _i294.AuthRepositoryImpl(gh<_i868.AuthDatasource>()));
+    gh.lazySingleton<_i515.IProfileDataSource>(() =>
+        _i299.ProfileDatasourceImpl(gh<_i361.Dio>(instanceName: 'tokenDio')));
     gh.lazySingleton<_i482.SignupUseCase>(
         () => _i482.SignupUseCase(gh<_i360.IAuthRepository>()));
     gh.lazySingleton<_i482.SigninUseCase>(
         () => _i482.SigninUseCase(gh<_i360.IAuthRepository>()));
+    gh.lazySingleton<_i827.IProfileRepository>(
+        () => _i669.ProfileRepositoryImpl(gh<_i515.IProfileDataSource>()));
+    gh.lazySingleton<_i1029.GetProfileUseCase>(
+        () => _i1029.GetProfileUseCase(gh<_i827.IProfileRepository>()));
     return this;
   }
 }

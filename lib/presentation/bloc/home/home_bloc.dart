@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
@@ -26,15 +25,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     required this.deleteTodo,
     required this.updateTodo,
   }) : super(HomeState.initial()) {
-
     //reset status if out add todo dialog to reset state
     on<ResetAddTodoEvent>((event, emit) {
       final initial = HomeState.initial();
-      emit(
-        initial.copyWith(
-          listTodo: state.listTodo,
-        ),
-      );
+      emit(initial.copyWith(listTodo: state.listTodo));
     });
 
     //get all todo
