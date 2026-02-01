@@ -3,188 +3,208 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/home_dialog_text.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
 import 'package:todo_list/presentation/pages/home/dialogs/choose_time_dialog.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
-  class ChooseDateDialog extends StatefulWidget {
-    const ChooseDateDialog({super.key});
+class ChooseDateDialog extends StatefulWidget {
+  const ChooseDateDialog({super.key});
 
-    @override
-    State<ChooseDateDialog> createState() => _ChooseDateDialogState();
-  }
+  @override
+  State<ChooseDateDialog> createState() => _ChooseDateDialogState();
+}
 
-  class _ChooseDateDialogState extends State<ChooseDateDialog> {
-    DateTime currentDate = DateTime.now();
-    DateTime selectedDate = DateTime.now();
+class _ChooseDateDialogState extends State<ChooseDateDialog> {
+  DateTime currentDate = DateTime.now();
+  DateTime selectedDate = DateTime.now();
 
-    @override
-    Widget build(BuildContext context) {
-      return BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) => Dialog(
-          backgroundColor: AppColors.darkGrey,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-          child: Padding(
-            padding: const EdgeInsets.all(AppSizes.chooseDateDialogPadding),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _header(),
-                const SizedBox(height: AppSizes.chooseDateDialogHeaderPaddingBottom),
-                _weekDays(),
-                const SizedBox(height: AppSizes.chooseDateDialogWeekPaddingBottom),
-                _calendar(),
-                const SizedBox(height: AppSizes.chooseDateDialogCalendarPaddingBottom),
-                _actions(),
-              ],
-            ),
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) => Dialog(
+        backgroundColor: AppColors.darkGrey,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSizes.chooseDateDialogPadding),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _header(),
+              const SizedBox(
+                height: AppSizes.chooseDateDialogHeaderPaddingBottom,
+              ),
+              _weekDays(),
+              const SizedBox(
+                height: AppSizes.chooseDateDialogWeekPaddingBottom,
+              ),
+              _calendar(),
+              const SizedBox(
+                height: AppSizes.chooseDateDialogCalendarPaddingBottom,
+              ),
+              _actions(),
+            ],
           ),
         ),
-      );
-    }
+      ),
+    );
+  }
 
-    Widget _header() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.chevron_left, color: AppColors.pureWhite87),
-            onPressed: _previousMonth,
+  Widget _header() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconButton(
+          icon: const Icon(Icons.chevron_left, color: AppColors.pureWhite87),
+          onPressed: _previousMonth,
+        ),
+        Center(
+          child: Column(
+            children: [
+              Text(
+                _monthName(currentDate.month).toUpperCase(),
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  color: AppColors.pureWhite87,
+                ),
+              ),
+              Text(
+                currentDate.year.toString(),
+                style: Theme.of(
+                  context,
+                ).textTheme.labelSmall?.copyWith(color: AppColors.grey),
+              ),
+            ],
           ),
-          Center(
-            child: Column(
-              children: [
-                Text(
-                  _monthName(currentDate.month).toUpperCase(),
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                    color: AppColors.pureWhite87,
-                  ),
-                ),
-                Text(
-                  currentDate.year.toString(),
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelSmall?.copyWith(color: AppColors.grey),
-                ),
-              ],
+        ),
+        IconButton(
+          icon: const Icon(Icons.chevron_right, color: Colors.white),
+          onPressed: _nextMonth,
+        ),
+      ],
+    );
+  }
+
+  Widget _weekDays() {
+    const days = [
+      HomeDialogText.chooseDateSunday,
+      HomeDialogText.chooseDateMonday,
+      HomeDialogText.chooseDateTueday,
+      HomeDialogText.chooseDateWedday,
+      HomeDialogText.chooseDateThuday,
+      HomeDialogText.chooseDateFriday,
+      HomeDialogText.chooseDateSatday,
+    ];
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: days.map((e) {
+        return Padding(
+          padding: const EdgeInsets.all(AppSizes.chooseDateDialogWeekPadding),
+          child: Text(
+            e,
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              color:
+                  e == HomeDialogText.chooseDateSunday ||
+                      e == HomeDialogText.chooseDateSatday
+                  ? AppColors.coralRed
+                  : AppColors.pureWhite87,
+              fontWeight: FontWeight.w700,
             ),
           ),
-          IconButton(
-            icon: const Icon(Icons.chevron_right, color: Colors.white),
-            onPressed: _nextMonth,
-          ),
-        ],
-      );
-    }
+        );
+      }).toList(),
+    );
+  }
 
-    Widget _weekDays() {
-      const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  Widget _calendar() {
+    final daysInMonth = _daysInMonth(currentDate);
+    final leadingEmpty = _leadingEmptyDays(currentDate);
+    final totalItems = leadingEmpty + daysInMonth;
 
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: days.map((e) {
-          return Padding(
-            padding: const EdgeInsets.all(AppSizes.chooseDateDialogWeekPadding),
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: totalItems,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 7,
+        crossAxisSpacing: AppSizes.chooseDateDialogCalendarItemSpace,
+        mainAxisSpacing: AppSizes.chooseDateDialogCalendarItemSpace,
+      ),
+      itemBuilder: (_, index) {
+        if (index < leadingEmpty) {
+          return const SizedBox();
+        }
+
+        final day = index - leadingEmpty + 1;
+
+        final isSelected =
+            selectedDate.year == currentDate.year &&
+            selectedDate.month == currentDate.month &&
+            selectedDate.day == day;
+
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              final date = DateTime(currentDate.year, currentDate.month, day);
+              selectedDate = date;
+              context.read<HomeBloc>().add(OnDateChanged(date));
+            });
+          },
+          child: Container(
+            width: AppSizes.chooseDateDialogCalendarItemSize,
+            height: AppSizes.chooseDateDialogCalendarItemSize,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? AppColors.mediumSlateBlue
+                  : AppColors.jetBlack,
+              borderRadius: BorderRadius.circular(
+                AppSizes.chooseDateDialogCalendarItemRadius,
+              ),
+            ),
+            margin: EdgeInsets.all(AppSizes.chooseDateDialogCalendarItemMargin),
             child: Text(
-              e,
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: e == 'SUN' || e == 'SAT'
-                    ? AppColors.coralRed
-                    : AppColors.pureWhite87,
+              '$day',
+              style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                color: AppColors.pureWhite87,
                 fontWeight: FontWeight.w700,
               ),
             ),
-          );
-        }).toList(),
-      );
-    }
+          ),
+        );
+      },
+    );
+  }
 
-    Widget _calendar() {
-      final daysInMonth = _daysInMonth(currentDate);
-      final leadingEmpty = _leadingEmptyDays(currentDate);
-      final totalItems = leadingEmpty + daysInMonth;
-
-      return GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: totalItems,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 7,
-          crossAxisSpacing: AppSizes.chooseDateDialogCalendarItemSpace,
-          mainAxisSpacing: AppSizes.chooseDateDialogCalendarItemSpace,
-        ),
-        itemBuilder: (_, index) {
-          if (index < leadingEmpty) {
-            return const SizedBox();
-          }
-
-          final day = index - leadingEmpty + 1;
-
-          final isSelected =
-              selectedDate.year == currentDate.year &&
-              selectedDate.month == currentDate.month &&
-              selectedDate.day == day;
-
-          return GestureDetector(
+  Widget _actions() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: GestureDetector(
             onTap: () {
-              setState(() {
-                final date = DateTime(currentDate.year, currentDate.month, day);
-                selectedDate = date;
-                context.read<HomeBloc>().add(OnDateChanged(date));
-              });
+              context.pop();
             },
-            child: Container(
-              width: AppSizes.chooseDateDialogCalendarItemSize,
-              height: AppSizes.chooseDateDialogCalendarItemSize,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: isSelected
-                    ? AppColors.mediumSlateBlue
-                    : AppColors.jetBlack,
-                borderRadius: BorderRadius.circular(AppSizes.chooseDateDialogCalendarItemRadius),
-              ),
-              margin: EdgeInsets.all(AppSizes.chooseDateDialogCalendarItemMargin),
-              child: Text(
-                '$day',
-                style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  color: AppColors.pureWhite87,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          );
-        },
-      );
-    }
-
-    Widget _actions() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                context.pop();
-              },
-              child: SizedBox(
-                height: AppSizes.chooseDateDialogButtonHeight,
-                child: Center(
-                  child: Text(
-                    'Cancel',
-                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      color: AppColors.mediumSlateBlue,
-                    ),
+            child: SizedBox(
+              height: AppSizes.chooseDateDialogButtonHeight,
+              child: Center(
+                child: Text(
+                  HomeDialogText.chooseDateCancelButtonText,
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                    color: AppColors.mediumSlateBlue,
                   ),
                 ),
               ),
             ),
           ),
-          PrimaryButtonWidget(
+        ),
+        Expanded(
+          child: PrimaryButtonWidget(
             isValid: true,
             height: AppSizes.chooseDateDialogButtonHeight,
-            text: 'Choose Time',
+            text: HomeDialogText.chooseDateChooseTimeButtonText,
             width: AppSizes.chooseDateDialogPrimaryButtonWidth,
             onPressed: () {
               context.pop();
@@ -194,62 +214,64 @@ import 'package:todo_list/presentation/widgets/primary_button.dart';
                 builder: (context) {
                   return BlocProvider.value(
                     value: homeBloc,
-                    child: ChooseTimeDialog());
+                    child: ChooseTimeDialog(),
+                  );
                 },
               );
             },
           ),
-        ],
-      );
-    }
-
-    void _previousMonth() {
-      setState(() {
-        currentDate = DateTime(
-          currentDate.month == 1 ? currentDate.year - 1 : currentDate.year,
-          currentDate.month == 1 ? 12 : currentDate.month - 1,
-        );
-      });
-    }
-
-    void _nextMonth() {
-      setState(() {
-        currentDate = DateTime(
-          currentDate.month == 12 ? currentDate.year + 1 : currentDate.year,
-          currentDate.month == 12 ? 1 : currentDate.month + 1,
-        );
-      });
-    }
-
-    int _daysInMonth(DateTime date) {
-      final firstDayNextMonth = DateTime(date.year, date.month + 1, 1);
-      return firstDayNextMonth.subtract(const Duration(days: 1)).day;
-    }
-
-    String _monthName(int month) {
-      const months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
-      return months[month - 1];
-    }
-
-    int _leadingEmptyDays(DateTime date) {
-      final firstWeekday = _firstWeekdayOfMonth(date);
-      return firstWeekday % 7;
-    }
-
-    int _firstWeekdayOfMonth(DateTime date) { 
-      return DateTime(date.year, date.month, 1).weekday;
-    }
+        ),
+      ],
+    );
   }
+
+  void _previousMonth() {
+    setState(() {
+      currentDate = DateTime(
+        currentDate.month == 1 ? currentDate.year - 1 : currentDate.year,
+        currentDate.month == 1 ? 12 : currentDate.month - 1,
+      );
+    });
+  }
+
+  void _nextMonth() {
+    setState(() {
+      currentDate = DateTime(
+        currentDate.month == 12 ? currentDate.year + 1 : currentDate.year,
+        currentDate.month == 12 ? 1 : currentDate.month + 1,
+      );
+    });
+  }
+
+  int _daysInMonth(DateTime date) {
+    final firstDayNextMonth = DateTime(date.year, date.month + 1, 1);
+    return firstDayNextMonth.subtract(const Duration(days: 1)).day;
+  }
+
+  String _monthName(int month) {
+    const months = [
+      HomeDialogText.chooseDateJanMonth,
+      HomeDialogText.chooseDateFebMonth,
+      HomeDialogText.chooseDateMarMonth,
+      HomeDialogText.chooseDateAprMonth,
+      HomeDialogText.chooseDateMayMonth,
+      HomeDialogText.chooseDateJunMonth,
+      HomeDialogText.chooseDateJulMonth,
+      HomeDialogText.chooseDateAugMonth,
+      HomeDialogText.chooseDateSepMonth,
+      HomeDialogText.chooseDateOctMonth,
+      HomeDialogText.chooseDateNovMonth,
+      HomeDialogText.chooseDateDecMonth,
+    ];
+    return months[month - 1];
+  }
+
+  int _leadingEmptyDays(DateTime date) {
+    final firstWeekday = _firstWeekdayOfMonth(date);
+    return firstWeekday % 7;
+  }
+
+  int _firstWeekdayOfMonth(DateTime date) {
+    return DateTime(date.year, date.month, 1).weekday;
+  }
+}

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/signin_text.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
@@ -78,9 +79,9 @@ class SigninPageWidget extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: Column(
                             children: [
-                              SizedBox(height: 8),
+                              SizedBox(height: AppSizes.signinPageFailSpaceTop),
                               Text(
-                                'Email invalid!',
+                                SigninText.emailFail,
                                 style: Theme.of(context).textTheme.displaySmall
                                     ?.copyWith(
                                       color: AppColors.mediumSlateBlue50,
@@ -105,9 +106,9 @@ class SigninPageWidget extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: Column(
                             children: [
-                              SizedBox(height: 8),
+                              SizedBox(height: AppSizes.signinPageFailSpaceTop),
                               Text(
-                                'Password invalid!',
+                                SigninText.passwordFail,
                                 style: Theme.of(context).textTheme.displaySmall
                                     ?.copyWith(
                                       color: AppColors.mediumSlateBlue50,
@@ -143,7 +144,7 @@ class SigninPageWidget extends StatelessWidget {
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
                             onPressed: () {
-                              context.push('/sign-up');
+                              context.push(AppRouterPath.signupRouter);
                             },
                             child: Text(
                               SigninText.bottomTextButton,

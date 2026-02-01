@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/assets_path.dart';
+import 'package:todo_list/core/constants/task_dialog_text.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
 import 'package:todo_list/presentation/bloc/task/task_event.dart';
 import 'package:todo_list/presentation/bloc/task/task_state.dart';
@@ -26,14 +28,14 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) => Dialog(
         backgroundColor: AppColors.darkGrey,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizes.chooseTimeDialogRadius)),
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.chooseTimeDialogPadding),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Choose Time',
+                TaskDialogText.editTimeTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w500,
@@ -45,7 +47,6 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
                 height: AppSizes.chooseTimeDialogDivideSpaceBottom,
               ),
 
-              /// TIME PICKER
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -60,7 +61,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
                       horizontal:
                           AppSizes.chooseTimeDialogColonPaddingHorizontal,
                     ),
-                    child: SvgPicture.asset('assets/icons/colon.svg'),
+                    child: SvgPicture.asset(AssetsPath.chooseTimeColonIcon),
                   ),
                   _numberPicker(
                     value: minute,
@@ -94,7 +95,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
                           height: AppSizes.chooseTimeDialogButtonHeight,
                           child: Center(
                             child: Text(
-                              'Cancel',
+                              TaskDialogText.editTimeCancelButtonText,
                               style: Theme.of(context).textTheme.displayLarge
                                   ?.copyWith(color: AppColors.mediumSlateBlue),
                             ),
@@ -105,7 +106,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
                     PrimaryButtonWidget(
                       isValid: true,
                       height: AppSizes.chooseTimeDialogButtonHeight,
-                      text: 'Edit',
+                      text: TaskDialogText.editTimeEditButtonText,
                       width: AppSizes.chooseTimeDialogPrimaryButtonWidth,
                       onPressed: () {
                         final time = TimeOfDay(

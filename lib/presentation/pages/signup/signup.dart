@@ -98,9 +98,9 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                         alignment: Alignment.centerLeft,
                         child: Column(
                           children: [
-                            SizedBox(height: 8),
+                            SizedBox(height: AppSizes.signupPageFailSpaceTop),
                             Text(
-                              'Email invalid!',
+                              SignupText.emailFail,
                               style: Theme.of(context).textTheme.displaySmall
                                   ?.copyWith(
                                     color: AppColors.mediumSlateBlue50,
@@ -125,9 +125,9 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                         alignment: Alignment.centerLeft,
                         child: Column(
                           children: [
-                            SizedBox(height: 8),
+                            SizedBox(height: AppSizes.signupPageFailSpaceTop),
                             Text(
-                              'Password invalid!',
+                              SignupText.passwordFail,
                               style: Theme.of(context).textTheme.displaySmall
                                   ?.copyWith(
                                     color: AppColors.mediumSlateBlue50,
@@ -153,9 +153,9 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                         alignment: Alignment.centerLeft,
                         child: Column(
                           children: [
-                            SizedBox(height: 8),
+                            SizedBox(height: AppSizes.signupPageFailSpaceTop),
                             Text(
-                              'Password not match!',
+                              SignupText.confirmPasswordFail,
                               style: Theme.of(context).textTheme.displaySmall
                                   ?.copyWith(
                                     color: AppColors.mediumSlateBlue50,

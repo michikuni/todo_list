@@ -1,6 +1,6 @@
 class AppSizes {
   AppSizes._();
-
+  //auth screen
   static const double authTextFieldBorder = 0.8;
   static const double authTextFieldSpace = 24;
   static const double authButtonSpaceTop = 68;
@@ -10,10 +10,32 @@ class AppSizes {
   static const double authPageBottomPadding = 20;
   static const double authPrimaryButtonHeight = 48;
   static const double signinPageTopPadding = 76;
+  static const double signinPageFailSpaceTop = 8;
+  static const double signupPageFailSpaceTop = 8;
 
+  //signin fail dialog
+  static const double signinDialogRadius = 4;
+  static const double signinDialogPadding = 8;
+  static const double signinDialogDivideSpaceTop = 12;
+  static const double signinDialogDivideSpaceBottom = 24;
+  static const double signinDialogContentSpaceBottom = 20;
+  static const double signinDialogButtonHeight = 48;
+  static const double signinDialogButtonWidth = 140;
+
+  //signup fail dialog
+  static const double signupDialogRadius = 4;
+  static const double signupDialogPadding = 8;
+  static const double signupDialogDivideSpaceTop = 12;
+  static const double signupDialogDivideSpaceBottom = 24;
+  static const double signupDialogContentSpaceBottom = 20;
+  static const double signupDialogButtonHeight = 48;
+  static const double signupDialogButtonWidth = 140;
+
+  //text input component
   static const double textInputTitleSpaceBottom = 8;
   static const double textInputPadding = 12;
 
+  //home screen
   static const double homeHorizontalPadding = 24;
   static const double homeSearchPadding = 12;
   static const double homeEmptyContentTop = 8;
@@ -34,19 +56,14 @@ class AppSizes {
   static const double homeListPaddingBottom = 20;
   static const double homeListItemSpace = 16;
 
-  
-  static const double categoryItemHeight = 90;
-  static const double categoryItemIconSize = 64;
-  static const double categoryItemIconRadius = 4;
-  static const double categoryItemIconPadding = 16;
-  static const double categoryItemIconMarginBottom = 4;
-
+  //dropdown button
   static const double dropdownButtonWidth = 76;
   static const double dropdownButtonHeight = 32;
   static const double dropdownButtonPaddingHorizontal = 8;
   static const double dropdownButtonRadius = 6;
   static const double dropdownButtonIconSize = 16;
 
+  //todo item
   static const double uncompleteTodoItemHeight =  72;
   static const double uncompleteTodoItemPaddingHorizontal =  16;
   static const double uncompleteTodoItemContentSpaceBottom =  6;
@@ -62,6 +79,7 @@ class AppSizes {
   static const double uncompleteTodoItemCategoryIconSpaceRight =  4;
   static const double uncompleteTodoItemRadius =  4;
 
+  //add task dialog
   static const double addTaskDialogRadius = 4;
   static const double addTaskDialogBorder = 1;
   static const double addTaskDialogPadding = 24;
@@ -71,7 +89,15 @@ class AppSizes {
   static const double addTaskDialogInputPaddingHorizontal = 16;
   static const double addTaskDialogInputPaddingVertical = 8;
   static const double addTaskDialogInputPaddingBottom = 8;
+  
+  //category item
+  static const double categoryItemHeight = 90;
+  static const double categoryItemIconSize = 64;
+  static const double categoryItemIconRadius = 4;
+  static const double categoryItemIconPadding = 16;
+  static const double categoryItemIconMarginBottom = 4;
 
+  //category dialog
   static const double chooseCategoryDialogRadius = 4;
   static const double chooseCategoryDialogPaddingHorizontal = 20;
   static const double chooseCategoryDialogItemSpace = 16;
@@ -82,6 +108,7 @@ class AppSizes {
   static const double chooseCategoryDialogButtonHeight = 48;
   static const double chooseCategoryDialogPrimaryButtonWidth = 140;
   
+  //date dialog
   static const double chooseDateDialogPadding = 8;
   static const double chooseDateDialogHeaderPaddingBottom = 12;
   static const double chooseDateDialogWeekPaddingBottom = 8;
@@ -94,6 +121,7 @@ class AppSizes {
   static const double chooseDateDialogButtonHeight = 48;
   static const double chooseDateDialogPrimaryButtonWidth = 140;
 
+  //priority dialog
   static const double choosePriorityDialogPadding = 12;
   static const double choosePriorityDialogItemSpace = 12;
   static const double choosePriorityDialogItemSize = 64;
@@ -108,6 +136,8 @@ class AppSizes {
   static const double choosePriorityDialogButtonHeight = 48;
   static const double choosePriorityDialogPrimaryButtonWidth = 140;
 
+  //time dialog
+  static const double chooseTimeDialogRadius = 4;
   static const double chooseTimeDialogPadding = 8;
   static const double chooseTimeDialogDivideSpaceBottom = 20;
   static const double chooseTimeDialogColonPaddingHorizontal = 16;
@@ -118,6 +148,7 @@ class AppSizes {
   static const double chooseTimeDialogTimeSize = 64;
   static const double chooseTimeDialogTimeRadius = 4;
 
+  //task screen
   static const double taskAppBarIconSize = 32;
   static const double taskAppBarIconRadius = 4;
   static const double taskPageHorizontalMargin = 24;
@@ -147,5 +178,27 @@ class AppSizes {
   static const double taskPrimaryButtonHeight = 48;
   static const double taskDeleteSpaceTop = 28;
 
+  //delete dialog
+  static const double deleteDialogRadius = 4;
+  static const double deleteDialogPadding = 8;
+  static const double deleteDialogDivideSpaceTop = 12;
+  static const double deleteDialogDivideSpaceBottom = 24;
+  static const double deleteDialogContentSpaceBottom = 20;
+  static const double deleteDialogButtonHeight = 48;
+  static const double deleteDialogButtonWidth = 140;
 
+  //edit task dialog
+  static const double editTaskDialogRadius = 4;
+  static const double editTaskDialogPaddingHorizontal = 8;
+  static const double editTaskDialogPaddingTop = 12;
+  static const double editTaskDialogPaddingBottom = 4;
+  static const double editTaskDialogHeight = 240;
+  static const double editTaskDialogTitlePaddingBottom = 12;
+  static const double editTaskDialogInputHeight = 40;
+  static const double editTaskDialogInputMarginVertical = 16;
+  static const double editTaskDialogInputPaddingHorizontal = 16;
+  static const double editTaskDialogInputMarginHorizontal = 8;
+  static const double editTaskDialogButtonSpaceTop = 28;
+  static const double editDialogButtonHeight = 48;
+  static const double editDialogButtonWidth = 152;
 }

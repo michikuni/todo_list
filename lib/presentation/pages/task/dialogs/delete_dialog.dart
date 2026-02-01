@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_router_path.dart';
+import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/task_dialog_text.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
@@ -21,7 +24,7 @@ class DeleteTaskDialog extends StatelessWidget {
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
         if (state.status == FormzSubmissionStatus.inProgress) {
-          print(state.status);
+          // print(state.status);
           showDialog(
             context: context,
             barrierDismissible: false,
@@ -29,42 +32,42 @@ class DeleteTaskDialog extends StatelessWidget {
           );
         }
         if(state.status == FormzSubmissionStatus.success){
-          print(state.status);
+          // print(state.status);
           context.read<AuthBloc>().add(AuthCheckEvent());
-          context.go('/');
+          context.go(AppRouterPath.gateRouter);
         }
       },
       child: Dialog(
         backgroundColor: Colors.transparent,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(AppSizes.deleteDialogRadius),
             color: AppColors.darkGrey,
           ),
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.all(AppSizes.deleteDialogPadding),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Delete Task',
+                TaskDialogText.deleteTaskTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.deleteDialogDivideSpaceTop),
               Divider(height: 1),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSizes.deleteDialogDivideSpaceBottom),
               Text(
-                'Are You sure you want to delete this task?\nTask title : ${todo.todo.content}',
+                '${TaskDialogText.deleteTaskContentText}${todo.todo.content}',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w500,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: AppSizes.deleteDialogContentSpaceBottom),
               Row(
                 children: [
                   Expanded(
@@ -73,10 +76,10 @@ class DeleteTaskDialog extends StatelessWidget {
                         context.pop();
                       },
                       child: SizedBox(
-                        height: 48,
+                        height: AppSizes.deleteDialogButtonHeight,
                         child: Center(
                           child: Text(
-                            'Cancel',
+                            TaskDialogText.deleteTaskCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
                                 ?.copyWith(color: AppColors.mediumSlateBlue),
                           ),
@@ -86,12 +89,12 @@ class DeleteTaskDialog extends StatelessWidget {
                   ),
                   Expanded(
                     child: PrimaryButtonWidget(
-                      height: 48,
+                      height: AppSizes.deleteDialogButtonHeight,
                       isValid: true,
-                      text: 'Delete',
-                      width: 140,
+                      text: TaskDialogText.deleteTaskDeleteButtonText,
+                      width: AppSizes.deleteDialogButtonWidth,
                       onPressed: () {
-                        print(todo.key);
+                        // print(todo.key);
                         context.read<TaskBloc>().add(DeleteTask(todo.key));
                       },
                     ),

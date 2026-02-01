@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
 import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dart';
@@ -16,7 +17,7 @@ class CompletedTodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push('/task', extra: todo);
+        context.push(AppRouterPath.taskRouter, extra: todo);
       },
       child: Stack(
         children: [

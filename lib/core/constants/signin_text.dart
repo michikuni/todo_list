@@ -9,4 +9,6 @@ class SigninText{
   static const primaryButtonText = 'Login';
   static const usernameHint = 'Enter your Username';
   static const passwordHint = '● ● ● ● ● ● ● ● ● ● ● ●';
+  static const emailFail = 'Email invalid!';
+  static const passwordFail = 'Password invalid!';
 }

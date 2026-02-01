@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/task_text.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
@@ -306,7 +307,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 width: double.infinity,
                 onPressed: () {
                   context.read<TaskBloc>().add(OnSubmit(widget.todo.key));
-                  context.push('/');
+                  context.push(AppRouterPath.gateRouter);
                 },
               ),
               SizedBox(height: AppSizes.taskPageBottomHorizontalMargin),

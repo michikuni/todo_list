@@ -10,5 +10,9 @@ class SignupText {
   static const bottomTextButton = 'Login';
   static const usernameHint = 'Enter your Username';
   static const passwordHint = '● ● ● ● ● ● ● ● ● ● ● ●';
+  static const emailFail = 'Email invalid!';
+  static const passwordFail = 'Password invalid!';
+  static const confirmPasswordFail = 'Password not match!';
+
 
 }

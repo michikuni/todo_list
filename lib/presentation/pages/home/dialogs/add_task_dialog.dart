@@ -5,6 +5,8 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/assets_path.dart';
+import 'package:todo_list/core/constants/home_dialog_text.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
@@ -60,7 +62,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Add Task',
+                HomeDialogText.addTaskTitleText,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w700,
@@ -103,7 +105,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                   textAlignVertical: TextAlignVertical.center,
                   maxLines: 1,
                   decoration: InputDecoration(
-                    hintText: 'Content',
+                    hintText: HomeDialogText.addTaskContentHint,
                     hintStyle: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
@@ -152,7 +154,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                   textAlignVertical: TextAlignVertical.center,
                   maxLines: 1,
                   decoration: InputDecoration(
-                    hintText: 'Description',
+                    hintText: HomeDialogText.addTaskDescriptionHint,
                     hintStyle: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
@@ -223,7 +225,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                     onPressed: () {
                       context.read<HomeBloc>().add(OnSubmited());
                     },
-                    icon: SvgPicture.asset('assets/icons/send.svg'),
+                    icon: SvgPicture.asset(AssetsPath.addTaskSendIcon),
                   ),
                 ],
               ),

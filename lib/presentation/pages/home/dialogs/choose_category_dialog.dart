@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/home_dialog_text.dart';
 import 'package:todo_list/domain/entities/todo/todo.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
@@ -35,7 +36,7 @@ class _ChooseCategoryDialogState extends State<ChooseCategoryDialog> {
           children: [
             SizedBox(height: AppSizes.chooseCategoryDialogTitleSpace),
             Text(
-              'Choose Category',
+              HomeDialogText.chooseCategoryTitleText,
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
                 color: AppColors.pureWhite87,
                 fontWeight: FontWeight.w700,
@@ -94,7 +95,7 @@ class _ChooseCategoryDialogState extends State<ChooseCategoryDialog> {
                         height: AppSizes.chooseCategoryDialogButtonHeight,
                         child: Center(
                           child: Text(
-                            'Cancel',
+                            HomeDialogText.chooseCategoryCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
                                 ?.copyWith(color: AppColors.mediumSlateBlue),
                           ),
@@ -102,14 +103,16 @@ class _ChooseCategoryDialogState extends State<ChooseCategoryDialog> {
                       ),
                     ),
                   ),
-                  PrimaryButtonWidget(
-                    isValid: true,
-                    height: AppSizes.chooseCategoryDialogButtonHeight,
-                    text: 'Save',
-                    width: AppSizes.chooseCategoryDialogPrimaryButtonWidth,
-                    onPressed: () {
-                      context.pop();
-                    },
+                  Expanded(
+                    child: PrimaryButtonWidget(
+                      isValid: true,
+                      height: AppSizes.chooseCategoryDialogButtonHeight,
+                      text: HomeDialogText.chooseCategorySaveButtonText,
+                      width: AppSizes.chooseCategoryDialogPrimaryButtonWidth,
+                      onPressed: () {
+                        context.pop();
+                      },
+                    ),
                   ),
                 ],
               ),

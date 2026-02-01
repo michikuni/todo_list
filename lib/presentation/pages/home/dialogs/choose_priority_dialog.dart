@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/home_dialog_text.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
@@ -31,7 +32,7 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
             children: [
               SizedBox(height: AppSizes.choosePriorityDialogTitleSpaceTop),
               Text(
-                "Edit Task Priority",
+                HomeDialogText.choosePriorityTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w700,
@@ -109,7 +110,7 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                         height: AppSizes.choosePriorityDialogButtonHeight,
                         child: Center(
                           child: Text(
-                            'Cancel',
+                            HomeDialogText.choosePriorityCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
                                 ?.copyWith(color: AppColors.mediumSlateBlue),
                           ),
@@ -122,7 +123,7 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                     child: PrimaryButtonWidget(
                       isValid: true,
                       height: AppSizes.choosePriorityDialogButtonHeight,
-                      text: 'Save',
+                      text: HomeDialogText.choosePrioritySaveButtonText,
                       width: AppSizes.choosePriorityDialogPrimaryButtonWidth,
                       onPressed: () {
                         context.pop();

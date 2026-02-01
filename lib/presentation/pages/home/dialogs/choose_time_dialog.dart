@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/assets_path.dart';
+import 'package:todo_list/core/constants/home_dialog_text.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
@@ -34,7 +36,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Choose Time',
+                HomeDialogText.chooseTimeTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w500,
@@ -46,7 +48,6 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                 height: AppSizes.chooseTimeDialogDivideSpaceBottom,
               ),
 
-              /// TIME PICKER
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -61,7 +62,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                       horizontal:
                           AppSizes.chooseTimeDialogColonPaddingHorizontal,
                     ),
-                    child: SvgPicture.asset('assets/icons/colon.svg'),
+                    child: SvgPicture.asset(AssetsPath.chooseTimeColonIcon),
                   ),
                   _numberPicker(
                     value: minute,
@@ -95,7 +96,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                           height: AppSizes.chooseTimeDialogButtonHeight,
                           child: Center(
                             child: Text(
-                              'Cancel',
+                              HomeDialogText.chooseTimeCancelButtonText,
                               style: Theme.of(context).textTheme.displayLarge
                                   ?.copyWith(color: AppColors.mediumSlateBlue),
                             ),
@@ -103,19 +104,21 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                         ),
                       ),
                     ),
-                    PrimaryButtonWidget(
-                      isValid: true,
-                      height: AppSizes.chooseTimeDialogButtonHeight,
-                      text: 'Save',
-                      width: AppSizes.chooseTimeDialogPrimaryButtonWidth,
-                      onPressed: () {
-                        final time = TimeOfDay(
-                          hour: isAm ? hour % 12 : handlerPmHour(hour),
-                          minute: minute,
-                        );
-                        context.read<HomeBloc>().add(OnTimeChanged(time));
-                        context.pop();
-                      },
+                    Expanded(
+                      child: PrimaryButtonWidget(
+                        isValid: true,
+                        height: AppSizes.chooseTimeDialogButtonHeight,
+                        text: HomeDialogText.chooseTimeSaveButtonText,
+                        width: AppSizes.chooseTimeDialogPrimaryButtonWidth,
+                        onPressed: () {
+                          final time = TimeOfDay(
+                            hour: isAm ? hour % 12 : handlerPmHour(hour),
+                            minute: minute,
+                          );
+                          context.read<HomeBloc>().add(OnTimeChanged(time));
+                          context.pop();
+                        },
+                      ),
                     ),
                   ],
                 ),

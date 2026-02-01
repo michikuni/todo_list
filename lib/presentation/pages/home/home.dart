@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formz/formz.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/assets_path.dart';
+import 'package:todo_list/core/constants/home_dialog_text.dart';
 import 'package:todo_list/core/constants/home_text.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
@@ -107,23 +109,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   children: [
                     BottomNavItem(
                       icon: Icons.home_filled,
-                      label: "Index",
+                      label: HomeDialogText.bottomBarIndexLabel,
                       marginLeft: AppSizes.homeBottomNavItemSpace,
                     ),
                     const BottomNavItem(
                       icon: Icons.calendar_month_outlined,
-                      label: "Calendar",
+                      label: HomeDialogText.bottomBarCalendarLabel,
                       marginLeft: AppSizes.homeBottomNavItemSpace,
                     ),
                     const Spacer(),
                     const BottomNavItem(
                       icon: Icons.access_time,
-                      label: "Focus",
+                      label: HomeDialogText.bottomBarFocusLabel,
                       marginRight: AppSizes.homeBottomNavItemSpace,
                     ),
                     const BottomNavItem(
                       icon: Icons.person_outline_rounded,
-                      label: "Profile",
+                      label: HomeDialogText.bottomBarProfileLabel,
                       marginRight: AppSizes.homeBottomNavItemSpace,
                     ),
                   ],
@@ -223,7 +225,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 ),
                                 child: Row(
                                   children: [
-                                    SvgPicture.asset('assets/icons/search.svg'),
+                                    SvgPicture.asset(AssetsPath.homeSearchIcon),
                                     const SizedBox(
                                       width: AppSizes.homeSearchPadding,
                                     ),
@@ -245,7 +247,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               ),
                                           decoration: InputDecoration(
                                             hint: Text(
-                                              'Search for your task...',
+                                              HomeDialogText.searchHint,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .displayLarge

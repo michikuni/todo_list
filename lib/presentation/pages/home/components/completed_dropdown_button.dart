@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/dropdown_text.dart';
 
 class CompletedDropdown extends StatefulWidget {
 
@@ -11,6 +12,8 @@ class CompletedDropdown extends StatefulWidget {
   @override
   State<CompletedDropdown> createState() => _CompletedDropdownState();
 }
+
+enum CompletedDropdownValue {completed}
 
 class _CompletedDropdownState extends State<CompletedDropdown> {
 
@@ -27,8 +30,8 @@ class _CompletedDropdownState extends State<CompletedDropdown> {
         borderRadius: BorderRadius.circular(AppSizes.dropdownButtonRadius),
       ),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          value: 'completed',
+        child: DropdownButton<CompletedDropdownValue>(
+          value: CompletedDropdownValue.completed,
           icon: const Icon(
             Icons.keyboard_arrow_down,
             size: AppSizes.dropdownButtonIconSize,
@@ -40,7 +43,7 @@ class _CompletedDropdownState extends State<CompletedDropdown> {
             context,
           ).textTheme.displaySmall?.copyWith(color: AppColors.pureWhite87),
           items: [
-            DropdownMenuItem(value: 'completed', child: Text('Completed')),
+            DropdownMenuItem(value: CompletedDropdownValue.completed, child: Text(DropdownText.completed)),
           ],
           onChanged: (v) {
             if (v == null) return;

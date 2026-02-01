@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/task_dialog_text.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
 import 'package:todo_list/presentation/bloc/task/task_event.dart';
 import 'package:todo_list/presentation/bloc/task/task_state.dart';
@@ -26,7 +28,6 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
     final state = context.read<TaskBloc>().state;
     contentController = TextEditingController(text: state.content);
     desciptionController = TextEditingController(text: state.description);
-    
   }
 
   @override
@@ -43,36 +44,46 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
         backgroundColor: Colors.transparent,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(AppSizes.editTaskDialogRadius),
             border: Border.all(width: 1),
             color: AppColors.darkGrey,
           ),
-          padding: EdgeInsets.fromLTRB(8, 12, 8, 4),
-          height: 240,
+          padding: EdgeInsets.fromLTRB(
+            AppSizes.editTaskDialogPaddingHorizontal,
+            AppSizes.editTaskDialogPaddingTop,
+            AppSizes.editTaskDialogPaddingHorizontal,
+            AppSizes.editTaskDialogPaddingBottom,
+          ),
+          height: AppSizes.editTaskDialogHeight,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Edit Task title',
+                TaskDialogText.editTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   color: AppColors.pureWhite87,
                 ),
               ),
-              SizedBox(height: 12),
+              SizedBox(height: AppSizes.editTaskDialogTitlePaddingBottom),
               Divider(height: 1),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                margin: EdgeInsets.symmetric(
+                  horizontal: AppSizes.editTaskDialogInputMarginHorizontal,
+                  vertical: AppSizes.editTaskDialogInputMarginVertical,
+                ),
                 decoration: contentSelected
                     ? BoxDecoration(
                         border: Border.all(
                           width: 1,
                           color: AppColors.mediumGrey,
                         ),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(
+                          AppSizes.editTaskDialogRadius,
+                        ),
                       )
                     : null,
-                height: 40,
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                height: AppSizes.editTaskDialogInputHeight,
+                padding: EdgeInsets.symmetric(horizontal: AppSizes.editTaskDialogInputPaddingHorizontal),
                 child: TextFormField(
                   expands: false,
                   scrollPadding: EdgeInsets.zero,
@@ -86,7 +97,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                     });
                   },
                   decoration: InputDecoration(
-                    hintText: 'Content',
+                    hintText: TaskDialogText.editContentHint,
                     hintStyle: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
@@ -98,18 +109,18 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 8),
+                margin: EdgeInsets.symmetric(horizontal: AppSizes.editTaskDialogInputMarginHorizontal),
                 decoration: descriptSelected
                     ? BoxDecoration(
                         border: Border.all(
                           width: 1,
                           color: AppColors.mediumGrey,
                         ),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(AppSizes.editTaskDialogRadius),
                       )
                     : null,
-                height: 40,
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                height: AppSizes.editTaskDialogInputHeight,
+                padding: EdgeInsets.symmetric(horizontal: AppSizes.editTaskDialogInputPaddingHorizontal),
                 child: TextFormField(
                   expands: false,
                   scrollPadding: EdgeInsets.zero,
@@ -123,7 +134,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                     });
                   },
                   decoration: InputDecoration(
-                    hintText: 'Description',
+                    hintText: TaskDialogText.editDescriptionHint,
                     hintStyle: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
@@ -134,7 +145,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                   ).textTheme.bodySmall?.copyWith(color: AppColors.pureWhite87),
                 ),
               ),
-              SizedBox(height: 28),
+              SizedBox(height: AppSizes.editTaskDialogButtonSpaceTop),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -145,10 +156,10 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                         context.pop();
                       },
                       child: SizedBox(
-                        height: 48,
+                        height: AppSizes.editDialogButtonHeight,
                         child: Center(
                           child: Text(
-                            'Cancel',
+                            TaskDialogText.editCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
                                 ?.copyWith(color: AppColors.mediumSlateBlue),
                           ),
@@ -159,9 +170,9 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                   Expanded(
                     child: PrimaryButtonWidget(
                       isValid: true,
-                      height: 48,
-                      text: 'Edit',
-                      width: 152,
+                      height: AppSizes.editDialogButtonHeight,
+                      text: TaskDialogText.editEditButtonText,
+                      width: AppSizes.editDialogButtonWidth,
                       onPressed: () {
                         context.read<TaskBloc>().add(
                           OnContentChanged(contentController.text),
