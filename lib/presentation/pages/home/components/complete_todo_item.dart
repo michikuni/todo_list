@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
@@ -11,19 +12,24 @@ class CompletedTodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: double.infinity,
-          height: AppSizes.uncompleteTodoItemHeight,
-          decoration: BoxDecoration(color: AppColors.darkGrey),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
-              CircleCheck(value: false, onChanged: (value) {}),
-              SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
-              Column(
+    return GestureDetector(
+      onTap: () {
+        context.push('/task', extra: todo);
+      },
+      child: Container(
+        width: double.infinity,
+        height: AppSizes.uncompleteTodoItemHeight,
+        decoration: BoxDecoration(color: AppColors.darkGrey),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
+            CircleCheck(value: todo.todo.isDone, onChanged: (value) {
+              // log
+            }),
+            SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
+            Expanded(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -46,10 +52,10 @@ class CompletedTodoItem extends StatelessWidget {
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

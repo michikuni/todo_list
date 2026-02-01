@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/domain/entities/todo/todo.dart';
+import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
 
 abstract class HomeEvent {}
 
@@ -42,3 +43,8 @@ class GetTodoEvent extends HomeEvent{}
 class ResetAddTodoEvent extends HomeEvent {}
 
 class OnLoggingOut extends HomeEvent{}
+
+class OnChangedCompletedStatus extends HomeEvent{
+  final TodoWithKeyEntity todo;
+  OnChangedCompletedStatus(this.todo);
+}
