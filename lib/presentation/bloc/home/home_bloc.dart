@@ -31,6 +31,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(initial.copyWith(listTodo: state.listTodo));
     });
 
+    on<OnChangedCompletedStatus>((event, emit) async {
+      emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+      // print(state.status);
+      final data = TodoEntity(
+        content: event.todo.todo.content,
+        description: event.todo.todo.description,
+        category: event.todo.todo.category,
+        priority: event.todo.todo.priority,
+        date: event.todo.todo.date,
+        minutes: event.todo.todo.minutes,
+        userId: event.todo.todo.userId,
+        email: event.todo.todo.email,
+        name: event.todo.todo.name,
+        avatar: event.todo.todo.avatar,
+        isDone: !event.todo.todo.isDone,
+      );
+      await updateTodo(event.todo.key, data);
+      add(GetTodoEvent());
+      emit(state.copyWith(status: FormzSubmissionStatus.success));
+      // print(state.status);
+    });
+
     //get all todo
     on<GetTodoEvent>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
@@ -43,12 +65,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           final data = onSome.map((e) {
             return TodoWithKeyEntity(
               key: e.key,
-              todo: e.todo.copyWith(
-                name: state.name,
-                userId: state.id,
-                avatar: state.avatar,
-                email: state.email,
-              ),
+              todo: e.todo
             );
           }).toList();
           emit(

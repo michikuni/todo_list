@@ -8,8 +8,9 @@ import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dar
 import 'package:todo_list/presentation/widgets/circle_check.dart';
 
 class UncompletedTodoItem extends StatelessWidget {
-  const UncompletedTodoItem({super.key, required this.todo});
+  const UncompletedTodoItem({super.key, required this.todo, required this.onChanged});
   final TodoWithKeyEntity todo;
+  final ValueChanged onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class UncompletedTodoItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
-                CircleCheck(value: false, onChanged: (value) {}),
+                CircleCheck(value: false, onChanged: onChanged),
                 SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
                 Expanded(
                   child: Column(

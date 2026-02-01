@@ -40,7 +40,6 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
       ),
 
     );
-    // log('${widget.todo.todo.userId}');
     context.read<TaskBloc>().add(OnCategoryChanged(widget.todo.todo.category));
     context.read<TaskBloc>().add(OnDone(widget.todo.todo.isDone));
     context.read<TaskBloc>().add(OnContentChanged(widget.todo.todo.content));
