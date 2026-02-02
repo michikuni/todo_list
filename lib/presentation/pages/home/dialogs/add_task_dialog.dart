@@ -57,7 +57,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
             color: AppColors.darkGrey,
           ),
           padding: EdgeInsets.all(AppSizes.addTaskDialogPadding),
-          // height: AppSizes.addTaskDialogHeight,
+          height: AppSizes.addTaskDialogHeight,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
