@@ -200,7 +200,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 ),
               ),
               const SizedBox(height: AppSizes.taskRowSpace),
-          
+
               //Task Category Row
               TaskRow(
                 onTap: () {
@@ -235,7 +235,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 ),
               ),
               const SizedBox(height: AppSizes.taskRowSpace),
-          
+
               //Task Priority Row
               TaskRow(
                 onTap: () {
@@ -256,7 +256,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 ),
               ),
               const SizedBox(height: AppSizes.taskRowSpace),
-          
+
               //Task Sub Row
               TaskRow(
                 onTap: () {},
@@ -272,7 +272,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 ),
               ),
               SizedBox(height: AppSizes.taskDeleteSpaceTop),
-          
+
               //Delete Task Row
               GestureDetector(
                 onTap: () {
@@ -298,7 +298,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 ),
               ),
               Expanded(child: Container()),
-          
+
               //Button
               PrimaryButtonWidget(
                 isValid: true,

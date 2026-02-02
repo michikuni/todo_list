@@ -165,17 +165,23 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                         ),
                       ),
                     SizedBox(height: AppSizes.authButtonSpaceTop),
-                    PrimaryButtonWidget(
-                      isValid:
-                          (state.username.isValid &&
-                          (state.password.isValid &&
-                          state.confirmPassword.isValid)),
-                      onPressed: () {
-                        context.read<SignupBloc>().add(SignupSubmitEvent());
-                      },
-                      height: AppSizes.authPrimaryButtonHeight,
-                      text: SignupText.header,
-                      width: double.infinity,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: PrimaryButtonWidget(
+                            isValid:
+                                (state.username.isValid &&
+                                (state.password.isValid &&
+                                state.confirmPassword.isValid)),
+                            onPressed: () {
+                              context.read<SignupBloc>().add(SignupSubmitEvent());
+                            },
+                            height: AppSizes.authPrimaryButtonHeight,
+                            text: SignupText.header,
+                            width: double.infinity,
+                          ),
+                        ),
+                      ],
                     ),
                     Expanded(child: Container()),
                     Row(

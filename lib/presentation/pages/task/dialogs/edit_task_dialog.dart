@@ -41,7 +41,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) => Dialog(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.darkGrey,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSizes.editTaskDialogRadius),

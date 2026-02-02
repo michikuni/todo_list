@@ -22,6 +22,7 @@ class SigninPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.black,
       body: BlocListener<SigninBloc, SigninState>(
         listenWhen: (prev, curr) => prev.status != curr.status,

@@ -9,7 +9,11 @@ import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dar
 import 'package:todo_list/presentation/widgets/circle_check.dart';
 
 class UncompletedTodoItem extends StatelessWidget {
-  const UncompletedTodoItem({super.key, required this.todo, required this.onChanged});
+  const UncompletedTodoItem({
+    super.key,
+    required this.todo,
+    required this.onChanged,
+  });
   final TodoWithKeyEntity todo;
   final ValueChanged onChanged;
 
@@ -28,9 +32,13 @@ class UncompletedTodoItem extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
-                CircleCheck(value: false, onChanged: onChanged),
-                SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
+                // SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
+                CircleCheck(
+                  value: false,
+                  onChanged: onChanged,
+                  padding: AppSizes.uncompleteTodoItemPaddingHorizontal,
+                ),
+                // SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,9 +46,8 @@ class UncompletedTodoItem extends StatelessWidget {
                     children: [
                       Text(
                         todo.todo.content,
-                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                          color: AppColors.pureWhite87,
-                        ),
+                        style: Theme.of(context).textTheme.displayLarge
+                            ?.copyWith(color: AppColors.pureWhite87),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -48,7 +55,10 @@ class UncompletedTodoItem extends StatelessWidget {
                         height: AppSizes.uncompleteTodoItemContentSpaceBottom,
                       ),
                       Text(
-                        formatDateWithMinutes(todo.todo.date, todo.todo.minutes),
+                        formatDateWithMinutes(
+                          todo.todo.date,
+                          todo.todo.minutes,
+                        ),
                         style: Theme.of(context).textTheme.displayMedium
                             ?.copyWith(color: AppColors.pureWhite87),
                         maxLines: 1,

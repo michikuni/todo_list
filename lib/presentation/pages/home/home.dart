@@ -49,6 +49,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return BlocListener<HomeBloc, HomeState>(
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
@@ -110,23 +111,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     BottomNavItem(
                       icon: Icons.home_filled,
                       label: HomeDialogText.bottomBarIndexLabel,
-                      marginLeft: AppSizes.homeBottomNavItemSpace,
+                      marginLeft: (screenWidth * 0.05),
                     ),
-                    const BottomNavItem(
+                    BottomNavItem(
                       icon: Icons.calendar_month_outlined,
                       label: HomeDialogText.bottomBarCalendarLabel,
-                      marginLeft: AppSizes.homeBottomNavItemSpace,
+                      marginLeft: (screenWidth * 0.05),
                     ),
                     const Spacer(),
-                    const BottomNavItem(
+                    BottomNavItem(
                       icon: Icons.access_time,
                       label: HomeDialogText.bottomBarFocusLabel,
-                      marginRight: AppSizes.homeBottomNavItemSpace,
+                      marginRight: (screenWidth * 0.05),
                     ),
-                    const BottomNavItem(
+                    BottomNavItem(
                       icon: Icons.person_outline_rounded,
                       label: HomeDialogText.bottomBarProfileLabel,
-                      marginRight: AppSizes.homeBottomNavItemSpace,
+                      marginRight:(screenWidth * 0.05),
                     ),
                   ],
                 ),

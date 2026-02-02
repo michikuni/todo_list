@@ -67,7 +67,7 @@ String formatDateWithMinutes(DateTime date, int minutes) {
       date.month == now.month &&
       date.day == now.day + 1;
 
-  final isLastYear = date.year < now.year;
+  final isOtherYear = date.year != now.year;
 
   final h = minutes ~/ 60;
   final m = minutes % 60;
@@ -87,7 +87,7 @@ String formatDateWithMinutes(DateTime date, int minutes) {
   final MM = date.month.toString().padLeft(2, '0');
   final yyyy = date.year.toString();
 
-  if (isLastYear) {
+  if (isOtherYear) {
     return '$dd/$MM/$yyyy At $hh:$mm';
   }
   return '$dd/$MM At $hh:$mm';
