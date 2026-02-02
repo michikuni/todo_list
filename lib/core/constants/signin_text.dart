@@ -1,6 +1,4 @@
 class SigninText{
-  SigninText._();
-
   static const header = 'Login';
   static const usernameTitle = 'Username';
   static const passwordTitle = 'Password';

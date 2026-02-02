@@ -1,5 +1,4 @@
 class AppSizes {
-  AppSizes._();
   //auth screen
   static const double authTextFieldBorder = 0.8;
   static const double authTextFieldSpace = 24;

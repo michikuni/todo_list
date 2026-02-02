@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_router_path.dart';
@@ -23,26 +24,45 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRouterPath.taskRouter,
-        builder: (context, state) {
-          final TodoWithKeyEntity todo = state.extra as TodoWithKeyEntity;
-          return BlocProvider(
-            create: (context) => TaskBloc(
-              update: getIt<UpdateTodoUseCase>(),
-              delete: getIt<DeleteTodoUseCase>(),
+        pageBuilder: (context, state) {
+          final todo = state.extra as TodoWithKeyEntity;
+          return buildPageWithDefaultTransition(
+            context: context,
+            state: state,
+            child: BlocProvider(
+              create: (_) => TaskBloc(
+                update: getIt<UpdateTodoUseCase>(),
+                delete: getIt<DeleteTodoUseCase>(),
+              ),
+              child: TaskPageWidget(todo: todo),
             ),
-            child: TaskPageWidget(todo: todo),
           );
         },
       ),
       GoRoute(
         path: AppRouterPath.signupRouter,
-        builder: (context, state) {
-          return BlocProvider(
+        pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          context: context,
+          state: state,
+          child: BlocProvider(
             create: (context) => SignupBloc(signup: getIt<SignupUseCase>()),
             child: const SignupPageWidget(),
-          );
-        },
+          ),
+        ),
       ),
     ],
+  );
+}
+
+CustomTransitionPage buildPageWithDefaultTransition<T>({
+  required BuildContext context,
+  required GoRouterState state,
+  required Widget child,
+}) {
+  return CustomTransitionPage<T>(
+    key: state.pageKey,
+    child: child,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+        FadeTransition(opacity: animation, child: child),
   );
 }

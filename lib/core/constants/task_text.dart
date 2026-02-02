@@ -1,6 +1,4 @@
 class TaskText {
-  TaskText._();
-
   static const taskTimeText = 'Task Time:';
   static const taskCategoryText = 'Task Category:';
   static const taskPriorityText = 'Task Priority:';

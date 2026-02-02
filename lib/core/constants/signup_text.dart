@@ -1,6 +1,4 @@
 class SignupText {
-  SignupText._();
-
   static const header = 'Register';
   static const usernameTitle = 'Username';
   static const passwordTitle = 'Password';

@@ -23,7 +23,7 @@ import 'package:todo_list/presentation/widgets/primary_button.dart';
 
 class TaskPageWidget extends StatefulWidget {
   const TaskPageWidget({super.key, required this.todo});
-  final TodoWithKeyEntity todo;
+  final TodoWithKeyEntity todo; 
   @override
   State<TaskPageWidget> createState() => _TaskPageWidgetState();
 }

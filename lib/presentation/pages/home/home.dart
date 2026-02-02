@@ -28,9 +28,12 @@ class HomePageWidget extends StatefulWidget {
   State<HomePageWidget> createState() => _HomePageWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
+class _HomePageWidgetState extends State<HomePageWidget>
+    with TickerProviderStateMixin {
   TimeFilter selectedFilter = TimeFilter.all;
   late TextEditingController searchController;
+  late Animation<double> animation;
+  late AnimationController animationController;
 
   @override
   void initState() {
@@ -42,9 +45,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    animationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    animation = Tween<double>(begin: 0, end: 600).animate(animationController);
+    animationController.forward();
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
     super.dispose();
     searchController.dispose();
+    animationController.dispose();
   }
 
   @override
@@ -127,7 +142,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     BottomNavItem(
                       icon: Icons.person_outline_rounded,
                       label: HomeDialogText.bottomBarProfileLabel,
-                      marginRight:(screenWidth * 0.05),
+                      marginRight: (screenWidth * 0.05),
                     ),
                   ],
                 ),
