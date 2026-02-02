@@ -28,9 +28,9 @@ class CompletedTodoItem extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
+                SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
                 CircleCheck(value: false, onChanged: onChanged, padding: AppSizes.uncompleteTodoItemPaddingHorizontal,),
-                // SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
+                SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

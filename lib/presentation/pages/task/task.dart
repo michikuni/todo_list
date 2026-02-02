@@ -229,7 +229,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 detailColor: Color(widget.todo.todo.category.color),
                 detailSpace: AppSizes.taskRowCategoryDetailSpace,
                 categoryIcon: SvgPicture.asset(
-                  widget.todo.todo.category.icon,
+                  state.category.icon,
                   width: 24,
                   height: 24,
                 ),
