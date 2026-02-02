@@ -78,6 +78,8 @@ class AppSizes {
   static const double uncompleteTodoItemCategoryIconSize =  14;
   static const double uncompleteTodoItemCategoryIconSpaceRight =  4;
   static const double uncompleteTodoItemRadius =  4;
+  static const double uncompleteTodoItemPriorityIconSize =  14;
+  static const double uncompleteTodoItemPriorityIconSpaceLeft =  8;
 
   //add task dialog
   static const double addTaskDialogRadius = 4;

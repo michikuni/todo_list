@@ -181,10 +181,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                         },
                       );
                     },
-                    icon: Icon(
-                      Icons.timer_outlined,
-                      color: AppColors.pureWhite87,
-                    ),
+                    icon: SvgPicture.asset(AssetsPath.timerIcon)
                   ),
                   IconButton(
                     onPressed: () {
@@ -199,10 +196,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                         },
                       );
                     },
-                    icon: Icon(
-                      Icons.sell_outlined,
-                      color: AppColors.pureWhite87,
-                    ),
+                    icon: SvgPicture.asset(AssetsPath.categoryIcon)
                   ),
                   IconButton(
                     onPressed: () {
@@ -215,10 +209,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                         ),
                       );
                     },
-                    icon: Icon(
-                      Icons.flag_outlined,
-                      color: AppColors.pureWhite87,
-                    ),
+                    icon: SvgPicture.asset(AssetsPath.priorityIcon)
                   ),
                   Expanded(child: Container()),
                   IconButton(

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/assets_path.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
 import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dart';
 import 'package:todo_list/presentation/widgets/circle_check.dart';
@@ -126,7 +127,12 @@ class UncompletedTodoItem extends StatelessWidget {
                   child: Center(
                     child: Row(
                       children: [
-                        Icon(Icons.flag_outlined, color: AppColors.pureWhite87),
+                        SizedBox(width: AppSizes.uncompleteTodoItemPriorityIconSpaceLeft,),
+                        SizedBox(
+                          height: AppSizes.uncompleteTodoItemPriorityIconSize,
+                          width: AppSizes.uncompleteTodoItemPriorityIconSize,
+                          child: SvgPicture.asset(AssetsPath.priorityIcon),
+                        ),
                         Text(
                           '${todo.todo.priority}',
                           style: Theme.of(context).textTheme.displaySmall

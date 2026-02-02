@@ -28,7 +28,7 @@ class TaskRow extends StatelessWidget {
   final double? detailSpace;
   final Color? detailColor;
   final String detailText;
-  final Icon rowIcon;
+  final SvgPicture rowIcon;
   final SvgPicture? categoryIcon;
   final VoidCallback onTap;
 

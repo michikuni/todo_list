@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/assets_path.dart';
 import 'package:todo_list/core/constants/task_text.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
@@ -161,10 +162,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                       width: AppSizes.taskTitleIconSize,
                       height: AppSizes.taskTitleIconSize,
                       child: Center(
-                        child: Icon(
-                          Icons.border_color_outlined,
-                          color: AppColors.pureWhite87,
-                        ),
+                        child: SvgPicture.asset(AssetsPath.editIcon)
                       ),
                     ),
                   ),
@@ -194,10 +192,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                   state.date,
                   state.minutes,
                 ),
-                rowIcon: Icon(
-                  Icons.timer_outlined,
-                  color: AppColors.pureWhite87,
-                ),
+                rowIcon: SvgPicture.asset(AssetsPath.timerIcon),
               ),
               const SizedBox(height: AppSizes.taskRowSpace),
 
@@ -221,10 +216,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 detailWidth: AppSizes.taskRowCategoryDetailWidth,
                 detailBorderRadius: AppSizes.taskRowRadius,
                 detailText: state.category.name,
-                rowIcon: Icon(
-                  Icons.sell_outlined,
-                  color: AppColors.pureWhite87,
-                ),
+                rowIcon: SvgPicture.asset(AssetsPath.categoryIcon),
                 iconSize: AppSizes.taskRowCategoryIconSize,
                 detailColor: Color(widget.todo.todo.category.color),
                 detailSpace: AppSizes.taskRowCategoryDetailSpace,
@@ -250,10 +242,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 detailWidth: AppSizes.taskRowPriorityDetailWidth,
                 detailBorderRadius: AppSizes.taskRowRadius,
                 detailText: state.priority.toString(),
-                rowIcon: Icon(
-                  Icons.flag_outlined,
-                  color: AppColors.pureWhite87,
-                ),
+                rowIcon: SvgPicture.asset(AssetsPath.priorityIcon),
               ),
               const SizedBox(height: AppSizes.taskRowSpace),
 
@@ -266,10 +255,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 detailWidth: AppSizes.taskRowSubDetailWidth,
                 detailBorderRadius: AppSizes.taskAppBarIconRadius,
                 detailText: TaskText.taskDefaultSubText,
-                rowIcon: Icon(
-                  Icons.account_tree_outlined,
-                  color: AppColors.pureWhite87,
-                ),
+                rowIcon: SvgPicture.asset(AssetsPath.accountTreeIcon)
               ),
               SizedBox(height: AppSizes.taskDeleteSpaceTop),
 
@@ -283,10 +269,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 },
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.delete_outline_rounded,
-                      color: AppColors.coralRed,
-                    ),
+                    SvgPicture.asset(AssetsPath.trashIcon),
                     SizedBox(width: AppSizes.taskRowTitleSpace),
                     Text(
                       TaskText.taskDeleteText,
