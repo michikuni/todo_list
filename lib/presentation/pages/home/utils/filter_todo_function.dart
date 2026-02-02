@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
 import 'package:todo_list/presentation/pages/home/components/dropdown_button.dart';
 
@@ -17,26 +19,28 @@ List<TodoWithKeyEntity> filterTodos({
 
     switch (timeFilter) {
       case TimeFilter.today:
-        matchTime = date.year == now.year &&
+        matchTime =
+            date.year == now.year &&
             date.month == now.month &&
             date.day == now.day;
         break;
 
       case TimeFilter.week:
-        final startOfWeek =
-            DateTime(now.year, now.month, now.day)
-                .subtract(Duration(days: now.weekday - 1));
+        final monday = 1;
+        var startOfWeek = DateTime(now.year, now.month, now.day);
+        while (startOfWeek.weekday != monday) {
+          startOfWeek = startOfWeek.subtract(const Duration(days: 1));
+        }
+        log('$startOfWeek');
         final endOfWeek = startOfWeek.add(const Duration(days: 7));
 
         matchTime =
-            date.isAfter(startOfWeek) &&
+            (date.isAfter(startOfWeek) || date.isAtSameMomentAs(startOfWeek)) &&
             date.isBefore(endOfWeek);
         break;
 
       case TimeFilter.month:
-        matchTime =
-            date.year == now.year &&
-            date.month == now.month;
+        matchTime = date.year == now.year && date.month == now.month;
         break;
 
       case TimeFilter.all:
@@ -52,14 +56,18 @@ List<TodoWithKeyEntity> filterTodos({
   }).toList();
 }
 
-
 String formatDateWithMinutes(DateTime date, int minutes) {
   final now = DateTime.now();
 
   final isToday =
+      date.year == now.year && date.month == now.month && date.day == now.day;
+
+  final isTomorrow =
       date.year == now.year &&
       date.month == now.month &&
-      date.day == now.day;
+      date.day == now.day + 1;
+
+  final isLastYear = date.year < now.year;
 
   final h = minutes ~/ 60;
   final m = minutes % 60;
@@ -71,15 +79,22 @@ String formatDateWithMinutes(DateTime date, int minutes) {
     return 'Today At $hh:$mm';
   }
 
+  if (isTomorrow) {
+    return 'Tomorrow At $hh:$mm';
+  }
+
   final dd = date.day.toString().padLeft(2, '0');
   final MM = date.month.toString().padLeft(2, '0');
   final yyyy = date.year.toString();
 
-  return '$dd/$MM/$yyyy At $hh:$mm';
+  if (isLastYear) {
+    return '$dd/$MM/$yyyy At $hh:$mm';
+  }
+  return '$dd/$MM At $hh:$mm';
 }
 
-int handlerPmHour(int hour){
-  if(hour == 12){
+int handlerPmHour(int hour) {
+  if (hour == 12) {
     return 0;
   } else {
     return hour + 12;

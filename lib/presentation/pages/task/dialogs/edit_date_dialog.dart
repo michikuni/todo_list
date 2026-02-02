@@ -33,9 +33,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               _header(),
-              const SizedBox(
-                height: AppSizes.chooseDateDialogHeaderPaddingBottom,
-              ),
+              const Divider(height: 1,),
               _weekDays(),
               const SizedBox(
                 height: AppSizes.chooseDateDialogWeekPaddingBottom,

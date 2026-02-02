@@ -83,7 +83,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                       )
                     : null,
                 height: AppSizes.editTaskDialogInputHeight,
-                padding: EdgeInsets.symmetric(horizontal: AppSizes.editTaskDialogInputPaddingHorizontal),
+                padding: EdgeInsets.symmetric(horizontal: contentSelected ? AppSizes.editTaskDialogInputPaddingHorizontal : 0),
                 child: TextFormField(
                   expands: false,
                   scrollPadding: EdgeInsets.zero,
@@ -120,7 +120,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                       )
                     : null,
                 height: AppSizes.editTaskDialogInputHeight,
-                padding: EdgeInsets.symmetric(horizontal: AppSizes.editTaskDialogInputPaddingHorizontal),
+                padding: EdgeInsets.symmetric(horizontal: descriptSelected ? AppSizes.editTaskDialogInputPaddingHorizontal : 0),
                 child: TextFormField(
                   expands: false,
                   scrollPadding: EdgeInsets.zero,
