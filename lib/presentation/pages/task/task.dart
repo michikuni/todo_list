@@ -99,221 +99,219 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
           padding: EdgeInsets.symmetric(
             horizontal: AppSizes.taskPageHorizontalMargin,
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                //Content, description
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: AppSizes.taskTitleCircleCheckPaddingTop,
-                      ),
-                      child: CircleCheck(
-                        value: state.isDone,
-                        onChanged: (val) {
-                          setState(() {
-                            context.read<TaskBloc>().add(OnDone(val));
-                          });
-                        },
-                      ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              //Content, description
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: AppSizes.taskTitleCircleCheckPaddingTop,
                     ),
-                    const SizedBox(width: AppSizes.taskTitleSpace),
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: AppSizes.taskTitleTextPaddingTop),
-                          Text(
-                            state.content,
-                            style: Theme.of(context).textTheme.bodyMedium
-                                ?.copyWith(color: AppColors.pureWhite87),
-                            maxLines: AppSizes.taskTitleTextMaxLine,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(height: AppSizes.taskTitleTextSpace),
-                          Text(
-                           state.description,
-                            style: Theme.of(context).textTheme.displayLarge
-                                ?.copyWith(color: AppColors.grey),
-                            maxLines: AppSizes.taskTitleTextMaxLine,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: AppSizes.taskTitleSpace),
-                    GestureDetector(
-                      onTap: () {
-                        final taskBloc = context.read<TaskBloc>();
-                        showDialog(
-                          context: context,
-                          builder: (context) => BlocProvider.value(
-                            value: taskBloc,
-                            child: EditTaskDialog(),
-                          ),
-                        );
+                    child: CircleCheck(
+                      value: state.isDone,
+                      onChanged: (val) {
+                        setState(() {
+                          context.read<TaskBloc>().add(OnDone(val));
+                        });
                       },
-                      child: SizedBox(
-                        width: AppSizes.taskTitleIconSize,
-                        height: AppSizes.taskTitleIconSize,
-                        child: Center(
-                          child: Icon(
-                            Icons.border_color_outlined,
-                            color: AppColors.pureWhite87,
-                          ),
+                    ),
+                  ),
+                  const SizedBox(width: AppSizes.taskTitleSpace),
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: AppSizes.taskTitleTextPaddingTop),
+                        Text(
+                          state.content,
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: AppColors.pureWhite87),
+                          maxLines: AppSizes.taskTitleTextMaxLine,
+                          overflow: TextOverflow.ellipsis,
                         ),
+                        SizedBox(height: AppSizes.taskTitleTextSpace),
+                        Text(
+                         state.description,
+                          style: Theme.of(context).textTheme.displayLarge
+                              ?.copyWith(color: AppColors.grey),
+                          maxLines: AppSizes.taskTitleTextMaxLine,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: AppSizes.taskTitleSpace),
+                  GestureDetector(
+                    onTap: () {
+                      final taskBloc = context.read<TaskBloc>();
+                      showDialog(
+                        context: context,
+                        builder: (context) => BlocProvider.value(
+                          value: taskBloc,
+                          child: EditTaskDialog(),
+                        ),
+                      );
+                    },
+                    child: SizedBox(
+                      width: AppSizes.taskTitleIconSize,
+                      height: AppSizes.taskTitleIconSize,
+                      child: Center(
+                        child: Icon(
+                          Icons.border_color_outlined,
+                          color: AppColors.pureWhite87,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSizes.taskTitleToRowSpace),
+              //Task Time Row
+              TaskRow(
+                onTap: () {
+                  final taskBloc = context.read<TaskBloc>();
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return BlocProvider.value(
+                        value: taskBloc,
+                        child: EditDateDialog(),
+                      );
+                    },
+                  );
+                },
+                taskRowHeight: AppSizes.taskRowHeight,
+                titleSpace: AppSizes.taskRowTitleSpace,
+                titleText: TaskText.taskTimeText,
+                detailWidth: AppSizes.taskRowTimeDetailWidth,
+                detailBorderRadius: AppSizes.taskRowRadius,
+                detailText: formatDateWithMinutes(
+                  state.date,
+                  state.minutes,
+                ),
+                rowIcon: Icon(
+                  Icons.timer_outlined,
+                  color: AppColors.pureWhite87,
+                ),
+              ),
+              const SizedBox(height: AppSizes.taskRowSpace),
+          
+              //Task Category Row
+              TaskRow(
+                onTap: () {
+                  final taskBloc = context.read<TaskBloc>();
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return BlocProvider.value(
+                        value: taskBloc,
+                        child: EditCategoryDialog(),
+                      );
+                    },
+                  );
+                },
+                taskRowHeight: AppSizes.taskRowHeight,
+                titleSpace: AppSizes.taskRowTitleSpace,
+                titleText: TaskText.taskCategoryText,
+                detailWidth: AppSizes.taskRowCategoryDetailWidth,
+                detailBorderRadius: AppSizes.taskRowRadius,
+                detailText: state.category.name,
+                rowIcon: Icon(
+                  Icons.sell_outlined,
+                  color: AppColors.pureWhite87,
+                ),
+                iconSize: AppSizes.taskRowCategoryIconSize,
+                detailColor: Color(widget.todo.todo.category.color),
+                detailSpace: AppSizes.taskRowCategoryDetailSpace,
+                categoryIcon: SvgPicture.asset(
+                  widget.todo.todo.category.icon,
+                  width: 24,
+                  height: 24,
+                ),
+              ),
+              const SizedBox(height: AppSizes.taskRowSpace),
+          
+              //Task Priority Row
+              TaskRow(
+                onTap: () {
+                  final taskBloc = context.read<TaskBloc>();
+                  showDialog(context: context, builder: (context) {
+                    return BlocProvider.value(value: taskBloc, child: EditPriorityDialog(),);
+                  },);
+                },
+                taskRowHeight: AppSizes.taskRowHeight,
+                titleSpace: AppSizes.taskRowTitleSpace,
+                titleText: TaskText.taskPriorityText,
+                detailWidth: AppSizes.taskRowPriorityDetailWidth,
+                detailBorderRadius: AppSizes.taskRowRadius,
+                detailText: state.priority.toString(),
+                rowIcon: Icon(
+                  Icons.flag_outlined,
+                  color: AppColors.pureWhite87,
+                ),
+              ),
+              const SizedBox(height: AppSizes.taskRowSpace),
+          
+              //Task Sub Row
+              TaskRow(
+                onTap: () {},
+                taskRowHeight: AppSizes.taskRowHeight,
+                titleSpace: AppSizes.taskRowTitleSpace,
+                titleText: TaskText.taskSubText,
+                detailWidth: AppSizes.taskRowSubDetailWidth,
+                detailBorderRadius: AppSizes.taskAppBarIconRadius,
+                detailText: TaskText.taskDefaultSubText,
+                rowIcon: Icon(
+                  Icons.account_tree_outlined,
+                  color: AppColors.pureWhite87,
+                ),
+              ),
+              SizedBox(height: AppSizes.taskDeleteSpaceTop),
+          
+              //Delete Task Row
+              GestureDetector(
+                onTap: () {
+                  final taskBloc = context.read<TaskBloc>();
+                  showDialog(context: context, builder: (context) {
+                    return BlocProvider.value(value: taskBloc, child: DeleteTaskDialog(todo: widget.todo),);
+                  },);
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.delete_outline_rounded,
+                      color: AppColors.coralRed,
+                    ),
+                    SizedBox(width: AppSizes.taskRowTitleSpace),
+                    Text(
+                      TaskText.taskDeleteText,
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        color: AppColors.coralRed,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSizes.taskTitleToRowSpace),
-                //Task Time Row
-                TaskRow(
-                  onTap: () {
-                    final taskBloc = context.read<TaskBloc>();
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return BlocProvider.value(
-                          value: taskBloc,
-                          child: EditDateDialog(),
-                        );
-                      },
-                    );
-                  },
-                  taskRowHeight: AppSizes.taskRowHeight,
-                  titleSpace: AppSizes.taskRowTitleSpace,
-                  titleText: TaskText.taskTimeText,
-                  detailWidth: AppSizes.taskRowTimeDetailWidth,
-                  detailBorderRadius: AppSizes.taskRowRadius,
-                  detailText: formatDateWithMinutes(
-                    state.date,
-                    state.minutes,
-                  ),
-                  rowIcon: Icon(
-                    Icons.timer_outlined,
-                    color: AppColors.pureWhite87,
-                  ),
-                ),
-                const SizedBox(height: AppSizes.taskRowSpace),
-            
-                //Task Category Row
-                TaskRow(
-                  onTap: () {
-                    final taskBloc = context.read<TaskBloc>();
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return BlocProvider.value(
-                          value: taskBloc,
-                          child: EditCategoryDialog(),
-                        );
-                      },
-                    );
-                  },
-                  taskRowHeight: AppSizes.taskRowHeight,
-                  titleSpace: AppSizes.taskRowTitleSpace,
-                  titleText: TaskText.taskCategoryText,
-                  detailWidth: AppSizes.taskRowCategoryDetailWidth,
-                  detailBorderRadius: AppSizes.taskRowRadius,
-                  detailText: state.category.name,
-                  rowIcon: Icon(
-                    Icons.sell_outlined,
-                    color: AppColors.pureWhite87,
-                  ),
-                  iconSize: AppSizes.taskRowCategoryIconSize,
-                  detailColor: Color(widget.todo.todo.category.color),
-                  detailSpace: AppSizes.taskRowCategoryDetailSpace,
-                  categoryIcon: SvgPicture.asset(
-                    widget.todo.todo.category.icon,
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
-                const SizedBox(height: AppSizes.taskRowSpace),
-            
-                //Task Priority Row
-                TaskRow(
-                  onTap: () {
-                    final taskBloc = context.read<TaskBloc>();
-                    showDialog(context: context, builder: (context) {
-                      return BlocProvider.value(value: taskBloc, child: EditPriorityDialog(),);
-                    },);
-                  },
-                  taskRowHeight: AppSizes.taskRowHeight,
-                  titleSpace: AppSizes.taskRowTitleSpace,
-                  titleText: TaskText.taskPriorityText,
-                  detailWidth: AppSizes.taskRowPriorityDetailWidth,
-                  detailBorderRadius: AppSizes.taskRowRadius,
-                  detailText: state.priority.toString(),
-                  rowIcon: Icon(
-                    Icons.flag_outlined,
-                    color: AppColors.pureWhite87,
-                  ),
-                ),
-                const SizedBox(height: AppSizes.taskRowSpace),
-            
-                //Task Sub Row
-                TaskRow(
-                  onTap: () {},
-                  taskRowHeight: AppSizes.taskRowHeight,
-                  titleSpace: AppSizes.taskRowTitleSpace,
-                  titleText: TaskText.taskSubText,
-                  detailWidth: AppSizes.taskRowSubDetailWidth,
-                  detailBorderRadius: AppSizes.taskAppBarIconRadius,
-                  detailText: TaskText.taskDefaultSubText,
-                  rowIcon: Icon(
-                    Icons.account_tree_outlined,
-                    color: AppColors.pureWhite87,
-                  ),
-                ),
-                SizedBox(height: AppSizes.taskDeleteSpaceTop),
-            
-                //Delete Task Row
-                GestureDetector(
-                  onTap: () {
-                    final taskBloc = context.read<TaskBloc>();
-                    showDialog(context: context, builder: (context) {
-                      return BlocProvider.value(value: taskBloc, child: DeleteTaskDialog(todo: widget.todo),);
-                    },);
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.delete_outline_rounded,
-                        color: AppColors.coralRed,
-                      ),
-                      SizedBox(width: AppSizes.taskRowTitleSpace),
-                      Text(
-                        TaskText.taskDeleteText,
-                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                          color: AppColors.coralRed,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(child: Container()),
-            
-                //Button
-                PrimaryButtonWidget(
-                  isValid: true,
-                  height: AppSizes.taskPrimaryButtonHeight,
-                  text: TaskText.taskButtonPrimaryText,
-                  width: double.infinity,
-                  onPressed: () {
-                    context.read<TaskBloc>().add(OnSubmit(widget.todo.key));
-                    context.push(AppRouterPath.gateRouter);
-                  },
-                ),
-                SizedBox(height: AppSizes.taskPageBottomHorizontalMargin),
-              ],
-            ),
+              ),
+              Expanded(child: Container()),
+          
+              //Button
+              PrimaryButtonWidget(
+                isValid: true,
+                height: AppSizes.taskPrimaryButtonHeight,
+                text: TaskText.taskButtonPrimaryText,
+                width: double.infinity,
+                onPressed: () {
+                  context.read<TaskBloc>().add(OnSubmit(widget.todo.key));
+                  context.push(AppRouterPath.gateRouter);
+                },
+              ),
+              SizedBox(height: AppSizes.taskPageBottomHorizontalMargin),
+            ],
           ),
         ),
       ),
