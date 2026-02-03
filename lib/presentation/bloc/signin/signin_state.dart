@@ -6,24 +6,19 @@ import 'package:todo_list/presentation/bloc/signin/form/password_input.dart';
 class SigninState {
   final EmailInput username;
   final PasswordInput password;
-  final SigninResponseEntity userData;
+  final SigninResponseEntity? userData;
   final FormzSubmissionStatus status;
   final bool isValid;
+
   const SigninState({
     this.username = const EmailInput.pure(),
     this.password = const PasswordInput.pure(),
-    this.userData = const SigninResponseEntity(
-      id: 1,
-      email: '',
-      name: '',
-      role: '',
-      avatar: '',
-      creationAt: '',
-      updatedAt: '',
-    ),
+    this.userData,
     this.isValid = false,
     this.status = FormzSubmissionStatus.initial,
   });
+
+  // bool get isFormValid => username.isFormValid;
 
   SigninState copyWith({
     EmailInput? username,

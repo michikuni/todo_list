@@ -10,7 +10,7 @@ class ProfileDatasourceImpl extends IProfileDataSource {
   final Dio dio;
   ProfileDatasourceImpl(@Named(ApiEndpoints.tokenDioName) this.dio);
   @override
-  Future<ProfileResponseModel> profile() async {
+  Future<ProfileResponseModel> getProfile() async {
     try {
       final response = await dio.get(ApiEndpoints.profileEndpoint);
       return ProfileResponseModel.fromJson(response.data);

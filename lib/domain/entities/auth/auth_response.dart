@@ -23,6 +23,7 @@ class SigninResponseEntity {
   final String avatar;
   final String creationAt;
   final String updatedAt;
+  
   const SigninResponseEntity({
     required this.id,
     required this.email,

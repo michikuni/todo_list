@@ -9,11 +9,13 @@ class TextInputWidget extends StatelessWidget {
     required this.hint,
     required this.title,
     required this.onValueChanged,
+    this.errorMessage,
   });
   final ValueChanged onValueChanged;
   final String title;
   final String hint;
   final bool isObscure;
+  final String? errorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,7 @@ class TextInputWidget extends StatelessWidget {
                 ).textTheme.displayLarge?.copyWith(color: AppColors.lightGrey),
               ),
               border: InputBorder.none,
+               errorText: errorMessage
             ),
             onChanged: onValueChanged,
           ),

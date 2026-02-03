@@ -74,23 +74,24 @@ class SigninPageWidget extends StatelessWidget {
                           );
                         },
                         isObscure: false,
+                        errorMessage: state.username.displayError,
                       ),
-                      if (state.username.isNotValid && !state.username.isPure)
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            children: [
-                              SizedBox(height: AppSizes.signinPageFailSpaceTop),
-                              Text(
-                                SigninText.emailFail,
-                                style: Theme.of(context).textTheme.displaySmall
-                                    ?.copyWith(
-                                      color: AppColors.mediumSlateBlue50,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      // if (state.username.isNotValid && !state.username.isPure)
+                      //   Align(
+                      //     alignment: Alignment.centerLeft,
+                      //     child: Column(
+                      //       children: [
+                      //         SizedBox(height: AppSizes.signinPageFailSpaceTop),
+                      //         Text(
+                      //           SigninText.emailFail,
+                      //           style: Theme.of(context).textTheme.displaySmall
+                      //               ?.copyWith(
+                      //                 color: AppColors.mediumSlateBlue50,
+                      //               ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
                       SizedBox(height: AppSizes.authTextFieldSpace),
                       TextInputWidget(
                         isObscure: true,

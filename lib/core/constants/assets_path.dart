@@ -8,4 +8,5 @@ class AssetsPath{
   static const accountTreeIcon = 'assets/icons/account_tree.svg';
   static const trashIcon = 'assets/icons/trash.svg';
   static const editIcon = 'assets/icons/edit-2.svg';
+  static const defaultImage = 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg';
 }

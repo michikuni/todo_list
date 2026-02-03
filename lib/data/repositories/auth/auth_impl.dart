@@ -11,6 +11,7 @@ import 'package:todo_list/domain/repositories/auth/auth.dart';
 @LazySingleton(as: IAuthRepository)
 class AuthRepositoryImpl implements IAuthRepository {
   final AuthDatasource authDatasource;
+
   AuthRepositoryImpl(this.authDatasource);
 
   @override
@@ -19,7 +20,9 @@ class AuthRepositoryImpl implements IAuthRepository {
   ) async {
     try {
       final data = AuthMapper.toSignupModel(auth);
+
       final response = await authDatasource.signup(data);
+      
       return Right(AuthMapper.toSignupEntity(response));
     } on ServerException catch (e) {
       if (e.statusCode == 401) {

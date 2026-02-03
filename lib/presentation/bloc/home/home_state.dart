@@ -16,6 +16,7 @@ import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
     final String description;
     final List<TodoWithKeyEntity> listTodo;
     final int key;
+    
     const HomeState({
       this.name = '',
       this.id = 1,

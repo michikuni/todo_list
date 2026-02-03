@@ -10,11 +10,14 @@ import 'package:todo_list/domain/repositories/profile/profile.dart';
 @LazySingleton(as: IProfileRepository)
 class ProfileRepositoryImpl extends IProfileRepository{
   final IProfileDataSource profileData;
+
   ProfileRepositoryImpl(this.profileData);
+
   @override
-  Future<Either<Failure, ProfileResponseEntity>> profile() async {
+  Future<Either<Failure, ProfileResponseEntity>> getProfile() async {
     try{
-      final response = await profileData.profile();
+      final response = await profileData.getProfile();
+
       return Right(ProfileMapper.toProfileEntity(response));
     } on NetworkException catch(e){
       return Left(NetworkFailure(e.message));

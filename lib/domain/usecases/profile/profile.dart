@@ -11,6 +11,6 @@ class GetProfileUseCase{
   GetProfileUseCase(this._repository);
 
   Future<Either<Failure, ProfileResponseEntity>>call(){
-    return _repository.profile();
+    return _repository.getProfile();
   }
 }

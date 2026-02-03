@@ -31,6 +31,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(initial.copyWith(listTodo: state.listTodo));
     });
 
+
+    //make todo completed or opposite
     on<OnChangedCompletedStatus>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
       // print(state.status);
@@ -81,7 +83,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     // add todo
     on<OnSubmited>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+
       final userId = await tokenStorage.getUserId();
+
       final data = TodoEntity(
         content: state.content,
         description: state.description,
@@ -96,6 +100,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         isDone: false,
       );
       await addTodo(data);
+
       final latestTodo = await getTodo();
       latestTodo.fold(
         () {
@@ -143,6 +148,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     // get user profile
     on<GetProfileEvent>((event, emit) async {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+      
       final token = await tokenStorage.getAccessToken();
       log('Token: ${token}');
       if (token != null) {

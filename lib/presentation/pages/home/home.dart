@@ -15,7 +15,7 @@ import 'package:todo_list/presentation/bloc/home/home_state.dart';
 import 'package:todo_list/presentation/pages/home/components/bottom_nav_item.dart';
 import 'package:todo_list/presentation/pages/home/components/complete_todo_item.dart';
 import 'package:todo_list/presentation/pages/home/components/completed_dropdown_button.dart';
-import 'package:todo_list/presentation/pages/home/components/dropdown_button.dart';
+import 'package:todo_list/presentation/pages/home/components/filter_dropdown_button.dart';
 import 'package:todo_list/presentation/pages/home/components/uncomplete_todo_item.dart';
 import 'package:todo_list/presentation/pages/home/dialogs/add_task_dialog.dart';
 import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dart';
@@ -77,6 +77,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
       },
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
+          final avatarUrl = state.avatar;
           final filteredUncompletedTodos = filterTodos(
             list: state.listTodo,
             timeFilter: selectedFilter,
@@ -159,9 +160,16 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   onTap: () {
                     context.read<AuthBloc>().add(AuthLoggedOut());
                   },
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     radius: AppSizes.homeAppBarAvatarSize,
-                    child: Icon(Icons.ac_unit_rounded),
+                    child: ClipOval(
+                      child: Image.network(
+                        avatarUrl.isNotEmpty
+                            ? avatarUrl
+                            : AssetsPath.defaultImage,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   ),
                 ),
               ],

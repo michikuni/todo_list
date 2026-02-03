@@ -6,6 +6,7 @@ class ProfileResponseEntity {
   final String avatar;
   final String creationAt;
   final String updatedAt;
+  
   const ProfileResponseEntity({
     required this.id,
     required this.email,
