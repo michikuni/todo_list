@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo_list/core/constants/api_endpoints.dart';
+import 'package:todo_list/core/constants/dio_name.dart';
 import 'package:todo_list/core/error/exception.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
 import 'package:todo_list/data/datasources/remote/auth/auth.dart';
@@ -13,8 +14,8 @@ class AuthDatasourceImpl implements AuthDatasource {
   final Dio tokenDio;
   final TokenStorage tokenStorage;
   AuthDatasourceImpl(
-    @Named(ApiEndpoints.unTokenDioName) this.unTokenDio,
-    @Named(ApiEndpoints.tokenDioName) this.tokenDio,
+    @Named(DioName.unTokenDioName) this.unTokenDio,
+    @Named(DioName.tokenDioName) this.tokenDio,
     this.tokenStorage,
   );
 

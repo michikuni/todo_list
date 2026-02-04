@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo_list/core/constants/api_endpoints.dart';
+import 'package:todo_list/core/constants/dio_name.dart';
 import 'package:todo_list/core/error/exception.dart';
 import 'package:todo_list/data/datasources/remote/profile/profile.dart';
 import 'package:todo_list/data/models/profile/profile_response.dart';
@@ -8,7 +9,7 @@ import 'package:todo_list/data/models/profile/profile_response.dart';
 @LazySingleton(as: IProfileDataSource)
 class ProfileDatasourceImpl extends IProfileDataSource {
   final Dio dio;
-  ProfileDatasourceImpl(@Named(ApiEndpoints.tokenDioName) this.dio);
+  ProfileDatasourceImpl(@Named(DioName.tokenDioName) this.dio);
   @override
   Future<ProfileResponseModel> getProfile() async {
     try {

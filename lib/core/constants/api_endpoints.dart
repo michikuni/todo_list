@@ -4,10 +4,4 @@ class ApiEndpoints{
   static const signinEndpoint = '/auth/login';
   static const profileEndpoint = '/auth/profile';
   static const refreshTokenEndpoint = '/auth/refresh-token';
-  static const timeOut = 30;
-  static const tokenDioName = 'tokenDio';
-  static const unTokenDioName = 'unTokenDio';
-  static const refreshDioName = 'refreshDio';
-  static const interceptorHeader = 'Authorization';
-  static const interceptorTokenType = 'Bearer';
 }

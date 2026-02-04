@@ -1,39 +1,41 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo_list/core/constants/api_endpoints.dart';
+import 'package:todo_list/core/constants/api_timeout.dart';
+import 'package:todo_list/core/constants/dio_name.dart';
 import 'package:todo_list/data/datasources/interceptor/token_interceptor.dart';
 
 @module
 abstract class DioClient {
-  @Named(ApiEndpoints.tokenDioName)
+  @Named(DioName.tokenDioName)
   @lazySingleton
   Dio dio(TokenInterceptor tokenInterceptor) {
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiEndpoints.baseUrl,
-        connectTimeout: const Duration(seconds: ApiEndpoints.timeOut),
-        receiveTimeout: const Duration(seconds: ApiEndpoints.timeOut),
+        connectTimeout: const Duration(seconds: ApiTimeout.timeOut),
+        receiveTimeout: const Duration(seconds: ApiTimeout.timeOut),
       ),
     );
     dio.interceptors.add(tokenInterceptor);
     return dio;
   }
 
-  @Named(ApiEndpoints.unTokenDioName)
+  @Named(DioName.unTokenDioName)
   @lazySingleton
   Dio unTokenDio() {
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiEndpoints.baseUrl,
-        connectTimeout: const Duration(seconds: ApiEndpoints.timeOut),
-        receiveTimeout: const Duration(seconds: ApiEndpoints.timeOut),
+        connectTimeout: const Duration(seconds: ApiTimeout.timeOut),
+        receiveTimeout: const Duration(seconds: ApiTimeout.timeOut),
       ),
     );
 
     return dio;
   }
 
-  @Named(ApiEndpoints.refreshDioName)
+  @Named(DioName.refreshDioName)
   @lazySingleton
   Dio refreshDio() => Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
 }
