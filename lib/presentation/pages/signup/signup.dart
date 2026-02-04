@@ -4,7 +4,7 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/signup_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/signup/signup_bloc.dart';
 import 'package:todo_list/presentation/bloc/signup/signup_event.dart';
 import 'package:todo_list/presentation/bloc/signup/signup_state.dart';
@@ -77,7 +77,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        SignupText.header,
+                        AppLocalizations.of(context)!.signupHeader,
                         style: Theme.of(context).textTheme.headlineLarge
                             ?.copyWith(color: AppColors.pureWhite87),
                       ),
@@ -85,8 +85,8 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                     SizedBox(height: AppSizes.authTextFieldSpace),
                     TextInputWidget(
                       isObscure: false,
-                      hint: SignupText.usernameHint,
-                      title: SignupText.usernameTitle,
+                      hint: AppLocalizations.of(context)!.signupUsernameHint,
+                      title: AppLocalizations.of(context)!.signupUsernameTitle,
                       onValueChanged: (value) {
                         context.read<SignupBloc>().add(
                           OnUsernameChanged(userName: value),
@@ -100,7 +100,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                           children: [
                             SizedBox(height: AppSizes.signupPageFailSpaceTop),
                             Text(
-                              SignupText.emailFail,
+                              AppLocalizations.of(context)!.signupEmailFail,
                               style: Theme.of(context).textTheme.displaySmall
                                   ?.copyWith(
                                     color: AppColors.mediumSlateBlue50,
@@ -112,8 +112,8 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                     SizedBox(height: AppSizes.authTextFieldSpace),
                     TextInputWidget(
                       isObscure: true,
-                      hint: SignupText.passwordHint,
-                      title: SignupText.passwordTitle,
+                      hint: AppLocalizations.of(context)!.signupPasswordHint,
+                      title: AppLocalizations.of(context)!.signupPasswordTitle,
                       onValueChanged: (value) {
                         context.read<SignupBloc>().add(
                           OnPasswordChanged(password: value),
@@ -127,7 +127,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                           children: [
                             SizedBox(height: AppSizes.signupPageFailSpaceTop),
                             Text(
-                              SignupText.passwordFail,
+                              AppLocalizations.of(context)!.signupPasswordFail,
                               style: Theme.of(context).textTheme.displaySmall
                                   ?.copyWith(
                                     color: AppColors.mediumSlateBlue50,
@@ -144,8 +144,8 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                           OnConfirmPasswordChanged(confirmPassword: value),
                         );
                       },
-                      hint: SignupText.passwordHint,
-                      title: SignupText.confirmPasswordTitle,
+                      hint: AppLocalizations.of(context)!.signupPasswordHint,
+                      title: AppLocalizations.of(context)!.signupConfirmPasswordTitle,
                     ),
                     if (state.confirmPassword.isNotValid &&
                         !state.confirmPassword.isPure)
@@ -155,7 +155,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                           children: [
                             SizedBox(height: AppSizes.signupPageFailSpaceTop),
                             Text(
-                              SignupText.confirmPasswordFail,
+                              AppLocalizations.of(context)!.signupConfirmPasswordFail,
                               style: Theme.of(context).textTheme.displaySmall
                                   ?.copyWith(
                                     color: AppColors.mediumSlateBlue50,
@@ -177,7 +177,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                               context.read<SignupBloc>().add(SignupSubmitEvent());
                             },
                             height: AppSizes.authPrimaryButtonHeight,
-                            text: SignupText.header,
+                            text: AppLocalizations.of(context)!.signupHeader,
                             width: double.infinity,
                           ),
                         ),
@@ -188,7 +188,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          SignupText.bottomText,
+                          AppLocalizations.of(context)!.signupBottomText,
                           style: Theme.of(context).textTheme.displaySmall
                               ?.copyWith(color: AppColors.pureWhite50),
                         ),
@@ -202,7 +202,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                             context.pop();
                           },
                           child: Text(
-                            SignupText.bottomTextButton,
+                            AppLocalizations.of(context)!.signupBottomTextButton,
                             style: Theme.of(context).textTheme.displaySmall
                                 ?.copyWith(color: AppColors.pureWhite87),
                           ),

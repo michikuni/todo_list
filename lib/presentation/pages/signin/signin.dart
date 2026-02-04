@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/signin_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
 import 'package:todo_list/presentation/bloc/signin/signin_bloc.dart';
@@ -59,39 +59,39 @@ class SigninPageWidget extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          SigninText.header,
+                          AppLocalizations.of(context)!.signinHeader,
                           style: Theme.of(context).textTheme.headlineLarge
                               ?.copyWith(color: AppColors.pureWhite87),
                         ),
                       ),
                       SizedBox(height: AppSizes.authTextFieldSpace),
                       TextInputWidget(
-                        hint: SigninText.usernameHint,
-                        title: SigninText.usernameTitle,
+                        hint: AppLocalizations.of(context)!.signinUsernameHint,
+                        title: AppLocalizations.of(context)!.signinUsernameTitle,
                         onValueChanged: (value) {
                           context.read<SigninBloc>().add(
                             OnUsernameChanged(value),
                           );
                         },
                         isObscure: false,
-                        errorMessage: state.username.displayError,
+                        // errorMessage: state.username.displayError,
                       ),
-                      // if (state.username.isNotValid && !state.username.isPure)
-                      //   Align(
-                      //     alignment: Alignment.centerLeft,
-                      //     child: Column(
-                      //       children: [
-                      //         SizedBox(height: AppSizes.signinPageFailSpaceTop),
-                      //         Text(
-                      //           SigninText.emailFail,
-                      //           style: Theme.of(context).textTheme.displaySmall
-                      //               ?.copyWith(
-                      //                 color: AppColors.mediumSlateBlue50,
-                      //               ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
+                      if (state.username.isNotValid && !state.username.isPure)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            children: [
+                              SizedBox(height: AppSizes.signinPageFailSpaceTop),
+                              Text(
+                                AppLocalizations.of(context)!.signinEmailFail,
+                                style: Theme.of(context).textTheme.displaySmall
+                                    ?.copyWith(
+                                      color: AppColors.mediumSlateBlue50,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
                       SizedBox(height: AppSizes.authTextFieldSpace),
                       TextInputWidget(
                         isObscure: true,
@@ -100,8 +100,8 @@ class SigninPageWidget extends StatelessWidget {
                             OnPasswordChanged(value),
                           );
                         },
-                        hint: SigninText.passwordHint,
-                        title: SigninText.passwordTitle,
+                        hint: AppLocalizations.of(context)!.signinPasswordHint,
+                        title: AppLocalizations.of(context)!.signinPasswordTitle,
                       ),
                       if (state.password.isNotValid && !state.password.isPure)
                         Align(
@@ -110,7 +110,7 @@ class SigninPageWidget extends StatelessWidget {
                             children: [
                               SizedBox(height: AppSizes.signinPageFailSpaceTop),
                               Text(
-                                SigninText.passwordFail,
+                                AppLocalizations.of(context)!.signinPasswordFail,
                                 style: Theme.of(context).textTheme.displaySmall
                                     ?.copyWith(
                                       color: AppColors.mediumSlateBlue50,
@@ -127,7 +127,7 @@ class SigninPageWidget extends StatelessWidget {
                           context.read<SigninBloc>().add(SigninSubmitEvent());
                         },
                         height: AppSizes.authPrimaryButtonHeight,
-                        text: SigninText.header,
+                        text: AppLocalizations.of(context)!.signinHeader,
                         width: double.infinity,
                       ),
                       Expanded(child: Container()),
@@ -135,7 +135,7 @@ class SigninPageWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            SigninText.bottomText,
+                            AppLocalizations.of(context)!.signinBottomText,
                             style: Theme.of(context).textTheme.displaySmall
                                 ?.copyWith(color: AppColors.pureWhite50),
                           ),
@@ -149,7 +149,7 @@ class SigninPageWidget extends StatelessWidget {
                               context.push(AppRouterPath.signupRouter);
                             },
                             child: Text(
-                              SigninText.bottomTextButton,
+                              AppLocalizations.of(context)!.signinBottomTextButton,
                               style: Theme.of(context).textTheme.displaySmall
                                   ?.copyWith(color: AppColors.pureWhite87),
                             ),

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/task_dialog_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
 import 'package:todo_list/presentation/bloc/task/task_event.dart';
 import 'package:todo_list/presentation/bloc/task/task_state.dart';
@@ -32,7 +32,7 @@ class _EditPriorityDialogState extends State<EditPriorityDialog> {
             children: [
               SizedBox(height: AppSizes.choosePriorityDialogTitleSpaceTop),
               Text(
-                TaskDialogText.priorityTitleText,
+                AppLocalizations.of(context)!.priorityTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w700,
@@ -110,7 +110,7 @@ class _EditPriorityDialogState extends State<EditPriorityDialog> {
                         height: AppSizes.choosePriorityDialogButtonHeight,
                         child: Center(
                           child: Text(
-                            TaskDialogText.priorityCancelButtonText,
+                            AppLocalizations.of(context)!.priorityCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
                                 ?.copyWith(color: AppColors.mediumSlateBlue),
                           ),
@@ -123,7 +123,7 @@ class _EditPriorityDialogState extends State<EditPriorityDialog> {
                     child: PrimaryButtonWidget(
                       isValid: true,
                       height: AppSizes.choosePriorityDialogButtonHeight,
-                      text: TaskDialogText.priorityEditButtonText,
+                      text: AppLocalizations.of(context)!.priorityEditButtonText,
                       width: AppSizes.choosePriorityDialogPrimaryButtonWidth,
                       onPressed: () {
                         context.pop();

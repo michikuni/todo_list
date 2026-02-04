@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/dropdown_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 
 class CompletedDropdown extends StatefulWidget {
 
@@ -43,7 +43,7 @@ class _CompletedDropdownState extends State<CompletedDropdown> {
             context,
           ).textTheme.displaySmall?.copyWith(color: AppColors.pureWhite87),
           items: [
-            DropdownMenuItem(value: CompletedDropdownValue.completed, child: Text(DropdownText.completed)),
+            DropdownMenuItem(value: CompletedDropdownValue.completed, child: Text(AppLocalizations.of(context)!.dropDownCompleted)),
           ],
           onChanged: (v) {
             if (v == null) return;

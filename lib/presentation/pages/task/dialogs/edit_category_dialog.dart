@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/task_dialog_text.dart';
 import 'package:todo_list/domain/entities/todo/todo.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
 import 'package:todo_list/presentation/bloc/task/task_event.dart';
 import 'package:todo_list/presentation/bloc/task/task_state.dart';
@@ -36,7 +36,7 @@ class _EditCategoryDialogState extends State<EditCategoryDialog> {
           children: [
             SizedBox(height: AppSizes.chooseCategoryDialogTitleSpace),
             Text(
-              TaskDialogText.categoryTaskDeleteButtonText,
+              AppLocalizations.of(context)!.categoryTaskDeleteButtonText,
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
                 color: AppColors.pureWhite87,
                 fontWeight: FontWeight.w700,
@@ -95,7 +95,7 @@ class _EditCategoryDialogState extends State<EditCategoryDialog> {
                         height: AppSizes.chooseCategoryDialogButtonHeight,
                         child: Center(
                           child: Text(
-                            TaskDialogText.categoryTaskCancelButtonText,
+                            AppLocalizations.of(context)!.categoryTaskCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
                                 ?.copyWith(color: AppColors.mediumSlateBlue),
                           ),
@@ -106,7 +106,7 @@ class _EditCategoryDialogState extends State<EditCategoryDialog> {
                   PrimaryButtonWidget(
                     isValid: true,
                     height: AppSizes.chooseCategoryDialogButtonHeight,
-                    text: TaskDialogText.categoryTaskDeleteButtonText,
+                    text: AppLocalizations.of(context)!.categoryTaskDeleteButtonText,
                     width: AppSizes.chooseCategoryDialogPrimaryButtonWidth,
                     onPressed: () {
                       context.pop();

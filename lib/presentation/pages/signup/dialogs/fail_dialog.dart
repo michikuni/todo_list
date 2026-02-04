@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/signup_dialog_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
 class SignupFailDialog extends StatelessWidget {
@@ -23,7 +23,7 @@ class SignupFailDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              SignupDialogText.signupDialogFailTitleText,
+              AppLocalizations.of(context)!.signupDialogFailTitleText,
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
                 color: AppColors.pureWhite87,
                 fontWeight: FontWeight.w700,
@@ -33,7 +33,7 @@ class SignupFailDialog extends StatelessWidget {
             Divider(height: 1),
             const SizedBox(height: AppSizes.signupDialogDivideSpaceBottom),
             Text(
-              SignupDialogText.signupDialogFailContentText,
+              AppLocalizations.of(context)!.signupDialogFailContentText,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: AppColors.pureWhite87,
                 fontWeight: FontWeight.w500,
@@ -47,7 +47,7 @@ class SignupFailDialog extends StatelessWidget {
                   child: PrimaryButtonWidget(
                     isValid: true,
                     height: AppSizes.signupDialogButtonHeight,
-                    text: SignupDialogText.signupDialogButtonText,
+                    text: AppLocalizations.of(context)!.signupDialogButtonText,
                     width: AppSizes.signupDialogButtonWidth,
                     onPressed: () {
                       context.pop();

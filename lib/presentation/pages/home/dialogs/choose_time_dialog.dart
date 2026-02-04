@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
-import 'package:todo_list/core/constants/home_dialog_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
@@ -36,7 +36,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                HomeDialogText.chooseTimeTitleText,
+                AppLocalizations.of(context)!.chooseTimeTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w500,
@@ -96,7 +96,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                           height: AppSizes.chooseTimeDialogButtonHeight,
                           child: Center(
                             child: Text(
-                              HomeDialogText.chooseTimeCancelButtonText,
+                              AppLocalizations.of(context)!.chooseTimeCancelButtonText,
                               style: Theme.of(context).textTheme.displayLarge
                                   ?.copyWith(color: AppColors.mediumSlateBlue),
                             ),
@@ -108,7 +108,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                       child: PrimaryButtonWidget(
                         isValid: true,
                         height: AppSizes.chooseTimeDialogButtonHeight,
-                        text: HomeDialogText.chooseTimeSaveButtonText,
+                        text: AppLocalizations.of(context)!.chooseTimeSaveButtonText,
                         width: AppSizes.chooseTimeDialogPrimaryButtonWidth,
                         onPressed: () {
                           final time = TimeOfDay(

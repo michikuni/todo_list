@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/signup_dialog_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
 class SignupSuccessDialog extends StatelessWidget {
@@ -24,7 +24,7 @@ class SignupSuccessDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              SignupDialogText.signupDialogSuccessTitleText,
+              AppLocalizations.of(context)!.signupDialogSuccessTitleText,
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
                 color: AppColors.pureWhite87,
                 fontWeight: FontWeight.w700,
@@ -34,7 +34,7 @@ class SignupSuccessDialog extends StatelessWidget {
             Divider(height: 1),
             const SizedBox(height: AppSizes.signupDialogDivideSpaceBottom),
             Text(
-              SignupDialogText.signupDialogSuccessContentText,
+              AppLocalizations.of(context)!.signupDialogSuccessContentText,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: AppColors.pureWhite87,
                 fontWeight: FontWeight.w500,
@@ -48,7 +48,7 @@ class SignupSuccessDialog extends StatelessWidget {
                   child: PrimaryButtonWidget(
                     isValid: true,
                     height: AppSizes.signupDialogButtonHeight,
-                    text: SignupDialogText.signupDialogButtonText,
+                    text: AppLocalizations.of(context)!.signupDialogButtonText,
                     width: AppSizes.signupDialogButtonWidth,
                     onPressed: () {
                       context.go(AppRouterPath.gateRouter);

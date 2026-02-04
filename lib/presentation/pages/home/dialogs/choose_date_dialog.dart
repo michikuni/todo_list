@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/home_dialog_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
 import 'package:todo_list/presentation/pages/home/dialogs/choose_time_dialog.dart';
+import 'package:todo_list/presentation/utils/extension_localizations.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
 class ChooseDateDialog extends StatefulWidget {
@@ -23,6 +24,9 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final days = l10n.weekDaysName;
+    final months = l10n.monthDaysName;
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) => Dialog(
         backgroundColor: AppColors.darkGrey,
@@ -32,9 +36,9 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _header(),
+              _header(months),
               const Divider(height: 1),
-              _weekDays(),
+              _weekDays(days),
               const SizedBox(
                 height: AppSizes.chooseDateDialogWeekPaddingBottom,
               ),
@@ -50,7 +54,7 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
     );
   }
 
-  Widget _header() {
+  Widget _header(List<String> months) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -62,7 +66,7 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
           child: Column(
             children: [
               Text(
-                _monthName(currentDate.month).toUpperCase(),
+                _monthName(currentDate.month, months).toUpperCase(),
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
                   color: AppColors.pureWhite87,
                 ),
@@ -84,17 +88,7 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
     );
   }
 
-  Widget _weekDays() {
-    const days = [
-      HomeDialogText.chooseDateSunday,
-      HomeDialogText.chooseDateMonday,
-      HomeDialogText.chooseDateTueday,
-      HomeDialogText.chooseDateWedday,
-      HomeDialogText.chooseDateThuday,
-      HomeDialogText.chooseDateFriday,
-      HomeDialogText.chooseDateSatday,
-    ];
-
+  Widget _weekDays(List<String> days) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: days.map((e) {
@@ -104,8 +98,8 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
             e,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
               color:
-                  e == HomeDialogText.chooseDateSunday ||
-                      e == HomeDialogText.chooseDateSatday
+                  e == days[0] ||
+                      e == days[6]
                   ? AppColors.coralRed
                   : AppColors.pureWhite87,
               fontWeight: FontWeight.w700,
@@ -189,7 +183,7 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
               height: AppSizes.chooseDateDialogButtonHeight,
               child: Center(
                 child: Text(
-                  HomeDialogText.chooseDateCancelButtonText,
+                  AppLocalizations.of(context)!.chooseDateCancelButtonText,
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
                     color: AppColors.mediumSlateBlue,
                   ),
@@ -202,7 +196,7 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
           child: PrimaryButtonWidget(
             isValid: true,
             height: AppSizes.chooseDateDialogButtonHeight,
-            text: HomeDialogText.chooseDateChooseTimeButtonText,
+            text: AppLocalizations.of(context)!.chooseDateChooseTimeButtonText,
             width: AppSizes.chooseDateDialogPrimaryButtonWidth,
             onPressed: () {
               context.pop();
@@ -246,21 +240,7 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
     return firstDayNextMonth.subtract(const Duration(days: 1)).day;
   }
 
-  String _monthName(int month) {
-    const months = [
-      HomeDialogText.chooseDateJanMonth,
-      HomeDialogText.chooseDateFebMonth,
-      HomeDialogText.chooseDateMarMonth,
-      HomeDialogText.chooseDateAprMonth,
-      HomeDialogText.chooseDateMayMonth,
-      HomeDialogText.chooseDateJunMonth,
-      HomeDialogText.chooseDateJulMonth,
-      HomeDialogText.chooseDateAugMonth,
-      HomeDialogText.chooseDateSepMonth,
-      HomeDialogText.chooseDateOctMonth,
-      HomeDialogText.chooseDateNovMonth,
-      HomeDialogText.chooseDateDecMonth,
-    ];
+  String _monthName(int month, List<String> months) {
     return months[month - 1];
   }
 

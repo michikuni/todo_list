@@ -5,8 +5,7 @@ import 'package:formz/formz.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
-import 'package:todo_list/core/constants/home_dialog_text.dart';
-import 'package:todo_list/core/constants/home_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
@@ -126,23 +125,23 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   children: [
                     BottomNavItem(
                       icon: Icons.home_filled,
-                      label: HomeDialogText.bottomBarIndexLabel,
+                      label: AppLocalizations.of(context)!.bottomBarIndexLabel,
                       marginLeft: (screenWidth * 0.05),
                     ),
                     BottomNavItem(
                       icon: Icons.calendar_month_outlined,
-                      label: HomeDialogText.bottomBarCalendarLabel,
+                      label: AppLocalizations.of(context)!.bottomBarCalendarLabel,
                       marginLeft: (screenWidth * 0.05),
                     ),
                     const Spacer(),
                     BottomNavItem(
                       icon: Icons.access_time,
-                      label: HomeDialogText.bottomBarFocusLabel,
+                      label: AppLocalizations.of(context)!.bottomBarFocusLabel,
                       marginRight: (screenWidth * 0.05),
                     ),
                     BottomNavItem(
                       icon: Icons.person_outline_rounded,
-                      label: HomeDialogText.bottomBarProfileLabel,
+                      label: AppLocalizations.of(context)!.bottomBarProfileLabel,
                       marginRight: (screenWidth * 0.05),
                     ),
                   ],
@@ -174,7 +173,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                 ),
               ],
               title: Text(
-                HomeText.appBarTitle,
+                AppLocalizations.of(context)!.homeAppBarTitle,
                 style: Theme.of(
                   context,
                 ).textTheme.bodyMedium?.copyWith(color: AppColors.pureWhite87),
@@ -203,12 +202,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(HomeText.emptyImageAssets),
+                              Image.asset(AssetsPath.emptyImageAssets),
                               const SizedBox(
                                 height: AppSizes.homeEmptyContentTop,
                               ),
                               Text(
-                                HomeText.emptyContent,
+                                AppLocalizations.of(context)!.homeEmptyContent,
                                 style: Theme.of(context).textTheme.bodyMedium
                                     ?.copyWith(color: AppColors.pureWhite87),
                               ),
@@ -216,7 +215,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 height: AppSizes.homeEmptyInstructionTop,
                               ),
                               Text(
-                                HomeText.emptyInstruction,
+                                AppLocalizations.of(context)!.homeEmptyInstruction,
                                 style: Theme.of(context).textTheme.displayLarge
                                     ?.copyWith(color: AppColors.pureWhite87),
                               ),
@@ -271,7 +270,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               ),
                                           decoration: InputDecoration(
                                             hint: Text(
-                                              HomeDialogText.searchHint,
+                                              AppLocalizations.of(context)!.searchHint,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .displayLarge

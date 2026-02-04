@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/task_dialog_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
 import 'package:todo_list/presentation/bloc/task/task_event.dart';
 import 'package:todo_list/presentation/bloc/task/task_state.dart';
@@ -59,7 +59,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                TaskDialogText.editTitleText,
+                AppLocalizations.of(context)!.editTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   color: AppColors.pureWhite87,
                 ),
@@ -97,7 +97,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                     });
                   },
                   decoration: InputDecoration(
-                    hintText: TaskDialogText.editContentHint,
+                    hintText: AppLocalizations.of(context)!.editContentHint,
                     hintStyle: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
@@ -134,7 +134,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                     });
                   },
                   decoration: InputDecoration(
-                    hintText: TaskDialogText.editDescriptionHint,
+                    hintText: AppLocalizations.of(context)!.editDescriptionHint,
                     hintStyle: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
@@ -159,7 +159,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                         height: AppSizes.editDialogButtonHeight,
                         child: Center(
                           child: Text(
-                            TaskDialogText.editCancelButtonText,
+                            AppLocalizations.of(context)!.editCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
                                 ?.copyWith(color: AppColors.mediumSlateBlue),
                           ),
@@ -171,7 +171,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                     child: PrimaryButtonWidget(
                       isValid: true,
                       height: AppSizes.editDialogButtonHeight,
-                      text: TaskDialogText.editEditButtonText,
+                      text: AppLocalizations.of(context)!.editEditButtonText,
                       width: AppSizes.editDialogButtonWidth,
                       onPressed: () {
                         context.read<TaskBloc>().add(

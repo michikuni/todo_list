@@ -6,7 +6,12 @@ class AppThemes {
   AppThemes._();
 
   static ThemeData get darkTheme {
-    return ThemeData(textTheme: _buildDefaultTextTheme(), useMaterial3: true);
+    return ThemeData(
+      textTheme: _buildDefaultTextTheme(),
+      useMaterial3: true,
+      
+      // colorScheme: darkColorScheme,
+    );
   }
 
   static TextTheme _buildDefaultTextTheme() {
@@ -53,4 +58,69 @@ class AppThemes {
       ),
     );
   }
+
+  
+  // static ColorScheme darkColorScheme = ColorScheme(
+    // brightness: Brightness.dark,  //Theme
+
+    // primary: AppColors.mediumSlateBlue, //primary button, FAB
+    // primaryContainer: , //card, selected item
+    // primaryFixed: ,
+    // primaryFixedDim: ,
+    
+    // onPrimary: AppColors.pureWhite,
+    // onPrimaryContainer: ,
+    // onPrimaryFixed: ,
+    // onPrimaryFixedVariant: ,
+
+    // secondary: , //secondary button, tag, chip, accent
+    // secondaryContainer: ,
+    // secondaryFixed: ,
+    // secondaryFixedDim: ,
+
+    // onSecondary: ,
+    // onSecondaryContainer: ,
+    // onSecondaryFixed: ,
+    // onSecondaryFixedVariant: ,
+
+    // tertiary: , //chart, badge, spot feature
+    // tertiaryContainer: ,
+    // tertiaryFixed: ,
+    // tertiaryFixedDim: ,
+
+    // onTertiary: ,
+    // onTertiaryContainer: ,
+    // onTertiaryFixed: ,
+    // onTertiaryFixedVariant: ,
+
+    // error: ,
+    // errorContainer: ,
+
+    // onError: ,
+    // onErrorContainer: ,
+
+    // surface: ,  //several surface
+    // surfaceBright: , //background bright
+    // surfaceContainer: , //card
+    // surfaceContainerHigh: , //modal, dialog
+    // surfaceContainerHighest: ,
+    // surfaceContainerLow: ,
+    // surfaceContainerLowest: ,
+    // surfaceDim: , //background dark
+    // surfaceTint: ,
+
+    // onSurface: ,
+    // onSurfaceVariant: ,
+
+    // inversePrimary: , //snackbar, floating widget, overlay
+    // inverseSurface: ,
+
+    // onInverseSurface: ,
+
+    // outline: , // border
+    // outlineVariant: , //divider
+    
+    // scrim: ,
+    // shadow: ,   
+  // );
 }

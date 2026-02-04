@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
-import 'package:todo_list/core/constants/home_dialog_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
@@ -62,7 +62,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                HomeDialogText.addTaskTitleText,
+                AppLocalizations.of(context)!.addTaskTitleText,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w700,
@@ -105,7 +105,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                   textAlignVertical: TextAlignVertical.center,
                   maxLines: 1,
                   decoration: InputDecoration(
-                    hintText: HomeDialogText.addTaskContentHint,
+                    hintText: AppLocalizations.of(context)!.addTaskContentHint,
                     hintStyle: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
@@ -154,7 +154,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                   textAlignVertical: TextAlignVertical.center,
                   maxLines: 1,
                   decoration: InputDecoration(
-                    hintText: HomeDialogText.addTaskDescriptionHint,
+                    hintText: AppLocalizations.of(context)!.addTaskDescriptionHint,
                     hintStyle: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: AppColors.grey),

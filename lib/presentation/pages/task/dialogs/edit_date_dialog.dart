@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/task_dialog_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
 import 'package:todo_list/presentation/bloc/task/task_event.dart';
 import 'package:todo_list/presentation/bloc/task/task_state.dart';
 import 'package:todo_list/presentation/pages/task/dialogs/edit_time_dialog.dart';
+import 'package:todo_list/presentation/utils/extension_localizations.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
 class EditDateDialog extends StatefulWidget {
@@ -23,6 +24,9 @@ class _EditDateDialogState extends State<EditDateDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final days = l10n.weekDaysName;
+    final months = l10n.monthDaysName;
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) => Dialog(
         backgroundColor: AppColors.darkGrey,
@@ -32,9 +36,9 @@ class _EditDateDialogState extends State<EditDateDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _header(),
+              _header(months),
               const Divider(height: 1,),
-              _weekDays(),
+              _weekDays(days),
               const SizedBox(
                 height: AppSizes.chooseDateDialogWeekPaddingBottom,
               ),
@@ -50,7 +54,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
     );
   }
 
-  Widget _header() {
+  Widget _header(List<String> months) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -62,7 +66,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
           child: Column(
             children: [
               Text(
-                _monthName(currentDate.month).toUpperCase(),
+                _monthName(currentDate.month, months).toUpperCase(),
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
                   color: AppColors.pureWhite87,
                 ),
@@ -84,17 +88,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
     );
   }
 
-  Widget _weekDays() {
-    const days = [
-      TaskDialogText.dateSunday,
-      TaskDialogText.dateMonday,
-      TaskDialogText.dateTueday,
-      TaskDialogText.dateWedday,
-      TaskDialogText.dateThuday,
-      TaskDialogText.dateFriday,
-      TaskDialogText.dateSatday,
-    ];
-
+  Widget _weekDays(List<String> days) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: days.map((e) {
@@ -104,8 +98,8 @@ class _EditDateDialogState extends State<EditDateDialog> {
             e,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
               color:
-                  e == TaskDialogText.dateSunday ||
-                      e == TaskDialogText.dateSatday
+                  e == days[0] ||
+                      e == days[6]
                   ? AppColors.coralRed
                   : AppColors.pureWhite87,
               fontWeight: FontWeight.w700,
@@ -189,7 +183,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
               height: AppSizes.chooseDateDialogButtonHeight,
               child: Center(
                 child: Text(
-                  TaskDialogText.dateCancelButtonText,
+                  AppLocalizations.of(context)!.dateCancelButtonText,
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
                     color: AppColors.mediumSlateBlue,
                   ),
@@ -201,7 +195,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
         PrimaryButtonWidget(
           isValid: true,
           height: AppSizes.chooseDateDialogButtonHeight,
-          text: TaskDialogText.dateEditTimeButtonText,
+          text: AppLocalizations.of(context)!.dateEditTimeButtonText,
           width: AppSizes.chooseDateDialogPrimaryButtonWidth,
           onPressed: () {
             context.pop();
@@ -244,21 +238,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
     return firstDayNextMonth.subtract(const Duration(days: 1)).day;
   }
 
-  String _monthName(int month) {
-    const months = [
-      TaskDialogText.dateJanMonth,
-      TaskDialogText.dateFebMonth,
-      TaskDialogText.dateMarMonth,
-      TaskDialogText.dateAprMonth,
-      TaskDialogText.dateMayMonth,
-      TaskDialogText.dateJunMonth,
-      TaskDialogText.dateJulMonth,
-      TaskDialogText.dateAugMonth,
-      TaskDialogText.dateSepMonth,
-      TaskDialogText.dateOctMonth,
-      TaskDialogText.dateNovMonth,
-      TaskDialogText.dateDecMonth,
-    ];
+  String _monthName(int month, List<String> months) {
     return months[month - 1];
   }
 

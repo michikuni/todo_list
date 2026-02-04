@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/dropdown_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 
 enum TimeFilter {
   today,
@@ -59,10 +59,10 @@ class _FilterDropdownState extends State<FilterDropdown> {
             context,
           ).textTheme.displaySmall?.copyWith(color: AppColors.pureWhite87),
           items: [
-            DropdownMenuItem(value: TimeFilter.today, child: Text(DropdownText.uncompletedToday)),
-            DropdownMenuItem(value: TimeFilter.week, child: Text(DropdownText.uncompletedWeek)),
-            DropdownMenuItem(value: TimeFilter.month, child: Text(DropdownText.uncompletedMonth)),
-            DropdownMenuItem(value: TimeFilter.all, child: Text(DropdownText.uncompletedAll)),
+            DropdownMenuItem(value: TimeFilter.today, child: Text(AppLocalizations.of(context)!.dropDownUncompletedToday)),
+            DropdownMenuItem(value: TimeFilter.week, child: Text(AppLocalizations.of(context)!.dropDownUncompletedWeek)),
+            DropdownMenuItem(value: TimeFilter.month, child: Text(AppLocalizations.of(context)!.dropDownUncompletedMonth)),
+            DropdownMenuItem(value: TimeFilter.all, child: Text(AppLocalizations.of(context)!.dropDownUncompletedAll)),
           ],
           onChanged: (v) {
             if (v == null) return;

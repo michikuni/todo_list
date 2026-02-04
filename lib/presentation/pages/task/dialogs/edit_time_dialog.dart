@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
-import 'package:todo_list/core/constants/task_dialog_text.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
 import 'package:todo_list/presentation/bloc/task/task_event.dart';
 import 'package:todo_list/presentation/bloc/task/task_state.dart';
@@ -35,7 +35,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                TaskDialogText.editTimeTitleText,
+                AppLocalizations.of(context)!.editTimeTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w500,
@@ -95,7 +95,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
                           height: AppSizes.chooseTimeDialogButtonHeight,
                           child: Center(
                             child: Text(
-                              TaskDialogText.editTimeCancelButtonText,
+                              AppLocalizations.of(context)!.editTimeCancelButtonText,
                               style: Theme.of(context).textTheme.displayLarge
                                   ?.copyWith(color: AppColors.mediumSlateBlue),
                             ),
@@ -106,7 +106,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
                     PrimaryButtonWidget(
                       isValid: true,
                       height: AppSizes.chooseTimeDialogButtonHeight,
-                      text: TaskDialogText.editTimeEditButtonText,
+                      text: AppLocalizations.of(context)!.editTimeEditButtonText,
                       width: AppSizes.chooseTimeDialogPrimaryButtonWidth,
                       onPressed: () {
                         final time = TimeOfDay(

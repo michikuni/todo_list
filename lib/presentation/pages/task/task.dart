@@ -6,8 +6,8 @@ import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
-import 'package:todo_list/core/constants/task_text.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
 import 'package:todo_list/presentation/bloc/task/task_event.dart';
 import 'package:todo_list/presentation/bloc/task/task_state.dart';
@@ -185,7 +185,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 },
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
-                titleText: TaskText.taskTimeText,
+                titleText: AppLocalizations.of(context)!.taskTimeText,
                 detailWidth: AppSizes.taskRowTimeDetailWidth,
                 detailBorderRadius: AppSizes.taskRowRadius,
                 detailText: formatDateWithMinutes(
@@ -212,7 +212,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 },
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
-                titleText: TaskText.taskCategoryText,
+                titleText: AppLocalizations.of(context)!.taskCategoryText,
                 detailWidth: AppSizes.taskRowCategoryDetailWidth,
                 detailBorderRadius: AppSizes.taskRowRadius,
                 detailText: state.category.name,
@@ -238,7 +238,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 },
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
-                titleText: TaskText.taskPriorityText,
+                titleText: AppLocalizations.of(context)!.taskPriorityText,
                 detailWidth: AppSizes.taskRowPriorityDetailWidth,
                 detailBorderRadius: AppSizes.taskRowRadius,
                 detailText: state.priority.toString(),
@@ -251,10 +251,10 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 onTap: () {},
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
-                titleText: TaskText.taskSubText,
+                titleText: AppLocalizations.of(context)!.taskSubText,
                 detailWidth: AppSizes.taskRowSubDetailWidth,
                 detailBorderRadius: AppSizes.taskAppBarIconRadius,
-                detailText: TaskText.taskDefaultSubText,
+                detailText: AppLocalizations.of(context)!.taskDefaultSubText,
                 rowIcon: SvgPicture.asset(AssetsPath.accountTreeIcon)
               ),
               SizedBox(height: AppSizes.taskDeleteSpaceTop),
@@ -272,7 +272,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                     SvgPicture.asset(AssetsPath.trashIcon),
                     SizedBox(width: AppSizes.taskRowTitleSpace),
                     Text(
-                      TaskText.taskDeleteText,
+                      AppLocalizations.of(context)!.taskDeleteText,
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
                         color: AppColors.coralRed,
                       ),
@@ -286,7 +286,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
               PrimaryButtonWidget(
                 isValid: true,
                 height: AppSizes.taskPrimaryButtonHeight,
-                text: TaskText.taskButtonPrimaryText,
+                text: AppLocalizations.of(context)!.taskButtonPrimaryText,
                 width: double.infinity,
                 onPressed: () {
                   context.read<TaskBloc>().add(OnSubmit(widget.todo.key));

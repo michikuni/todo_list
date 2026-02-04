@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
-import 'package:todo_list/core/constants/task_dialog_text.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
@@ -50,7 +50,7 @@ class DeleteTaskDialog extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                TaskDialogText.deleteTaskTitleText,
+                AppLocalizations.of(context)!.deleteTaskTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w700,
@@ -60,7 +60,7 @@ class DeleteTaskDialog extends StatelessWidget {
               Divider(height: 1),
               const SizedBox(height: AppSizes.deleteDialogDivideSpaceBottom),
               Text(
-                '${TaskDialogText.deleteTaskContentText}${todo.todo.content}',
+                '${AppLocalizations.of(context)!.deleteTaskContentText}${todo.todo.content}',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: AppColors.pureWhite87,
                   fontWeight: FontWeight.w500,
@@ -79,7 +79,7 @@ class DeleteTaskDialog extends StatelessWidget {
                         height: AppSizes.deleteDialogButtonHeight,
                         child: Center(
                           child: Text(
-                            TaskDialogText.deleteTaskCancelButtonText,
+                            AppLocalizations.of(context)!.deleteTaskCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
                                 ?.copyWith(color: AppColors.mediumSlateBlue),
                           ),
@@ -91,7 +91,7 @@ class DeleteTaskDialog extends StatelessWidget {
                     child: PrimaryButtonWidget(
                       height: AppSizes.deleteDialogButtonHeight,
                       isValid: true,
-                      text: TaskDialogText.deleteTaskDeleteButtonText,
+                      text: AppLocalizations.of(context)!.deleteTaskDeleteButtonText,
                       width: AppSizes.deleteDialogButtonWidth,
                       onPressed: () {
                         // print(todo.key);

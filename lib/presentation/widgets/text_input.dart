@@ -56,7 +56,6 @@ class TextInputWidget extends StatelessWidget {
                 ).textTheme.displayLarge?.copyWith(color: AppColors.lightGrey),
               ),
               border: InputBorder.none,
-               errorText: errorMessage
             ),
             onChanged: onValueChanged,
           ),
