@@ -90,14 +90,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
               backgroundColor: AppColors.black,
               centerTitle: true,
               actions: [
-                CircleAvatar(
-                  radius: AppSizes.homeAppBarAvatarSize,
-                  child: ClipOval(
+                ClipOval(
+                  child: CircleAvatar(
+                    radius: AppSizes.homeAppBarAvatarSize,
                     child: Image.network(
                       avatarUrl.isNotEmpty
                           ? avatarUrl
                           : AssetsPath.defaultImage,
-                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
