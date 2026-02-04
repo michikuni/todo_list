@@ -9,28 +9,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final GetProfileUseCase getProfile;
 
   AuthBloc({required this.getProfile, required this.storage})
-    : super(AuthInitial()) {
+    : super(const AuthInitial()) {
     on<AuthCheckEvent>((event, emit) async {
-      emit(AuthLoading());
+      emit(AuthLoading(locale: state.locale));
+
       final token = await storage.getAccessToken();
-      // print(token);
       if (token != null) {
         final response = await getProfile();
         response.fold(
-          (onLeft) {
-            emit(AuthUnauthenticated());
-          },
-          (onRight) {
-            emit(AuthAuthenticated());
-          },
+          (_) => emit(AuthUnauthenticated(locale: state.locale)),
+          (_) => emit(AuthAuthenticated(locale: state.locale)),
         );
       } else {
-        emit(AuthUnauthenticated());
+        emit(AuthUnauthenticated(locale: state.locale));
       }
     });
+
     on<AuthLoggedOut>((event, emit) async {
       await storage.clear();
-      emit(AuthUnauthenticated());
+      emit(AuthUnauthenticated(locale: state.locale));
+    });
+
+    on<OnChangedLocale>((event, emit) {
+      emit(LocaleChangedState(event.locale));
+      add(AuthCheckEvent());
     });
   }
 }

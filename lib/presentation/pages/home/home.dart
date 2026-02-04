@@ -124,20 +124,30 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Expanded(
-                      child: BottomNavItem(
-                        icon: Icons.home_filled,
-                        label: AppLocalizations.of(context)!.bottomBarIndexLabel,
-                        marginLeft: (screenWidth * 0.05),
+                      child: GestureDetector(
+                        onTap: () {
+                          context.read<AuthBloc>().add(OnChangedLocale(Locale('vi')));
+                        },
+                        child: BottomNavItem(
+                          icon: Icons.home_filled,
+                          label: AppLocalizations.of(context)!.bottomBarIndexLabel,
+                          marginLeft: (screenWidth * 0.05),
+                        ),
                       ),
                     ),
                     Expanded(
-                      child: BottomNavItem(
-                        icon: Icons.calendar_month_outlined,
-                        label: AppLocalizations.of(context)!.bottomBarCalendarLabel,
-                        marginLeft: (screenWidth * 0.05),
+                      child: GestureDetector(
+                        onTap: () {
+                          context.read<AuthBloc>().add(OnChangedLocale(Locale('en')));
+                        },
+                        child: BottomNavItem(
+                          icon: Icons.calendar_month_outlined,
+                          label: AppLocalizations.of(context)!.bottomBarCalendarLabel,
+                          marginLeft: (screenWidth * 0.05),
+                        ),
                       ),
                     ),
-                    Expanded(child: const Spacer()),
+                    const Spacer(),
                     Expanded(
                       child: BottomNavItem(
                         icon: Icons.access_time,

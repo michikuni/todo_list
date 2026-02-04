@@ -11,6 +11,7 @@ import 'package:todo_list/domain/usecases/profile/profile.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
+import 'package:todo_list/presentation/bloc/gate/auth_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,17 +35,26 @@ class TodoAppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      theme: AppThemes.darkTheme,
-      routerConfig: AppRouter.appRouters,
-      supportedLocales: const [Locale('vi')],
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: AppThemes.darkTheme,
+          routerConfig: AppRouter.appRouters,
+          locale: state.locale,
+          supportedLocales: const [
+            Locale('vi'),
+            Locale('en'),
+          ],
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+        );
+      },
     );
   }
 }
+
