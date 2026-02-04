@@ -6,17 +6,13 @@ import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
-import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
-import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
-import 'package:todo_list/presentation/pages/home/components/bottom_nav_item.dart';
 import 'package:todo_list/presentation/pages/home/components/complete_todo_item.dart';
 import 'package:todo_list/presentation/pages/home/components/completed_dropdown_button.dart';
 import 'package:todo_list/presentation/pages/home/components/filter_dropdown_button.dart';
 import 'package:todo_list/presentation/pages/home/components/uncomplete_todo_item.dart';
-import 'package:todo_list/presentation/pages/home/dialogs/add_task_dialog.dart';
 import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dart';
 import 'package:todo_list/presentation/widgets/loading_dialog.dart';
 
@@ -63,7 +59,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.sizeOf(context).width;
     return BlocListener<HomeBloc, HomeState>(
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
@@ -88,84 +83,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
             searchText: searchController.text,
           ).where((e) => e.todo.isDone).toList();
           return Scaffold(
-            floatingActionButton: SizedBox(
-              height: AppSizes.homeAddButtonSize,
-              width: AppSizes.homeAddButtonSize,
-              child: FloatingActionButton(
-                onPressed: () {
-                  final homeBloc = context.read<HomeBloc>();
-                  homeBloc.add(ResetAddTodoEvent());
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return BlocProvider.value(
-                        value: homeBloc,
-                        child: AddTaskDialog(),
-                      );
-                    },
-                  );
-                },
-                backgroundColor: AppColors.mediumSlateBlue,
-                shape: const CircleBorder(),
-                child: const Icon(
-                  Icons.add,
-                  size: AppSizes.homeAddButtonIconSize,
-                  color: AppColors.pureWhite,
-                ),
-              ),
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            bottomNavigationBar: BottomAppBar(
-              color: AppColors.darkGrey,
-              child: SizedBox(
-                height: AppSizes.homeBottomNavHeight,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          context.read<AuthBloc>().add(OnChangedLocale(Locale('vi')));
-                        },
-                        child: BottomNavItem(
-                          icon: Icons.home_filled,
-                          label: AppLocalizations.of(context)!.bottomBarIndexLabel,
-                          marginLeft: (screenWidth * 0.05),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          context.read<AuthBloc>().add(OnChangedLocale(Locale('en')));
-                        },
-                        child: BottomNavItem(
-                          icon: Icons.calendar_month_outlined,
-                          label: AppLocalizations.of(context)!.bottomBarCalendarLabel,
-                          marginLeft: (screenWidth * 0.05),
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                    Expanded(
-                      child: BottomNavItem(
-                        icon: Icons.access_time,
-                        label: AppLocalizations.of(context)!.bottomBarFocusLabel,
-                        marginRight: (screenWidth * 0.05),
-                      ),
-                    ),
-                    Expanded(
-                      child: BottomNavItem(
-                        icon: Icons.person_outline_rounded,
-                        label: AppLocalizations.of(context)!.bottomBarProfileLabel,
-                        marginRight: (screenWidth * 0.05),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
             appBar: AppBar(
               actionsPadding: EdgeInsets.only(
                 right: AppSizes.homeHorizontalPadding,
@@ -173,19 +90,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
               backgroundColor: AppColors.black,
               centerTitle: true,
               actions: [
-                GestureDetector(
-                  onTap: () {
-                    context.read<AuthBloc>().add(AuthLoggedOut());
-                  },
-                  child: CircleAvatar(
-                    radius: AppSizes.homeAppBarAvatarSize,
-                    child: ClipOval(
-                      child: Image.network(
-                        avatarUrl.isNotEmpty
-                            ? avatarUrl
-                            : AssetsPath.defaultImage,
-                        fit: BoxFit.contain,
-                      ),
+                CircleAvatar(
+                  radius: AppSizes.homeAppBarAvatarSize,
+                  child: ClipOval(
+                    child: Image.network(
+                      avatarUrl.isNotEmpty
+                          ? avatarUrl
+                          : AssetsPath.defaultImage,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
@@ -233,7 +145,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 height: AppSizes.homeEmptyInstructionTop,
                               ),
                               Text(
-                                AppLocalizations.of(context)!.homeEmptyInstruction,
+                                AppLocalizations.of(
+                                  context,
+                                )!.homeEmptyInstruction,
                                 style: Theme.of(context).textTheme.displayLarge
                                     ?.copyWith(color: AppColors.pureWhite87),
                               ),
@@ -288,7 +202,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               ),
                                           decoration: InputDecoration(
                                             hint: Text(
-                                              AppLocalizations.of(context)!.searchHint,
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.searchHint,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .displayLarge
