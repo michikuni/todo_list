@@ -6,7 +6,9 @@ import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/pages/home/utils/filter_todo_function.dart';
+import 'package:todo_list/presentation/utils/extension_localizations.dart';
 import 'package:todo_list/presentation/widgets/circle_check.dart';
 
 class UncompletedTodoItem extends StatelessWidget {
@@ -20,6 +22,7 @@ class UncompletedTodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: () {
         context.push(AppRouterPath.taskRouter, extra: todo);
@@ -104,7 +107,7 @@ class UncompletedTodoItem extends StatelessWidget {
                             AppSizes.uncompleteTodoItemCategoryIconSpaceRight,
                       ),
                       Text(
-                        todo.todo.category.name,
+                        l10n.categoryName(todo.todo.category.name.toLowerCase()),
                         style: Theme.of(context).textTheme.displaySmall
                             ?.copyWith(color: AppColors.pureWhite),
                       ),

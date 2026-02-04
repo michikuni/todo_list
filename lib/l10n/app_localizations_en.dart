@@ -331,4 +331,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get decmonth => 'December';
+
+  @override
+  String get categoryGrocery => 'Grocery';
+
+  @override
+  String get categoryWork => 'Work';
+
+  @override
+  String get categorySport => 'Sport';
+
+  @override
+  String get categoryDesign => 'Design';
+
+  @override
+  String get categoryUniversity => 'University';
+
+  @override
+  String get categorySocial => 'Social';
+
+  @override
+  String get categoryMusic => 'Music';
+
+  @override
+  String get categoryHealth => 'Health';
+
+  @override
+  String get categoryMovie => 'Movie';
+
+  @override
+  String get categoryHome => 'Home';
+
+  @override
+  String get categoryCreateNew => 'Create New';
 }

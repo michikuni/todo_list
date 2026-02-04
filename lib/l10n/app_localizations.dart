@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_vi.dart';
 
 // ignore_for_file: type=lint
 
@@ -90,7 +91,8 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
-    Locale('en')
+    Locale('en'),
+    Locale('vi')
   ];
 
   /// No description provided for @homeAppBarTitle.
@@ -740,6 +742,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'December'**
   String get decmonth;
+
+  /// No description provided for @categoryGrocery.
+  ///
+  /// In en, this message translates to:
+  /// **'Grocery'**
+  String get categoryGrocery;
+
+  /// No description provided for @categoryWork.
+  ///
+  /// In en, this message translates to:
+  /// **'Work'**
+  String get categoryWork;
+
+  /// No description provided for @categorySport.
+  ///
+  /// In en, this message translates to:
+  /// **'Sport'**
+  String get categorySport;
+
+  /// No description provided for @categoryDesign.
+  ///
+  /// In en, this message translates to:
+  /// **'Design'**
+  String get categoryDesign;
+
+  /// No description provided for @categoryUniversity.
+  ///
+  /// In en, this message translates to:
+  /// **'University'**
+  String get categoryUniversity;
+
+  /// No description provided for @categorySocial.
+  ///
+  /// In en, this message translates to:
+  /// **'Social'**
+  String get categorySocial;
+
+  /// No description provided for @categoryMusic.
+  ///
+  /// In en, this message translates to:
+  /// **'Music'**
+  String get categoryMusic;
+
+  /// No description provided for @categoryHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Health'**
+  String get categoryHealth;
+
+  /// No description provided for @categoryMovie.
+  ///
+  /// In en, this message translates to:
+  /// **'Movie'**
+  String get categoryMovie;
+
+  /// No description provided for @categoryHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get categoryHome;
+
+  /// No description provided for @categoryCreateNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Create New'**
+  String get categoryCreateNew;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -751,7 +819,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'vi'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -763,6 +831,7 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en': return AppLocalizationsEn();
+    case 'vi': return AppLocalizationsVi();
   }
 
   throw FlutterError(

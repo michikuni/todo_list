@@ -23,6 +23,35 @@ extension AppText on AppLocalizations {
     sepmonth,
     octmonth,
     novmonth,
-    decmonth
+    decmonth,
   ];
+
+  String categoryName(String type) {
+    switch (type) {
+      case 'grocery':
+        return categoryGrocery;
+      case 'work':
+        return categoryWork;
+      case 'sport':
+        return categorySport;
+      case 'design':
+        return categoryDesign;
+      case 'university':
+        return categoryUniversity;
+      case 'social':
+        return categorySocial;
+      case 'music':
+        return categoryMusic;
+      case 'health':
+        return categoryHealth;
+      case 'movie':
+        return categoryMovie;
+      case 'home':
+        return categoryHome;
+      case 'createnew':
+        return categoryCreateNew;
+      default:
+        return type;
+    }
+  }
 }

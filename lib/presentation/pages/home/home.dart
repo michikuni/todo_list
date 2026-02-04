@@ -123,26 +123,34 @@ class _HomePageWidgetState extends State<HomePageWidget>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    BottomNavItem(
-                      icon: Icons.home_filled,
-                      label: AppLocalizations.of(context)!.bottomBarIndexLabel,
-                      marginLeft: (screenWidth * 0.05),
+                    Expanded(
+                      child: BottomNavItem(
+                        icon: Icons.home_filled,
+                        label: AppLocalizations.of(context)!.bottomBarIndexLabel,
+                        marginLeft: (screenWidth * 0.05),
+                      ),
                     ),
-                    BottomNavItem(
-                      icon: Icons.calendar_month_outlined,
-                      label: AppLocalizations.of(context)!.bottomBarCalendarLabel,
-                      marginLeft: (screenWidth * 0.05),
+                    Expanded(
+                      child: BottomNavItem(
+                        icon: Icons.calendar_month_outlined,
+                        label: AppLocalizations.of(context)!.bottomBarCalendarLabel,
+                        marginLeft: (screenWidth * 0.05),
+                      ),
                     ),
-                    const Spacer(),
-                    BottomNavItem(
-                      icon: Icons.access_time,
-                      label: AppLocalizations.of(context)!.bottomBarFocusLabel,
-                      marginRight: (screenWidth * 0.05),
+                    Expanded(child: const Spacer()),
+                    Expanded(
+                      child: BottomNavItem(
+                        icon: Icons.access_time,
+                        label: AppLocalizations.of(context)!.bottomBarFocusLabel,
+                        marginRight: (screenWidth * 0.05),
+                      ),
                     ),
-                    BottomNavItem(
-                      icon: Icons.person_outline_rounded,
-                      label: AppLocalizations.of(context)!.bottomBarProfileLabel,
-                      marginRight: (screenWidth * 0.05),
+                    Expanded(
+                      child: BottomNavItem(
+                        icon: Icons.person_outline_rounded,
+                        label: AppLocalizations.of(context)!.bottomBarProfileLabel,
+                        marginRight: (screenWidth * 0.05),
+                      ),
                     ),
                   ],
                 ),

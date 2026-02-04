@@ -10,6 +10,7 @@ import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
 import 'package:todo_list/presentation/pages/home/components/category_item.dart';
 import 'package:todo_list/presentation/pages/home/utils/default_category.dart';
+import 'package:todo_list/presentation/utils/extension_localizations.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
 class ChooseCategoryDialog extends StatefulWidget {
@@ -23,6 +24,8 @@ class _ChooseCategoryDialogState extends State<ChooseCategoryDialog> {
   Category selectedCategory = categories[9];
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) => Dialog(
         backgroundColor: AppColors.darkGrey,
@@ -60,11 +63,13 @@ class _ChooseCategoryDialogState extends State<ChooseCategoryDialog> {
                 mainAxisSpacing: AppSizes.chooseCategoryDialogItemSpace,
                 crossAxisSpacing: AppSizes.chooseCategoryDialogItemSpace,
                 children: categories.map((category) {
-                  final isSelected = selectedCategory.name.toLowerCase() == category.name.toLowerCase();
+                  final isSelected =
+                      selectedCategory.name.toLowerCase() ==
+                      category.name.toLowerCase();
 
                   return CategoryItem(
                     icon: category.icon,
-                    label: category.name,
+                    label: l10n.categoryName(category.name.toLowerCase()),
                     color: Color(category.color),
                     isSelected: isSelected,
                     onTap: () {
@@ -95,7 +100,9 @@ class _ChooseCategoryDialogState extends State<ChooseCategoryDialog> {
                         height: AppSizes.chooseCategoryDialogButtonHeight,
                         child: Center(
                           child: Text(
-                            AppLocalizations.of(context)!.chooseCategoryCancelButtonText,
+                            AppLocalizations.of(
+                              context,
+                            )!.chooseCategoryCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
                                 ?.copyWith(color: AppColors.mediumSlateBlue),
                           ),
@@ -107,7 +114,9 @@ class _ChooseCategoryDialogState extends State<ChooseCategoryDialog> {
                     child: PrimaryButtonWidget(
                       isValid: true,
                       height: AppSizes.chooseCategoryDialogButtonHeight,
-                      text: AppLocalizations.of(context)!.chooseCategorySaveButtonText,
+                      text: AppLocalizations.of(
+                        context,
+                      )!.chooseCategorySaveButtonText,
                       width: AppSizes.chooseCategoryDialogPrimaryButtonWidth,
                       onPressed: () {
                         context.pop();

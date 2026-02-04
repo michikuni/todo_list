@@ -38,7 +38,7 @@ class TodoAppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppThemes.darkTheme,
       routerConfig: AppRouter.appRouters,
-      supportedLocales: const [Locale('en')],
+      supportedLocales: const [Locale('vi')],
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

@@ -10,6 +10,7 @@ import 'package:todo_list/presentation/bloc/task/task_event.dart';
 import 'package:todo_list/presentation/bloc/task/task_state.dart';
 import 'package:todo_list/presentation/pages/home/components/category_item.dart';
 import 'package:todo_list/presentation/pages/home/utils/default_category.dart';
+import 'package:todo_list/presentation/utils/extension_localizations.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
 class EditCategoryDialog extends StatefulWidget {
@@ -23,6 +24,7 @@ class _EditCategoryDialogState extends State<EditCategoryDialog> {
   Category selectedCategory = categories[9];
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) => Dialog(
         backgroundColor: AppColors.darkGrey,
@@ -36,7 +38,7 @@ class _EditCategoryDialogState extends State<EditCategoryDialog> {
           children: [
             SizedBox(height: AppSizes.chooseCategoryDialogTitleSpace),
             Text(
-              AppLocalizations.of(context)!.categoryTaskDeleteButtonText,
+              AppLocalizations.of(context)!.categoryTaskTitleText,
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
                 color: AppColors.pureWhite87,
                 fontWeight: FontWeight.w700,
@@ -64,7 +66,7 @@ class _EditCategoryDialogState extends State<EditCategoryDialog> {
 
                   return CategoryItem(
                     icon: category.icon,
-                    label: category.name,
+                    label: l10n.categoryName(category.name.toLowerCase()),
                     color: Color(category.color),
                     isSelected: isSelected,
                     onTap: () {

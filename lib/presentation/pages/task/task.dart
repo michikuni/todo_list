@@ -18,6 +18,7 @@ import 'package:todo_list/presentation/pages/task/dialogs/edit_category_dialog.d
 import 'package:todo_list/presentation/pages/task/dialogs/edit_date_dialog.dart';
 import 'package:todo_list/presentation/pages/task/dialogs/edit_priority_dialog.dart';
 import 'package:todo_list/presentation/pages/task/dialogs/edit_task_dialog.dart';
+import 'package:todo_list/presentation/utils/extension_localizations.dart';
 import 'package:todo_list/presentation/widgets/circle_check.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
 
@@ -53,6 +54,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.black,
@@ -185,7 +187,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 },
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
-                titleText: AppLocalizations.of(context)!.taskTimeText,
+                titleText: l10n.taskTimeText,
                 detailWidth: AppSizes.taskRowTimeDetailWidth,
                 detailBorderRadius: AppSizes.taskRowRadius,
                 detailText: formatDateWithMinutes(
@@ -212,10 +214,10 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 },
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
-                titleText: AppLocalizations.of(context)!.taskCategoryText,
+                titleText: l10n.taskCategoryText,
                 detailWidth: AppSizes.taskRowCategoryDetailWidth,
                 detailBorderRadius: AppSizes.taskRowRadius,
-                detailText: state.category.name,
+                detailText: l10n.categoryName(state.category.name.toLowerCase()),
                 rowIcon: SvgPicture.asset(AssetsPath.categoryIcon),
                 iconSize: AppSizes.taskRowCategoryIconSize,
                 detailColor: Color(widget.todo.todo.category.color),
@@ -238,7 +240,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 },
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
-                titleText: AppLocalizations.of(context)!.taskPriorityText,
+                titleText: l10n.taskPriorityText,
                 detailWidth: AppSizes.taskRowPriorityDetailWidth,
                 detailBorderRadius: AppSizes.taskRowRadius,
                 detailText: state.priority.toString(),
@@ -251,10 +253,10 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 onTap: () {},
                 taskRowHeight: AppSizes.taskRowHeight,
                 titleSpace: AppSizes.taskRowTitleSpace,
-                titleText: AppLocalizations.of(context)!.taskSubText,
+                titleText: l10n.taskSubText,
                 detailWidth: AppSizes.taskRowSubDetailWidth,
                 detailBorderRadius: AppSizes.taskAppBarIconRadius,
-                detailText: AppLocalizations.of(context)!.taskDefaultSubText,
+                detailText: l10n.taskDefaultSubText,
                 rowIcon: SvgPicture.asset(AssetsPath.accountTreeIcon)
               ),
               SizedBox(height: AppSizes.taskDeleteSpaceTop),
@@ -272,7 +274,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                     SvgPicture.asset(AssetsPath.trashIcon),
                     SizedBox(width: AppSizes.taskRowTitleSpace),
                     Text(
-                      AppLocalizations.of(context)!.taskDeleteText,
+                      l10n.taskDeleteText,
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
                         color: AppColors.coralRed,
                       ),
@@ -286,7 +288,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
               PrimaryButtonWidget(
                 isValid: true,
                 height: AppSizes.taskPrimaryButtonHeight,
-                text: AppLocalizations.of(context)!.taskButtonPrimaryText,
+                text: l10n.taskButtonPrimaryText,
                 width: double.infinity,
                 onPressed: () {
                   context.read<TaskBloc>().add(OnSubmit(widget.todo.key));

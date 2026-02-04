@@ -126,5 +126,17 @@
   "sepmonth": "September",
   "octmonth": "October",
   "novmonth": "November",
-  "decmonth": "December"
+  "decmonth": "December",
+
+  "categoryGrocery": "Grocery",
+  "categoryWork": "Work",
+  "categorySport": "Sport",
+  "categoryDesign": "Design",
+  "categoryUniversity": "University",
+  "categorySocial": "Social",
+  "categoryMusic": "Music",
+  "categoryHealth": "Health",
+  "categoryMovie": "Movie",
+  "categoryHome": "Home",
+  "categoryCreateNew": "Create New"
 }
