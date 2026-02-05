@@ -41,7 +41,9 @@ class PersonalWidget extends StatelessWidget {
                     child: CircleAvatar(
                       radius: 52,
                       child: Image.network(
-                        state.avatar,
+                        state.avatar.isNotEmpty
+                            ? state.avatar
+                            : AssetsPath.defaultImage,
                         errorBuilder: (context, error, stackTrace) {
                           return const Icon(
                             Icons.account_circle_rounded,
