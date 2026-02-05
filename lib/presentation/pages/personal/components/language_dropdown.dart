@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 
 class LanguageDropdown extends StatefulWidget {
   final ValueChanged<LanguageDropdownValue> onChanged;
+  final Locale locale;
 
   const LanguageDropdown({
     super.key,
     required this.onChanged,
+    required this.locale
   });
 
   @override
@@ -21,11 +24,17 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
   @override
   void initState() {
     super.initState();
-    initLanguage = LanguageDropdownValue.english;
+    if(widget.locale == Locale('vi')){
+      initLanguage =LanguageDropdownValue.vietnamese;
+    }
+    if(widget.locale == Locale('en')){
+      initLanguage =LanguageDropdownValue.english;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       width: 104,
       height: AppSizes.dropdownButtonHeight,
@@ -52,11 +61,11 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
           items: [
             DropdownMenuItem(
               value: LanguageDropdownValue.english,
-              child: Text('English'),
+              child: Text(l10n.profileDropdownEn),
             ),
             DropdownMenuItem(
               value: LanguageDropdownValue.vietnamese,
-              child: Text('Vietnamese'),
+              child: Text(l10n.profileDropdownVi),
             ),
           ],
           onChanged: (v) {

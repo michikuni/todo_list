@@ -138,5 +138,14 @@
   "categoryHealth": "Sức khỏe",
   "categoryMovie": "Phim ảnh",
   "categoryHome": "Gia đình",
-  "categoryCreateNew": "Tạo mới"
+  "categoryCreateNew": "Tạo mới",
+
+  "profileTitleText": "Hồ sơ",
+  "profileIdText": "ID",
+  "profileNameText": "Tên người dùng",
+  "profileEmailText": "Email",
+  "profileLanguageText": "Ngôn ngữ",
+  "profileSignoutText": "Đăng xuất",
+  "profileDropdownEn": "Tiếng anh",
+  "profileDropdownVi": "Tiếng việt"
 }

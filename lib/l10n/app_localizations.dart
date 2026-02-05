@@ -808,6 +808,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create New'**
   String get categoryCreateNew;
+
+  /// No description provided for @profileTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profileTitleText;
+
+  /// No description provided for @profileIdText.
+  ///
+  /// In en, this message translates to:
+  /// **'ID'**
+  String get profileIdText;
+
+  /// No description provided for @profileNameText.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get profileNameText;
+
+  /// No description provided for @profileEmailText.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get profileEmailText;
+
+  /// No description provided for @profileLanguageText.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get profileLanguageText;
+
+  /// No description provided for @profileSignoutText.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get profileSignoutText;
+
+  /// No description provided for @profileDropdownEn.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get profileDropdownEn;
+
+  /// No description provided for @profileDropdownVi.
+  ///
+  /// In en, this message translates to:
+  /// **'Vietnamese'**
+  String get profileDropdownVi;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

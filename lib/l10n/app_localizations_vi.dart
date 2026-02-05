@@ -364,4 +364,28 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get categoryCreateNew => 'Tạo mới';
+
+  @override
+  String get profileTitleText => 'Hồ sơ';
+
+  @override
+  String get profileIdText => 'ID';
+
+  @override
+  String get profileNameText => 'Tên người dùng';
+
+  @override
+  String get profileEmailText => 'Email';
+
+  @override
+  String get profileLanguageText => 'Ngôn ngữ';
+
+  @override
+  String get profileSignoutText => 'Đăng xuất';
+
+  @override
+  String get profileDropdownEn => 'Tiếng anh';
+
+  @override
+  String get profileDropdownVi => 'Tiếng việt';
 }

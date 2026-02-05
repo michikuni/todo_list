@@ -138,5 +138,14 @@
   "categoryHealth": "Health",
   "categoryMovie": "Movie",
   "categoryHome": "Home",
-  "categoryCreateNew": "Create New"
+  "categoryCreateNew": "Create New",
+
+  "profileTitleText": "Profile",
+  "profileIdText": "ID",
+  "profileNameText": "Name",
+  "profileEmailText": "Email",
+  "profileLanguageText": "Language",
+  "profileSignoutText": "Logout",
+  "profileDropdownEn": "English",
+  "profileDropdownVi": "Vietnamese"
 }

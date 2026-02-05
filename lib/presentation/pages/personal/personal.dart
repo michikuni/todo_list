@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
@@ -13,11 +14,12 @@ class PersonalWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) => Scaffold(
         backgroundColor: AppColors.black,
         appBar: AppBar(
-          title: Text('Profile', style: Theme.of(context).textTheme.bodyMedium),
+          title: Text(l10n.profileTitleText, style: Theme.of(context).textTheme.bodyMedium),
           centerTitle: true,
           backgroundColor: AppColors.black,
         ),
@@ -46,7 +48,7 @@ class PersonalWidget extends StatelessWidget {
                   ),
                   SizedBox(width: AppSizes.taskRowTitleSpace),
                   Text(
-                    'ID',
+                    l10n.profileIdText,
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
                       color: AppColors.pureWhite87,
                     ),
@@ -69,7 +71,7 @@ class PersonalWidget extends StatelessWidget {
                   ),
                   SizedBox(width: AppSizes.taskRowTitleSpace),
                   Text(
-                    'Name',
+                    l10n.profileNameText,
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
                       color: AppColors.pureWhite87,
                     ),
@@ -92,7 +94,7 @@ class PersonalWidget extends StatelessWidget {
                   ),
                   SizedBox(width: AppSizes.taskRowTitleSpace),
                   Text(
-                    'Email',
+                    l10n.profileEmailText,
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
                       color: AppColors.pureWhite87,
                     ),
@@ -116,13 +118,14 @@ class PersonalWidget extends StatelessWidget {
                     Icon(Icons.language_rounded, color: AppColors.pureWhite87),
                     SizedBox(width: AppSizes.taskRowTitleSpace),
                     Text(
-                      'Language',
+                      l10n.profileLanguageText,
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
                         color: AppColors.pureWhite87,
                       ),
                     ),
                     Expanded(child: Container()),
                     LanguageDropdown(
+                      locale: context.select((AuthBloc bloc) => bloc.state.locale),
                       onChanged: (value) {
                         switch (value) {
                           case LanguageDropdownValue.english:
@@ -149,7 +152,7 @@ class PersonalWidget extends StatelessWidget {
                     Icon(Icons.logout, color: AppColors.coralRed),
                     SizedBox(width: AppSizes.taskRowTitleSpace),
                     Text(
-                      'Log out',
+                      l10n.profileSignoutText,
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
                         color: AppColors.coralRed,
                       ),

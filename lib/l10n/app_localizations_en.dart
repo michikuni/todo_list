@@ -364,4 +364,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get categoryCreateNew => 'Create New';
+
+  @override
+  String get profileTitleText => 'Profile';
+
+  @override
+  String get profileIdText => 'ID';
+
+  @override
+  String get profileNameText => 'Name';
+
+  @override
+  String get profileEmailText => 'Email';
+
+  @override
+  String get profileLanguageText => 'Language';
+
+  @override
+  String get profileSignoutText => 'Logout';
+
+  @override
+  String get profileDropdownEn => 'English';
+
+  @override
+  String get profileDropdownVi => 'Vietnamese';
 }
