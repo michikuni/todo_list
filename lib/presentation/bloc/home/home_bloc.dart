@@ -4,13 +4,15 @@ import 'package:formz/formz.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
 import 'package:todo_list/domain/entities/todo/todo.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
-import 'package:todo_list/domain/usecases/profile/profile.dart';
+import 'package:todo_list/domain/usecases/profile/get_profile.dart';
+import 'package:todo_list/domain/usecases/profile/update_name_profile.dart';
 import 'package:todo_list/domain/usecases/todo/todo.dart';
 import 'package:todo_list/presentation/bloc/home/home_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetProfileUseCase getProfile;
+  final UpdateNameProfileUseCase updateNameProfile;
   final TokenStorage tokenStorage;
   final GetTodoUseCase getTodo;
   final AddTodoUseCase addTodo;
@@ -24,6 +26,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     required this.addTodo,
     required this.deleteTodo,
     required this.updateTodo,
+    required this.updateNameProfile
   }) : super(HomeState.initial()) {
     //reset status if out add todo dialog to reset state
     on<ResetAddTodoEvent>((event, emit) {
@@ -173,5 +176,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
       // print(state.status);
     });
+
+    on<UpdateNameProfileEvent>((event, emit) async {
+      emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+      final response = await updateNameProfile(event.name);
+      response.fold((onLeft){
+        log(onLeft.message);
+        emit(state.copyWith(status: FormzSubmissionStatus.failure));
+      }, (onRight){
+        emit(state.copyWith(name: onRight.name, status: FormzSubmissionStatus.success));
+      });
+      add(GetProfileEvent());
+    },);
   }
 }

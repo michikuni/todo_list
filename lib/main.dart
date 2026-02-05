@@ -7,7 +7,7 @@ import 'package:todo_list/core/router/app_routers.dart';
 import 'package:todo_list/core/theme/app_themes.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
 import 'package:todo_list/data/models/todo/todo_model.dart';
-import 'package:todo_list/domain/usecases/profile/profile.dart';
+import 'package:todo_list/domain/usecases/profile/get_profile.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_event.dart';

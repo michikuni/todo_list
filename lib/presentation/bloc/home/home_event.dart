@@ -6,6 +6,11 @@ abstract class HomeEvent {}
 
 class GetProfileEvent extends HomeEvent{}
 
+class UpdateNameProfileEvent extends HomeEvent{
+  final String name;
+  UpdateNameProfileEvent(this.name);
+}
+
 class OnContentChanged extends HomeEvent{
   final String content;
   OnContentChanged(this.content);

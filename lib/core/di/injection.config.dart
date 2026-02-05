@@ -36,7 +36,9 @@ import 'package:todo_list/domain/repositories/auth/auth.dart' as _i360;
 import 'package:todo_list/domain/repositories/profile/profile.dart' as _i827;
 import 'package:todo_list/domain/repositories/todo/todo.dart' as _i1022;
 import 'package:todo_list/domain/usecases/auth/auth.dart' as _i482;
-import 'package:todo_list/domain/usecases/profile/profile.dart' as _i1029;
+import 'package:todo_list/domain/usecases/profile/get_profile.dart' as _i800;
+import 'package:todo_list/domain/usecases/profile/update_name_profile.dart'
+    as _i749;
 import 'package:todo_list/domain/usecases/todo/todo.dart' as _i435;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -87,18 +89,23 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i435.UpdateTodoUseCase(gh<_i1022.ITodoRepository>()));
     gh.lazySingleton<_i435.DeleteTodoUseCase>(
         () => _i435.DeleteTodoUseCase(gh<_i1022.ITodoRepository>()));
+    gh.lazySingleton<_i515.IProfileDataSource>(
+        () => _i299.ProfileDatasourceImpl(
+              gh<_i361.Dio>(instanceName: 'tokenDio'),
+              gh<_i927.TokenStorage>(),
+            ));
     gh.lazySingleton<_i360.IAuthRepository>(
         () => _i294.AuthRepositoryImpl(gh<_i868.AuthDatasource>()));
-    gh.lazySingleton<_i515.IProfileDataSource>(() =>
-        _i299.ProfileDatasourceImpl(gh<_i361.Dio>(instanceName: 'tokenDio')));
+    gh.lazySingleton<_i827.IProfileRepository>(
+        () => _i669.ProfileRepositoryImpl(gh<_i515.IProfileDataSource>()));
     gh.lazySingleton<_i482.SignupUseCase>(
         () => _i482.SignupUseCase(gh<_i360.IAuthRepository>()));
     gh.lazySingleton<_i482.SigninUseCase>(
         () => _i482.SigninUseCase(gh<_i360.IAuthRepository>()));
-    gh.lazySingleton<_i827.IProfileRepository>(
-        () => _i669.ProfileRepositoryImpl(gh<_i515.IProfileDataSource>()));
-    gh.lazySingleton<_i1029.GetProfileUseCase>(
-        () => _i1029.GetProfileUseCase(gh<_i827.IProfileRepository>()));
+    gh.lazySingleton<_i800.GetProfileUseCase>(
+        () => _i800.GetProfileUseCase(gh<_i827.IProfileRepository>()));
+    gh.lazySingleton<_i749.UpdateNameProfileUseCase>(
+        () => _i749.UpdateNameProfileUseCase(gh<_i827.IProfileRepository>()));
     return this;
   }
 }

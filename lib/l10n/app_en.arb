@@ -147,5 +147,11 @@
   "profileLanguageText": "Language",
   "profileSignoutText": "Logout",
   "profileDropdownEn": "English",
-  "profileDropdownVi": "Vietnamese"
+  "profileDropdownVi": "Vietnamese",
+
+  "personalUpdateNameDialogPrimaryButton": "Edit",
+  "personalUpdateNameDialogSecondaryButton": "Cancel",
+  "personalUpdateNameDialogTextHint": "Name",
+  "personalUpdateNameDialogTitleText": "Change Name"
+
 }

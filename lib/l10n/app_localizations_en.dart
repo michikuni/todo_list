@@ -388,4 +388,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileDropdownVi => 'Vietnamese';
+
+  @override
+  String get personalUpdateNameDialogPrimaryButton => 'Edit';
+
+  @override
+  String get personalUpdateNameDialogSecondaryButton => 'Cancel';
+
+  @override
+  String get personalUpdateNameDialogTextHint => 'Name';
+
+  @override
+  String get personalUpdateNameDialogTitleText => 'Change Name';
 }

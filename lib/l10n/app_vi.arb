@@ -147,5 +147,10 @@
   "profileLanguageText": "Ngôn ngữ",
   "profileSignoutText": "Đăng xuất",
   "profileDropdownEn": "Tiếng anh",
-  "profileDropdownVi": "Tiếng việt"
+  "profileDropdownVi": "Tiếng việt",
+
+  "personalUpdateNameDialogPrimaryButton": "Chỉnh sửa",
+  "personalUpdateNameDialogSecondaryButton": "Hủy",
+  "personalUpdateNameDialogTextHint": "Tên",
+  "personalUpdateNameDialogTitleText": "Thay đổi tên"
 }

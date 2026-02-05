@@ -69,9 +69,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
             ),
           ],
           onChanged: (v) {
-            print(v);
             if (v == null) return;
-            setState(() => initLanguage = v);
             widget.onChanged(v);
           },
         ),

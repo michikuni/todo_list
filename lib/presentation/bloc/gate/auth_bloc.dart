@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
-import 'package:todo_list/domain/usecases/profile/profile.dart';
+import 'package:todo_list/domain/usecases/profile/get_profile.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_state.dart';
 

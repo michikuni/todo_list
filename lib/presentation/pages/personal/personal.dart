@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
+import 'package:todo_list/core/constants/assets_path.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
 import 'package:todo_list/presentation/bloc/home/home_state.dart';
 import 'package:todo_list/presentation/pages/personal/components/language_dropdown.dart';
+import 'package:todo_list/presentation/pages/personal/dialog/update_name.dart';
 
 class PersonalWidget extends StatelessWidget {
   const PersonalWidget({super.key});
@@ -19,7 +22,10 @@ class PersonalWidget extends StatelessWidget {
       builder: (context, state) => Scaffold(
         backgroundColor: AppColors.black,
         appBar: AppBar(
-          title: Text(l10n.profileTitleText, style: Theme.of(context).textTheme.bodyMedium),
+          title: Text(
+            l10n.profileTitleText,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
           centerTitle: true,
           backgroundColor: AppColors.black,
         ),
@@ -65,10 +71,7 @@ class PersonalWidget extends StatelessWidget {
               SizedBox(height: 24),
               Row(
                 children: [
-                  Icon(
-                    Icons.perm_identity,
-                    color: AppColors.pureWhite87,
-                  ),
+                  Icon(Icons.perm_identity, color: AppColors.pureWhite87),
                   SizedBox(width: AppSizes.taskRowTitleSpace),
                   Text(
                     l10n.profileNameText,
@@ -83,15 +86,28 @@ class PersonalWidget extends StatelessWidget {
                       color: AppColors.pureWhite87,
                     ),
                   ),
+                  SizedBox(width: 12),
+                  IconButton(
+                    icon: SvgPicture.asset(AssetsPath.editIcon),
+                    onPressed: () {
+                      final homeBloc = context.read<HomeBloc>();
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return BlocProvider.value(
+                            value: homeBloc,
+                            child: UpdateNameDialog(oldName: state.name),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
               SizedBox(height: 24),
               Row(
                 children: [
-                  Icon(
-                    Icons.email_outlined,
-                    color: AppColors.pureWhite87,
-                  ),
+                  Icon(Icons.email_outlined, color: AppColors.pureWhite87),
                   SizedBox(width: AppSizes.taskRowTitleSpace),
                   Text(
                     l10n.profileEmailText,
@@ -125,7 +141,9 @@ class PersonalWidget extends StatelessWidget {
                     ),
                     Expanded(child: Container()),
                     LanguageDropdown(
-                      locale: context.select((AuthBloc bloc) => bloc.state.locale),
+                      locale: context.select(
+                        (AuthBloc bloc) => bloc.state.locale,
+                      ),
                       onChanged: (value) {
                         switch (value) {
                           case LanguageDropdownValue.english:

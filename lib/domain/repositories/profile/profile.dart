@@ -4,4 +4,5 @@ import 'package:todo_list/domain/entities/profile/profile_response.dart';
 
 abstract class IProfileRepository{
   Future<Either<Failure, ProfileResponseEntity>> getProfile();
+  Future<Either<Failure, ProfileResponseEntity>> updateNameProfile(String name);
 }

@@ -4,7 +4,8 @@ import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/di/injection.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
-import 'package:todo_list/domain/usecases/profile/profile.dart';
+import 'package:todo_list/domain/usecases/profile/get_profile.dart';
+import 'package:todo_list/domain/usecases/profile/update_name_profile.dart';
 import 'package:todo_list/domain/usecases/todo/todo.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
@@ -45,6 +46,7 @@ class _MainLayoutState extends State<MainLayout> {
         addTodo: getIt<AddTodoUseCase>(),
         deleteTodo: getIt<DeleteTodoUseCase>(),
         updateTodo: getIt<UpdateTodoUseCase>(),
+        updateNameProfile: getIt<UpdateNameProfileUseCase>()
       )..add(GetProfileEvent()),
       child: Builder(
         builder: (context) {

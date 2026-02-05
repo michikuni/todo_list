@@ -388,4 +388,16 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get profileDropdownVi => 'Tiếng việt';
+
+  @override
+  String get personalUpdateNameDialogPrimaryButton => 'Chỉnh sửa';
+
+  @override
+  String get personalUpdateNameDialogSecondaryButton => 'Hủy';
+
+  @override
+  String get personalUpdateNameDialogTextHint => 'Tên';
+
+  @override
+  String get personalUpdateNameDialogTitleText => 'Thay đổi tên';
 }

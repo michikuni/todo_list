@@ -30,4 +30,21 @@ class ProfileRepositoryImpl extends IProfileRepository{
       return Left(CacheFailure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, ProfileResponseEntity>> updateNameProfile(String name) async {
+    try{
+      final response = await profileData.updateNameProfile(name);
+      return Right(ProfileMapper.toProfileEntity(response));
+    } on NetworkException catch(e){
+      return Left(NetworkFailure(e.message));
+    } on ServerException catch(e){
+      if(e.statusCode == 401){
+        return Left(ValidationFailure(e.message));
+      }
+      return Left(ServerFailure(e.message));
+    } on CacheException catch(e){
+      return Left(CacheFailure(e.message));
+    }
+  }
 }

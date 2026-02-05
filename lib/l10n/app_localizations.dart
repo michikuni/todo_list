@@ -856,6 +856,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Vietnamese'**
   String get profileDropdownVi;
+
+  /// No description provided for @personalUpdateNameDialogPrimaryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get personalUpdateNameDialogPrimaryButton;
+
+  /// No description provided for @personalUpdateNameDialogSecondaryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get personalUpdateNameDialogSecondaryButton;
+
+  /// No description provided for @personalUpdateNameDialogTextHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get personalUpdateNameDialogTextHint;
+
+  /// No description provided for @personalUpdateNameDialogTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Name'**
+  String get personalUpdateNameDialogTitleText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
