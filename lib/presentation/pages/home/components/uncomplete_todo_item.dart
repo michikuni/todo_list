@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
@@ -32,12 +31,13 @@ class UncompletedTodoItem extends StatelessWidget {
           Container(
             width: double.infinity,
             height: AppSizes.uncompleteTodoItemHeight,
-            decoration: BoxDecoration(color: AppColors.darkGrey),
+            decoration: BoxDecoration(color: Theme.of(context).colorScheme.onPrimaryContainer),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // SizedBox(width: AppSizes.uncompleteTodoItemPaddingHorizontal),
                 CircleCheck(
+                  radioColor: Theme.of(context).colorScheme.primary,
                   value: false,
                   onChanged: onChanged,
                   padding: AppSizes.uncompleteTodoItemPaddingHorizontal,
@@ -51,7 +51,7 @@ class UncompletedTodoItem extends StatelessWidget {
                       Text(
                         todo.todo.content,
                         style: Theme.of(context).textTheme.displayLarge
-                            ?.copyWith(color: AppColors.pureWhite87),
+                            ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -64,7 +64,7 @@ class UncompletedTodoItem extends StatelessWidget {
                           todo.todo.minutes,
                         ),
                         style: Theme.of(context).textTheme.displayMedium
-                            ?.copyWith(color: AppColors.pureWhite87),
+                            ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                         maxLines: 1,
                       ),
                     ],
@@ -109,7 +109,7 @@ class UncompletedTodoItem extends StatelessWidget {
                       Text(
                         l10n.categoryName(todo.todo.category.name.toLowerCase()),
                         style: Theme.of(context).textTheme.displaySmall
-                            ?.copyWith(color: AppColors.pureWhite),
+                            ?.copyWith(color: Theme.of(context).colorScheme.primaryFixedDim),
                       ),
                     ],
                   ),
@@ -123,7 +123,7 @@ class UncompletedTodoItem extends StatelessWidget {
                       AppSizes.uncompleteTodoItemRadius,
                     ),
                     border: Border.all(
-                      color: AppColors.mediumSlateBlue,
+                      color: Theme.of(context).colorScheme.primary,
                       width: 1,
                     ),
                   ),
@@ -139,7 +139,7 @@ class UncompletedTodoItem extends StatelessWidget {
                         Text(
                           '${todo.todo.priority}',
                           style: Theme.of(context).textTheme.displaySmall
-                              ?.copyWith(color: AppColors.pureWhite),
+                              ?.copyWith(color: Theme.of(context).colorScheme.primaryFixedDim),
                         ),
                       ],
                     ),

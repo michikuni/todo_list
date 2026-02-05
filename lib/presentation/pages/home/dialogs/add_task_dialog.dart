@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
@@ -54,7 +53,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSizes.addTaskDialogRadius),
             border: Border.all(width: AppSizes.addTaskDialogBorder),
-            color: AppColors.darkGrey,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
           ),
           padding: EdgeInsets.all(AppSizes.addTaskDialogPadding),
           height: AppSizes.addTaskDialogHeight,
@@ -64,7 +63,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
               Text(
                 AppLocalizations.of(context)!.addTaskTitleText,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.pureWhite87,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -74,7 +73,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                     ? BoxDecoration(
                         border: Border.all(
                           width: AppSizes.addTaskDialogBorder,
-                          color: AppColors.mediumGrey,
+                          color: Theme.of(context).colorScheme.outline,
                         ),
                         borderRadius: BorderRadius.circular(
                           AppSizes.addTaskDialogRadius,
@@ -108,12 +107,12 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                     hintText: AppLocalizations.of(context)!.addTaskContentHint,
                     hintStyle: Theme.of(
                       context,
-                    ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
+                    ).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.secondaryFixedDim),
                     border: InputBorder.none,
                   ),
                   style: Theme.of(
                     context,
-                  ).textTheme.bodySmall?.copyWith(color: AppColors.pureWhite87),
+                  ).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ),
               SizedBox(height: AppSizes.addTaskDialogTitlePaddingBottom),
@@ -123,7 +122,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                     ? BoxDecoration(
                         border: Border.all(
                           width: 1,
-                          color: AppColors.mediumGrey,
+                          color: Theme.of(context).colorScheme.outline,
                         ),
                         borderRadius: BorderRadius.circular(
                           AppSizes.addTaskDialogRadius,
@@ -157,12 +156,12 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                     hintText: AppLocalizations.of(context)!.addTaskDescriptionHint,
                     hintStyle: Theme.of(
                       context,
-                    ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
+                    ).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.secondaryFixedDim),
                     border: InputBorder.none,
                   ),
                   style: Theme.of(
                     context,
-                  ).textTheme.bodySmall?.copyWith(color: AppColors.pureWhite87),
+                  ).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ),
               SizedBox(height: AppSizes.addTaskDialogInputPaddingBottom),

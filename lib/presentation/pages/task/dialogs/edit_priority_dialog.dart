@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
@@ -23,7 +22,7 @@ class _EditPriorityDialogState extends State<EditPriorityDialog> {
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) => Dialog(
-        backgroundColor: AppColors.darkGrey,
+        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         child: Padding(
           padding: EdgeInsets.all(AppSizes.choosePriorityDialogPadding),
@@ -34,7 +33,7 @@ class _EditPriorityDialogState extends State<EditPriorityDialog> {
               Text(
                 AppLocalizations.of(context)!.priorityTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  color: AppColors.pureWhite87,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -67,8 +66,8 @@ class _EditPriorityDialogState extends State<EditPriorityDialog> {
                       height: AppSizes.choosePriorityDialogItemSize,
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? AppColors.mediumSlateBlue
-                            : AppColors.jetBlack,
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.secondary,
                         borderRadius: BorderRadius.circular(AppSizes.choosePriorityDialogItemRadius),
                       ),
                       child: Column(
@@ -112,7 +111,7 @@ class _EditPriorityDialogState extends State<EditPriorityDialog> {
                           child: Text(
                             AppLocalizations.of(context)!.priorityCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
-                                ?.copyWith(color: AppColors.mediumSlateBlue),
+                                ?.copyWith(color: Theme.of(context).colorScheme.primary),
                           ),
                         ),
                       ),

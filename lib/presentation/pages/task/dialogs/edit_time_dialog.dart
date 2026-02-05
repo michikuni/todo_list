@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
@@ -27,7 +26,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) => Dialog(
-        backgroundColor: AppColors.darkGrey,
+        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizes.chooseTimeDialogRadius)),
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.chooseTimeDialogPadding),
@@ -37,11 +36,11 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
               Text(
                 AppLocalizations.of(context)!.editTimeTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  color: AppColors.pureWhite87,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const Divider(color: AppColors.mediumGrey),
+              Divider(color: Theme.of(context).colorScheme.outlineVariant),
 
               const SizedBox(
                 height: AppSizes.chooseTimeDialogDivideSpaceBottom,
@@ -97,7 +96,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
                             child: Text(
                               AppLocalizations.of(context)!.editTimeCancelButtonText,
                               style: Theme.of(context).textTheme.displayLarge
-                                  ?.copyWith(color: AppColors.mediumSlateBlue),
+                                  ?.copyWith(color: Theme.of(context).colorScheme.primary),
                             ),
                           ),
                         ),
@@ -145,7 +144,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
         borderRadius: BorderRadius.circular(
           AppSizes.chooseTimeDialogTimeRadius,
         ),
-        color: AppColors.jetBlack,
+        color: Theme.of(context).colorScheme.secondary,
       ),
       child: ListWheelScrollView.useDelegate(
         controller: controller,
@@ -169,8 +168,8 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
                     height: 1,
                     fontWeight: FontWeight.w600,
                     color: isSelected
-                        ? AppColors.pureWhite87
-                        : AppColors.pureWhite10,
+                        ? Theme.of(context).colorScheme.onPrimary
+                        : Theme.of(context).colorScheme.onSecondary,
                   ),
                 ),
               ),
@@ -189,7 +188,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
         borderRadius: BorderRadius.circular(
           AppSizes.chooseTimeDialogTimeRadius,
         ),
-        color: AppColors.jetBlack,
+        color: Theme.of(context).colorScheme.secondary,
       ),
       child: ListWheelScrollView(
         itemExtent: 24,
@@ -210,7 +209,7 @@ class _EditTimeDialogState extends State<EditTimeDialog> {
         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
           height: 1,
           fontWeight: FontWeight.w600,
-          color: selected ? AppColors.pureWhite87 : AppColors.pureWhite10,
+          color: selected ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSecondary,
         ),
       ),
     );

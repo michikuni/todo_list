@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
+import 'package:todo_list/core/theme/dark_theme.dart';
 
 class AppThemes {
   AppThemes._();
@@ -9,8 +10,7 @@ class AppThemes {
     return ThemeData(
       textTheme: _buildDefaultTextTheme(),
       useMaterial3: true,
-      
-      // colorScheme: darkColorScheme,
+      colorScheme: DarkTheme.darkColorScheme,
     );
   }
 
@@ -58,69 +58,4 @@ class AppThemes {
       ),
     );
   }
-
-  
-  // static ColorScheme darkColorScheme = ColorScheme(
-    // brightness: Brightness.dark,  //Theme
-
-    // primary: AppColors.mediumSlateBlue, //primary button, FAB
-    // primaryContainer: , //card, selected item
-    // primaryFixed: ,
-    // primaryFixedDim: ,
-    
-    // onPrimary: AppColors.pureWhite,
-    // onPrimaryContainer: ,
-    // onPrimaryFixed: ,
-    // onPrimaryFixedVariant: ,
-
-    // secondary: , //secondary button, tag, chip, accent
-    // secondaryContainer: ,
-    // secondaryFixed: ,
-    // secondaryFixedDim: ,
-
-    // onSecondary: ,
-    // onSecondaryContainer: ,
-    // onSecondaryFixed: ,
-    // onSecondaryFixedVariant: ,
-
-    // tertiary: , //chart, badge, spot feature
-    // tertiaryContainer: ,
-    // tertiaryFixed: ,
-    // tertiaryFixedDim: ,
-
-    // onTertiary: ,
-    // onTertiaryContainer: ,
-    // onTertiaryFixed: ,
-    // onTertiaryFixedVariant: ,
-
-    // error: ,
-    // errorContainer: ,
-
-    // onError: ,
-    // onErrorContainer: ,
-
-    // surface: ,  //several surface
-    // surfaceBright: , //background bright
-    // surfaceContainer: , //card
-    // surfaceContainerHigh: , //modal, dialog
-    // surfaceContainerHighest: ,
-    // surfaceContainerLow: ,
-    // surfaceContainerLowest: ,
-    // surfaceDim: , //background dark
-    // surfaceTint: ,
-
-    // onSurface: ,
-    // onSurfaceVariant: ,
-
-    // inversePrimary: , //snackbar, floating widget, overlay
-    // inverseSurface: ,
-
-    // onInverseSurface: ,
-
-    // outline: , // border
-    // outlineVariant: , //divider
-    
-    // scrim: ,
-    // shadow: ,   
-  // );
 }

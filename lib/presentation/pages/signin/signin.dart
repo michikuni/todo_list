@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
@@ -23,7 +22,7 @@ class SigninPageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.black,
+      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       body: BlocListener<SigninBloc, SigninState>(
         listenWhen: (prev, curr) => prev.status != curr.status,
         listener: (context, state) {
@@ -61,7 +60,7 @@ class SigninPageWidget extends StatelessWidget {
                         child: Text(
                           AppLocalizations.of(context)!.signinHeader,
                           style: Theme.of(context).textTheme.headlineLarge
-                              ?.copyWith(color: AppColors.pureWhite87),
+                              ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                         ),
                       ),
                       SizedBox(height: AppSizes.authTextFieldSpace),
@@ -86,7 +85,7 @@ class SigninPageWidget extends StatelessWidget {
                                 AppLocalizations.of(context)!.signinEmailFail,
                                 style: Theme.of(context).textTheme.displaySmall
                                     ?.copyWith(
-                                      color: AppColors.mediumSlateBlue50,
+                                      color: Theme.of(context).colorScheme.error,
                                     ),
                               ),
                             ],
@@ -113,7 +112,7 @@ class SigninPageWidget extends StatelessWidget {
                                 AppLocalizations.of(context)!.signinPasswordFail,
                                 style: Theme.of(context).textTheme.displaySmall
                                     ?.copyWith(
-                                      color: AppColors.mediumSlateBlue50,
+                                      color: Theme.of(context).colorScheme.error,
                                     ),
                               ),
                             ],
@@ -137,7 +136,7 @@ class SigninPageWidget extends StatelessWidget {
                           Text(
                             AppLocalizations.of(context)!.signinBottomText,
                             style: Theme.of(context).textTheme.displaySmall
-                                ?.copyWith(color: AppColors.pureWhite50),
+                                ?.copyWith(color: Theme.of(context).colorScheme.onPrimaryFixedVariant),
                           ),
                           TextButton(
                             style: TextButton.styleFrom(
@@ -151,7 +150,7 @@ class SigninPageWidget extends StatelessWidget {
                             child: Text(
                               AppLocalizations.of(context)!.signinBottomTextButton,
                               style: Theme.of(context).textTheme.displaySmall
-                                  ?.copyWith(color: AppColors.pureWhite87),
+                                  ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                             ),
                           ),
                         ],

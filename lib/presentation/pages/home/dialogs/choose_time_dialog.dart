@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
@@ -28,7 +27,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) => Dialog(
-        backgroundColor: AppColors.darkGrey,
+        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.chooseTimeDialogPadding),
@@ -38,11 +37,11 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
               Text(
                 AppLocalizations.of(context)!.chooseTimeTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  color: AppColors.pureWhite87,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const Divider(color: AppColors.mediumGrey),
+              Divider(color: Theme.of(context).colorScheme.outlineVariant),
 
               const SizedBox(
                 height: AppSizes.chooseTimeDialogDivideSpaceBottom,
@@ -98,7 +97,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                             child: Text(
                               AppLocalizations.of(context)!.chooseTimeCancelButtonText,
                               style: Theme.of(context).textTheme.displayLarge
-                                  ?.copyWith(color: AppColors.mediumSlateBlue),
+                                  ?.copyWith(color: Theme.of(context).colorScheme.primary),
                             ),
                           ),
                         ),
@@ -144,7 +143,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
       height: AppSizes.chooseTimeDialogTimeSize,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSizes.chooseTimeDialogTimeRadius),
-        color: AppColors.jetBlack,
+        color: Theme.of(context).colorScheme.secondary,
       ),
       child: ListWheelScrollView.useDelegate(
         controller: controller,
@@ -168,8 +167,8 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
                     height: 1,
                     fontWeight: FontWeight.w600,
                     color: isSelected
-                        ? AppColors.pureWhite87
-                        : AppColors.pureWhite10,
+                        ? Theme.of(context).colorScheme.onPrimary
+                        : Theme.of(context).colorScheme.onSecondary,
                   ),
                 ),
               ),
@@ -186,7 +185,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
       height: AppSizes.chooseTimeDialogTimeSize,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSizes.chooseTimeDialogTimeRadius),
-        color: AppColors.jetBlack,
+        color: Theme.of(context).colorScheme.secondary,
       ),
       child: ListWheelScrollView(
         itemExtent: 24,
@@ -207,7 +206,7 @@ class _ChooseTimeDialogState extends State<ChooseTimeDialog> {
         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
           height: 1,
           fontWeight: FontWeight.w600,
-          color: selected ? AppColors.pureWhite87 : AppColors.pureWhite10,
+          color: selected ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSecondary,
         ),
       ),
     );

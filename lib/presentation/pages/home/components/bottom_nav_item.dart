@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 
 class BottomNavItem extends StatelessWidget {
@@ -34,7 +33,7 @@ class BottomNavItem extends StatelessWidget {
             label,
             style: Theme.of(
               context,
-            ).textTheme.displaySmall?.copyWith(color: AppColors.pureWhite87),
+            ).textTheme.displaySmall?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
           ),
         ],
       ),

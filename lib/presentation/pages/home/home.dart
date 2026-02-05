@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formz/formz.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/constants/assets_path.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
@@ -87,7 +86,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
               actionsPadding: EdgeInsets.only(
                 right: AppSizes.homeHorizontalPadding,
               ),
-              backgroundColor: AppColors.black,
+              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               centerTitle: true,
               actions: [
                 ClipOval(
@@ -105,13 +104,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                 AppLocalizations.of(context)!.homeAppBarTitle,
                 style: Theme.of(
                   context,
-                ).textTheme.bodyMedium?.copyWith(color: AppColors.pureWhite87),
+                ).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
               ),
-              leading: const Padding(
+              leading: Padding(
                 padding: EdgeInsets.only(left: AppSizes.homeHorizontalPadding),
                 child: Icon(
                   Icons.filter_list_rounded,
-                  color: AppColors.pureWhite87,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
             ),
@@ -119,7 +118,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
               child: Container(
                 width: double.infinity,
                 height: double.infinity,
-                color: AppColors.black,
+                color: Theme.of(context).colorScheme.primaryContainer,
                 padding: EdgeInsets.symmetric(horizontal: AppSizes.homePadding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -138,7 +137,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                               Text(
                                 AppLocalizations.of(context)!.homeEmptyContent,
                                 style: Theme.of(context).textTheme.bodyMedium
-                                    ?.copyWith(color: AppColors.pureWhite87),
+                                    ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                               ),
                               const SizedBox(
                                 height: AppSizes.homeEmptyInstructionTop,
@@ -148,7 +147,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   context,
                                 )!.homeEmptyInstruction,
                                 style: Theme.of(context).textTheme.displayLarge
-                                    ?.copyWith(color: AppColors.pureWhite87),
+                                    ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                               ),
                             ],
                           ),
@@ -164,7 +163,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     width: AppSizes.authTextFieldBorder,
-                                    color: AppColors.mediumGrey,
+                                    color: Theme.of(context).colorScheme.outline,
                                   ),
                                   borderRadius: BorderRadius.circular(
                                     AppSizes.authTextFieldBorderRadius,
@@ -197,7 +196,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               .textTheme
                                               .displayLarge
                                               ?.copyWith(
-                                                color: AppColors.pureWhite,
+                                                color: Theme.of(context).colorScheme.primaryFixedDim,
                                               ),
                                           decoration: InputDecoration(
                                             hint: Text(
@@ -208,7 +207,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                   .textTheme
                                                   .displayLarge
                                                   ?.copyWith(
-                                                    color: AppColors.lightGrey,
+                                                    color: Theme.of(context).colorScheme.onSecondaryContainer,
                                                   ),
                                             ),
                                             border: InputBorder.none,
@@ -230,6 +229,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: FilterDropdown(
+                                    textColor: Theme.of(context).colorScheme.onPrimary,
                                     initialValue: selectedFilter,
                                     onChanged: (value) {
                                       setState(() {
@@ -274,7 +274,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 width: 104,
                                 child: Align(
                                   alignment: Alignment.centerLeft,
-                                  child: CompletedDropdown(),
+                                  child: CompletedDropdown(textColor: Theme.of(context).colorScheme.onPrimary,),
                                 ),
                               ),
                             ),

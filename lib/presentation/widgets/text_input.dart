@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 
 class TextInputWidget extends StatelessWidget {
@@ -27,7 +26,7 @@ class TextInputWidget extends StatelessWidget {
             title,
             style: Theme.of(
               context,
-            ).textTheme.displayLarge?.copyWith(color: AppColors.pureWhite87),
+            ).textTheme.displayLarge?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
           ),
         ),
         SizedBox(height: AppSizes.textInputTitleSpaceBottom),
@@ -36,7 +35,7 @@ class TextInputWidget extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
               width: AppSizes.authTextFieldBorder,
-              color: AppColors.mediumGrey,
+              color: Theme.of(context).colorScheme.outline,
             ),
             borderRadius: BorderRadius.circular(
               AppSizes.authTextFieldBorderRadius,
@@ -46,14 +45,14 @@ class TextInputWidget extends StatelessWidget {
           child: TextFormField(
             style: Theme.of(
               context,
-            ).textTheme.displayLarge?.copyWith(color: AppColors.pureWhite),
+            ).textTheme.displayLarge?.copyWith(color: Theme.of(context).colorScheme.primaryFixedDim),
             obscureText: isObscure,
             decoration: InputDecoration(
               hint: Text(
                 hint,
                 style: Theme.of(
                   context,
-                ).textTheme.displayLarge?.copyWith(color: AppColors.lightGrey),
+                ).textTheme.displayLarge?.copyWith(color: Theme.of(context).colorScheme.onSecondaryContainer),
               ),
               border: InputBorder.none,
             ),

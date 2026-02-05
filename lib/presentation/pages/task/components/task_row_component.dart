@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 
 class TaskRow extends StatelessWidget {
@@ -45,7 +44,7 @@ class TaskRow extends StatelessWidget {
             titleText,
             style: Theme.of(
               context,
-            ).textTheme.displayLarge?.copyWith(color: AppColors.pureWhite87),
+            ).textTheme.displayLarge?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
           ),
           Expanded(child: Container()),
           GestureDetector(
@@ -54,7 +53,7 @@ class TaskRow extends StatelessWidget {
               height: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(detailBorderRadius),
-                color: AppColors.pureWhite21,
+                color: Theme.of(context).colorScheme.secondaryContainer,
               ),
               padding: EdgeInsets.symmetric(
                 horizontal: AppSizes.taskRowDetailPaddingHorizontal,
@@ -74,7 +73,7 @@ class TaskRow extends StatelessWidget {
                   Text(
                     detailText,
                     style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                      color: AppColors.pureWhite87,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
                 ],

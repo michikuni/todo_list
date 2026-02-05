@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 
 class CircleCheck extends StatelessWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
   final double? padding;
+  final Color radioColor;
 
-  const CircleCheck({super.key, required this.value, required this.onChanged, this.padding});
+  const CircleCheck({
+    super.key,
+    required this.value,
+    required this.onChanged,
+    this.padding,
+    required this.radioColor
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,9 @@ class CircleCheck extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: value ? AppColors.mediumSlateBlue : AppColors.pureWhite,
+              color: value
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.primaryFixedDim,
               width: AppSizes.taskTitleCircleCheckBorderWidth,
             ),
           ),
@@ -30,9 +38,9 @@ class CircleCheck extends StatelessWidget {
                   child: Container(
                     width: AppSizes.taskTitleCenterCircleCheckSize,
                     height: AppSizes.taskTitleCenterCircleCheckSize,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColors.mediumSlateBlue,
+                      color: radioColor,
                     ),
                   ),
                 )

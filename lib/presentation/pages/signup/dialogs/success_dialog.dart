@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
@@ -16,7 +15,7 @@ class SignupSuccessDialog extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSizes.signupDialogRadius),
-          color: AppColors.darkGrey,
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
         ),
         padding: EdgeInsets.all(AppSizes.signupDialogPadding),
         child: Column(
@@ -26,7 +25,7 @@ class SignupSuccessDialog extends StatelessWidget {
             Text(
               AppLocalizations.of(context)!.signupDialogSuccessTitleText,
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                color: AppColors.pureWhite87,
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -36,7 +35,7 @@ class SignupSuccessDialog extends StatelessWidget {
             Text(
               AppLocalizations.of(context)!.signupDialogSuccessContentText,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.pureWhite87,
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,

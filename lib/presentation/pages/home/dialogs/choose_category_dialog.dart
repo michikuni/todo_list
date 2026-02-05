@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/domain/entities/todo/todo.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
@@ -28,7 +27,7 @@ class _ChooseCategoryDialogState extends State<ChooseCategoryDialog> {
 
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) => Dialog(
-        backgroundColor: AppColors.darkGrey,
+        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             AppSizes.chooseCategoryDialogRadius,
@@ -41,7 +40,7 @@ class _ChooseCategoryDialogState extends State<ChooseCategoryDialog> {
             Text(
               AppLocalizations.of(context)!.chooseCategoryTitleText,
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                color: AppColors.pureWhite87,
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -104,7 +103,7 @@ class _ChooseCategoryDialogState extends State<ChooseCategoryDialog> {
                               context,
                             )!.chooseCategoryCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
-                                ?.copyWith(color: AppColors.mediumSlateBlue),
+                                ?.copyWith(color: Theme.of(context).colorScheme.primary),
                           ),
                         ),
                       ),

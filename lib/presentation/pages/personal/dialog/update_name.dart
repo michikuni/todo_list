@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/home/home_bloc.dart';
@@ -50,7 +49,7 @@ class _UpdateNameDialogState extends State<UpdateNameDialog> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSizes.signupDialogRadius),
-            color: AppColors.darkGrey,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
           ),
           padding: EdgeInsets.all(AppSizes.signupDialogPadding),
           child: Column(
@@ -60,7 +59,7 @@ class _UpdateNameDialogState extends State<UpdateNameDialog> {
               Text(
                 l10n.personalUpdateNameDialogTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  color: AppColors.pureWhite87,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -75,7 +74,7 @@ class _UpdateNameDialogState extends State<UpdateNameDialog> {
                 decoration: BoxDecoration(
                         border: Border.all(
                           width: 1,
-                          color: AppColors.mediumGrey,
+                          color: Theme.of(context).colorScheme.outline,
                         ),
                         borderRadius: BorderRadius.circular(
                           AppSizes.editTaskDialogRadius,
@@ -93,12 +92,12 @@ class _UpdateNameDialogState extends State<UpdateNameDialog> {
                     hintText: l10n.personalUpdateNameDialogTextHint,
                     hintStyle: Theme.of(
                       context,
-                    ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
+                    ).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.secondaryFixedDim),
                     border: InputBorder.none,
                   ),
                   style: Theme.of(
                     context,
-                  ).textTheme.bodySmall?.copyWith(color: AppColors.pureWhite87),
+                  ).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ),
               SizedBox(height: AppSizes.signupDialogContentSpaceBottom),
@@ -115,7 +114,7 @@ class _UpdateNameDialogState extends State<UpdateNameDialog> {
                           child: Text(
                             l10n.personalUpdateNameDialogSecondaryButton,
                             style: Theme.of(context).textTheme.displayLarge
-                                ?.copyWith(color: AppColors.mediumSlateBlue),
+                                ?.copyWith(color: Theme.of(context).colorScheme.primary),
                           ),
                         ),
                       ),

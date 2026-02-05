@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -36,7 +35,7 @@ class CategoryItem extends StatelessWidget {
                   AppSizes.categoryItemIconRadius,
                 ),
                 border: isSelected
-                    ? Border.all(color: AppColors.pureWhite, width: 1)
+                    ? Border.all(color: Theme.of(context).colorScheme.primaryFixedDim, width: 1)
                     : null,
               ),
               margin: EdgeInsets.only(
@@ -50,7 +49,7 @@ class CategoryItem extends StatelessWidget {
             Text(
               label,
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                color: AppColors.pureWhite87,
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.w500,
               ),
             ),

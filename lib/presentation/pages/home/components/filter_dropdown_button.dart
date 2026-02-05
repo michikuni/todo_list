@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
 
@@ -13,11 +12,13 @@ enum TimeFilter {
 class FilterDropdown extends StatefulWidget {
   final TimeFilter initialValue;
   final ValueChanged<TimeFilter> onChanged;
+  final Color textColor;
 
   const FilterDropdown({
     super.key,
     required this.initialValue,
     required this.onChanged,
+    required this.textColor
   });
 
   @override
@@ -42,22 +43,22 @@ class _FilterDropdownState extends State<FilterDropdown> {
         horizontal: AppSizes.dropdownButtonPaddingHorizontal,
       ),
       decoration: BoxDecoration(
-        color: AppColors.pureWhite21,
+        color: Theme.of(context).colorScheme.secondaryContainer,
         borderRadius: BorderRadius.circular(AppSizes.dropdownButtonRadius),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<TimeFilter>(
           value: value,
-          icon: const Icon(
+          icon: Icon(
             Icons.keyboard_arrow_down,
             size: AppSizes.dropdownButtonIconSize,
-            color: AppColors.pureWhite87,
+            color: widget.textColor,
           ),
-          dropdownColor: AppColors.lightGrey,
+          dropdownColor: Theme.of(context).colorScheme.onSecondaryContainer,
           isExpanded: true,
           style: Theme.of(
             context,
-          ).textTheme.displaySmall?.copyWith(color: AppColors.pureWhite87),
+          ).textTheme.displaySmall?.copyWith(color: widget.textColor),
           items: [
             DropdownMenuItem(value: TimeFilter.today, child: Text(AppLocalizations.of(context)!.dropDownUncompletedToday)),
             DropdownMenuItem(value: TimeFilter.week, child: Text(AppLocalizations.of(context)!.dropDownUncompletedWeek)),

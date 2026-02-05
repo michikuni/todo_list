@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 
 class PrimaryButtonWidget extends StatelessWidget {
@@ -27,19 +26,19 @@ class PrimaryButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             width: AppSizes.authTextFieldBorder,
-            color: AppColors.mediumSlateBlue50,
+            color: Theme.of(context).colorScheme.primaryFixed,
           ),
           borderRadius: BorderRadius.circular(
             AppSizes.authTextFieldBorderRadius,
           ),
-          color: isValid ? AppColors.mediumSlateBlue : AppColors.mediumSlateBlue50,
+          color: isValid ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.primaryFixed,
         ),
         child: Center(
           child: Text(
             text,
             style: Theme.of(
               context,
-            ).textTheme.displayLarge?.copyWith(color: AppColors.pureWhite),
+            ).textTheme.displayLarge?.copyWith(color: Theme.of(context).colorScheme.primaryFixedDim),
           ),
         ),
       ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/widgets/primary_button.dart';
@@ -15,7 +14,7 @@ class LoginFailDialog extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSizes.signinDialogRadius),
-          color: AppColors.darkGrey,
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
         ),
         padding: EdgeInsets.all(AppSizes.signinDialogPadding),
         child: Column(
@@ -25,7 +24,7 @@ class LoginFailDialog extends StatelessWidget {
             Text(
               AppLocalizations.of(context)!.signinDialogTitleText,
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                color: AppColors.pureWhite87,
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -35,7 +34,7 @@ class LoginFailDialog extends StatelessWidget {
             Text(
               AppLocalizations.of(context)!.signinDialogContentText,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.pureWhite87,
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/task/task_bloc.dart';
@@ -41,12 +40,12 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) => Dialog(
-        backgroundColor: AppColors.darkGrey,
+        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSizes.editTaskDialogRadius),
             border: Border.all(width: 1),
-            color: AppColors.darkGrey,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
           ),
           padding: EdgeInsets.fromLTRB(
             AppSizes.editTaskDialogPaddingHorizontal,
@@ -61,7 +60,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
               Text(
                 AppLocalizations.of(context)!.editTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  color: AppColors.pureWhite87,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
               SizedBox(height: AppSizes.editTaskDialogTitlePaddingBottom),
@@ -75,7 +74,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                     ? BoxDecoration(
                         border: Border.all(
                           width: 1,
-                          color: AppColors.mediumGrey,
+                          color: Theme.of(context).colorScheme.outline,
                         ),
                         borderRadius: BorderRadius.circular(
                           AppSizes.editTaskDialogRadius,
@@ -100,12 +99,12 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                     hintText: AppLocalizations.of(context)!.editContentHint,
                     hintStyle: Theme.of(
                       context,
-                    ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
+                    ).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.secondaryFixedDim),
                     border: InputBorder.none,
                   ),
                   style: Theme.of(
                     context,
-                  ).textTheme.bodySmall?.copyWith(color: AppColors.pureWhite87),
+                  ).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ),
               Container(
@@ -114,7 +113,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                     ? BoxDecoration(
                         border: Border.all(
                           width: 1,
-                          color: AppColors.mediumGrey,
+                          color: Theme.of(context).colorScheme.outline,
                         ),
                         borderRadius: BorderRadius.circular(AppSizes.editTaskDialogRadius),
                       )
@@ -137,12 +136,12 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                     hintText: AppLocalizations.of(context)!.editDescriptionHint,
                     hintStyle: Theme.of(
                       context,
-                    ).textTheme.bodySmall?.copyWith(color: AppColors.grey),
+                    ).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.secondaryFixedDim),
                     border: InputBorder.none,
                   ),
                   style: Theme.of(
                     context,
-                  ).textTheme.bodySmall?.copyWith(color: AppColors.pureWhite87),
+                  ).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ),
               SizedBox(height: AppSizes.editTaskDialogButtonSpaceTop),
@@ -161,7 +160,7 @@ class _AddTaskDialogState extends State<EditTaskDialog> {
                           child: Text(
                             AppLocalizations.of(context)!.editCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
-                                ?.copyWith(color: AppColors.mediumSlateBlue),
+                                ?.copyWith(color: Theme.of(context).colorScheme.primary),
                           ),
                         ),
                       ),

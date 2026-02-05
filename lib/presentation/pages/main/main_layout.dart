@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/core/di/injection.dart';
 import 'package:todo_list/data/datasources/local/token/token_stograge.dart';
@@ -69,12 +68,12 @@ class _MainLayoutState extends State<MainLayout> {
                           },
                         );
                       },
-                      backgroundColor: AppColors.mediumSlateBlue,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       shape: const CircleBorder(),
-                      child: const Icon(
+                      child: Icon(
                         Icons.add,
                         size: AppSizes.homeAddButtonIconSize,
-                        color: AppColors.pureWhite,
+                        color: Theme.of(context).colorScheme.primaryFixedDim,
                       ),
                     ),
                   )
@@ -83,7 +82,7 @@ class _MainLayoutState extends State<MainLayout> {
                 ? FloatingActionButtonLocation.centerDocked
                 : null,
             bottomNavigationBar: BottomAppBar(
-              color: AppColors.darkGrey,
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
               child: SizedBox(
                 height: AppSizes.homeBottomNavHeight,
                 child: Row(

@@ -29,7 +29,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
     final months = l10n.monthDaysName;
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) => Dialog(
-        backgroundColor: AppColors.darkGrey,
+        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.chooseDateDialogPadding),
@@ -59,7 +59,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
-          icon: const Icon(Icons.chevron_left, color: AppColors.pureWhite87),
+          icon: Icon(Icons.chevron_left, color: Theme.of(context).colorScheme.onPrimary),
           onPressed: _previousMonth,
         ),
         Center(
@@ -68,20 +68,20 @@ class _EditDateDialogState extends State<EditDateDialog> {
               Text(
                 _monthName(currentDate.month, months).toUpperCase(),
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  color: AppColors.pureWhite87,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
               Text(
                 currentDate.year.toString(),
                 style: Theme.of(
                   context,
-                ).textTheme.labelSmall?.copyWith(color: AppColors.grey),
+                ).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.secondaryFixedDim),
               ),
             ],
           ),
         ),
         IconButton(
-          icon: const Icon(Icons.chevron_right, color: AppColors.pureWhite),
+          icon: Icon(Icons.chevron_right, color: Theme.of(context).colorScheme.primaryFixedDim),
           onPressed: _nextMonth,
         ),
       ],
@@ -101,7 +101,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
                   e == days[0] ||
                       e == days[6]
                   ? AppColors.coralRed
-                  : AppColors.pureWhite87,
+                  : Theme.of(context).colorScheme.onPrimary,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -150,8 +150,8 @@ class _EditDateDialogState extends State<EditDateDialog> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: isSelected
-                  ? AppColors.mediumSlateBlue
-                  : AppColors.jetBlack,
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.circular(
                 AppSizes.chooseDateDialogCalendarItemRadius,
               ),
@@ -160,7 +160,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
             child: Text(
               '$day',
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                color: AppColors.pureWhite87,
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -185,7 +185,7 @@ class _EditDateDialogState extends State<EditDateDialog> {
                 child: Text(
                   AppLocalizations.of(context)!.dateCancelButtonText,
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    color: AppColors.mediumSlateBlue,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),

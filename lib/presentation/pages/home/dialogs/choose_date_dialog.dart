@@ -29,7 +29,7 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
     final months = l10n.monthDaysName;
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) => Dialog(
-        backgroundColor: AppColors.darkGrey,
+        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.chooseDateDialogPadding),
@@ -59,7 +59,10 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
-          icon: const Icon(Icons.chevron_left, color: AppColors.pureWhite87),
+          icon: Icon(
+            Icons.chevron_left,
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
           onPressed: _previousMonth,
         ),
         Center(
@@ -68,14 +71,14 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
               Text(
                 _monthName(currentDate.month, months).toUpperCase(),
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                  color: AppColors.pureWhite87,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
               Text(
                 currentDate.year.toString(),
                 style: Theme.of(
                   context,
-                ).textTheme.labelSmall?.copyWith(color: AppColors.grey),
+                ).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.secondaryFixedDim),
               ),
             ],
           ),
@@ -97,11 +100,9 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
           child: Text(
             e,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color:
-                  e == days[0] ||
-                      e == days[6]
+              color: e == days[0] || e == days[6]
                   ? AppColors.coralRed
-                  : AppColors.pureWhite87,
+                  : Theme.of(context).colorScheme.onPrimary,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -150,8 +151,8 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: isSelected
-                  ? AppColors.mediumSlateBlue
-                  : AppColors.jetBlack,
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.circular(
                 AppSizes.chooseDateDialogCalendarItemRadius,
               ),
@@ -160,7 +161,7 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
             child: Text(
               '$day',
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                color: AppColors.pureWhite87,
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -185,7 +186,7 @@ class _ChooseDateDialogState extends State<ChooseDateDialog> {
                 child: Text(
                   AppLocalizations.of(context)!.chooseDateCancelButtonText,
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    color: AppColors.mediumSlateBlue,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),

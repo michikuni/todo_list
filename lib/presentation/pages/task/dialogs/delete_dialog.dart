@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/constants/app_router_path.dart';
 import 'package:todo_list/core/constants/app_sizes.dart';
 import 'package:todo_list/domain/entities/todo/todo_with_key.dart';
@@ -42,7 +41,7 @@ class DeleteTaskDialog extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSizes.deleteDialogRadius),
-            color: AppColors.darkGrey,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
           ),
           padding: EdgeInsets.all(AppSizes.deleteDialogPadding),
           child: Column(
@@ -52,7 +51,7 @@ class DeleteTaskDialog extends StatelessWidget {
               Text(
                 AppLocalizations.of(context)!.deleteTaskTitleText,
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  color: AppColors.pureWhite87,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -62,7 +61,7 @@ class DeleteTaskDialog extends StatelessWidget {
               Text(
                 '${AppLocalizations.of(context)!.deleteTaskContentText}${todo.todo.content}',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.pureWhite87,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.w500,
                 ),
                 textAlign: TextAlign.center,
@@ -81,7 +80,7 @@ class DeleteTaskDialog extends StatelessWidget {
                           child: Text(
                             AppLocalizations.of(context)!.deleteTaskCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
-                                ?.copyWith(color: AppColors.mediumSlateBlue),
+                                ?.copyWith(color: Theme.of(context).colorScheme.primary),
                           ),
                         ),
                       ),

@@ -57,7 +57,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.black,
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         leading: Center(
           child: GestureDetector(
             onTap: () => context.pop(),
@@ -69,10 +69,10 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                 borderRadius: BorderRadius.circular(
                   AppSizes.taskAppBarIconRadius,
                 ),
-                color: AppColors.eerieBlack,
+                color: Theme.of(context).colorScheme.secondaryFixed,
               ),
               child: Center(
-                child: Icon(Icons.close_rounded, color: AppColors.pureWhite87),
+                child: Icon(Icons.close_rounded, color: Theme.of(context).colorScheme.onPrimary),
               ),
             ),
           ),
@@ -86,10 +86,10 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
               borderRadius: BorderRadius.circular(
                 AppSizes.taskAppBarIconRadius,
               ),
-              color: AppColors.eerieBlack,
+              color: Theme.of(context).colorScheme.secondaryFixed,
             ),
             child: Center(
-              child: Icon(Icons.repeat_rounded, color: AppColors.pureWhite87),
+              child: Icon(Icons.repeat_rounded, color: Theme.of(context).colorScheme.onPrimary),
             ),
           ),
         ],
@@ -98,7 +98,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
         builder: (context, state) => Container(
           width: double.infinity,
           height: double.infinity,
-          color: AppColors.black,
+          color: Theme.of(context).colorScheme.primaryContainer,
           padding: EdgeInsets.symmetric(
             horizontal: AppSizes.taskPageHorizontalMargin,
           ),
@@ -115,6 +115,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                       top: AppSizes.taskTitleCircleCheckPaddingTop,
                     ),
                     child: CircleCheck(
+                      radioColor: Theme.of(context).colorScheme.primary,
                       value: state.isDone,
                       onChanged: (val) {
                         setState(() {
@@ -133,7 +134,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                         Text(
                           state.content,
                           style: Theme.of(context).textTheme.bodyMedium
-                              ?.copyWith(color: AppColors.pureWhite87),
+                              ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
                           maxLines: AppSizes.taskTitleTextMaxLine,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -141,7 +142,7 @@ class _TaskPageWidgetState extends State<TaskPageWidget> {
                         Text(
                          state.description,
                           style: Theme.of(context).textTheme.displayLarge
-                              ?.copyWith(color: AppColors.grey),
+                              ?.copyWith(color: Theme.of(context).colorScheme.secondaryFixedDim),
                           maxLines: AppSizes.taskTitleTextMaxLine,
                           overflow: TextOverflow.ellipsis,
                         ),

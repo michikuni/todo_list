@@ -20,14 +20,14 @@ class PersonalWidget extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) => Scaffold(
-        backgroundColor: AppColors.black,
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         appBar: AppBar(
           title: Text(
             l10n.profileTitleText,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           centerTitle: true,
-          backgroundColor: AppColors.black,
+          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         ),
         body: SafeArea(
           minimum: EdgeInsets.all(24),
@@ -50,20 +50,20 @@ class PersonalWidget extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.verified_user_outlined,
-                    color: AppColors.pureWhite87,
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
                   SizedBox(width: AppSizes.taskRowTitleSpace),
                   Text(
                     l10n.profileIdText,
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      color: AppColors.pureWhite87,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
                   Expanded(child: Container()),
                   Text(
                     state.id.toString(),
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      color: AppColors.pureWhite87,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
                 ],
@@ -71,19 +71,19 @@ class PersonalWidget extends StatelessWidget {
               SizedBox(height: 24),
               Row(
                 children: [
-                  Icon(Icons.perm_identity, color: AppColors.pureWhite87),
+                  Icon(Icons.perm_identity, color: Theme.of(context).colorScheme.onPrimary),
                   SizedBox(width: AppSizes.taskRowTitleSpace),
                   Text(
                     l10n.profileNameText,
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      color: AppColors.pureWhite87,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
                   Expanded(child: Container()),
                   Text(
                     state.name,
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      color: AppColors.pureWhite87,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
                   SizedBox(width: 12),
@@ -107,19 +107,19 @@ class PersonalWidget extends StatelessWidget {
               SizedBox(height: 24),
               Row(
                 children: [
-                  Icon(Icons.email_outlined, color: AppColors.pureWhite87),
+                  Icon(Icons.email_outlined, color: Theme.of(context).colorScheme.onPrimary),
                   SizedBox(width: AppSizes.taskRowTitleSpace),
                   Text(
                     l10n.profileEmailText,
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      color: AppColors.pureWhite87,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
                   Expanded(child: Container()),
                   Text(
                     state.email,
                     style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      color: AppColors.pureWhite87,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
                 ],
@@ -131,12 +131,12 @@ class PersonalWidget extends StatelessWidget {
                 },
                 child: Row(
                   children: [
-                    Icon(Icons.language_rounded, color: AppColors.pureWhite87),
+                    Icon(Icons.language_rounded, color: Theme.of(context).colorScheme.onPrimary),
                     SizedBox(width: AppSizes.taskRowTitleSpace),
                     Text(
                       l10n.profileLanguageText,
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        color: AppColors.pureWhite87,
+                        color: Theme.of(context).colorScheme.onPrimary,
                       ),
                     ),
                     Expanded(child: Container()),
