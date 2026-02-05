@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_list/core/constants/app_colors.dart';
 import 'package:todo_list/core/theme/dark_theme.dart';
+import 'package:todo_list/core/theme/light_theme.dart';
 
 class AppThemes {
   AppThemes._();
@@ -11,7 +12,14 @@ class AppThemes {
       textTheme: _buildDefaultTextTheme(),
       useMaterial3: true,
       colorScheme: DarkTheme.darkColorScheme,
-      // colorScheme: LightTheme.lightColorScheme,
+    );
+  }
+
+  static ThemeData get lightTheme {
+    return ThemeData(
+      textTheme: _buildDefaultTextTheme(),
+      useMaterial3: true,
+      colorScheme: LightTheme.lightColorScheme,
     );
   }
 

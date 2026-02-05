@@ -172,6 +172,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             );
           },
         );
+        // log('Bloc id: ${state.id}');
+        // log('Bloc name: ${state.name}');
+        // log('Bloc email: ${state.email}');
+        // log('Bloc avatar: ${state.avatar}');
         add(GetTodoEvent());
       }
       // print(state.status);

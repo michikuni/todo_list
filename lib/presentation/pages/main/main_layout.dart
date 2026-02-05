@@ -24,10 +24,7 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOption = [
-    HomePageWidget(),
-    PersonalWidget(),
-  ];
+  List<Widget> get _pages => [const HomePageWidget(), const PersonalWidget()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -45,8 +42,9 @@ class _MainLayoutState extends State<MainLayout> {
         addTodo: getIt<AddTodoUseCase>(),
         deleteTodo: getIt<DeleteTodoUseCase>(),
         updateTodo: getIt<UpdateTodoUseCase>(),
-        updateNameProfile: getIt<UpdateNameProfileUseCase>()
+        updateNameProfile: getIt<UpdateNameProfileUseCase>(),
       )..add(GetProfileEvent()),
+
       child: Builder(
         builder: (context) {
           return Scaffold(
@@ -139,7 +137,7 @@ class _MainLayoutState extends State<MainLayout> {
                 ),
               ),
             ),
-            body: _widgetOption.elementAt(_selectedIndex),
+            body: _pages[_selectedIndex],
           );
         },
       ),

@@ -11,7 +11,8 @@ import 'package:todo_list/domain/usecases/profile/get_profile.dart';
 import 'package:todo_list/l10n/app_localizations.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_bloc.dart';
 import 'package:todo_list/presentation/bloc/gate/auth_event.dart';
-import 'package:todo_list/presentation/bloc/gate/auth_state.dart';
+import 'package:todo_list/presentation/bloc/personal/personal_bloc.dart';
+import 'package:todo_list/presentation/bloc/personal/personal_state.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,25 +36,28 @@ class TodoAppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthState>(
-      builder: (context, state) {
-        return MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          theme: AppThemes.darkTheme,
-          routerConfig: AppRouter.appRouters,
-          locale: state.locale,
-          supportedLocales: const [
-            Locale('vi'),
-            Locale('en'),
-          ],
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-        );
-      },
+    return BlocProvider(
+      create: (context) => PersonalBloc(),
+      child: BlocBuilder<PersonalBloc, PersonalState>(
+        builder: (context, state) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: state.status ? AppThemes.lightTheme : AppThemes.darkTheme,
+            routerConfig: AppRouter.appRouters,
+            locale: state.locale,
+            supportedLocales: const [
+              Locale('vi'),
+              Locale('en'),
+            ],
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+          );
+        },
+      ),
     );
   }
 }

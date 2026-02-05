@@ -5,12 +5,12 @@ class LightTheme {
   static ColorScheme lightColorScheme = ColorScheme(
     brightness: Brightness.light, // Theme
 
-    primary: const Color.fromARGB(255, 255, 168, 168),
+    primary: const Color(0xFFFF877D),
 
-    onPrimary: AppColors.pureWhite,
+    onPrimary: Color(0xFF651B40),
 
-    primaryContainer: Color(0xFFFFF5E4), // background
-    onPrimaryContainer: const Color(0xFFFF9494), // item on background
+    primaryContainer: Color(0xFFEDE7D3), // background
+    onPrimaryContainer: const Color(0xFFFFC4AE), // item on background
 
     primaryFixed: const Color(0xFFFFD1D1), // disable button
 
@@ -22,9 +22,9 @@ class LightTheme {
     onSecondary: AppColors.lightGrey, // card background
 
     secondaryContainer: Color(0xFFF5F5F5), // container dropdown background
-    onSecondaryContainer: AppColors.jetBlack, // dropdown text/icon
+    onSecondaryContainer: Color(0xFFFFFFFF), // dropdown text/icon
 
-    secondaryFixed: AppColors.lightGrey, // button task
+    secondaryFixed: const Color(0xFFFFC4AE), // button task
     secondaryFixedDim: AppColors.darkGrey, // hint
 
     outline: AppColors.grey, // border

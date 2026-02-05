@@ -19,7 +19,7 @@ class AuthGate extends StatelessWidget {
         switch (state) {
           case AuthLoading():
           case AuthInitial():
-            return const LoadingDialog();
+            return LoadingDialog();
 
           case AuthAuthenticated():
             return MainLayout();

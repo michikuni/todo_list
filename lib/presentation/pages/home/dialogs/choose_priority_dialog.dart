@@ -58,7 +58,9 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                     onTap: () {
                       setState(() {
                         selected = number;
-                        context.read<HomeBloc>().add(OnPriorityChanged(selected));
+                        context.read<HomeBloc>().add(
+                          OnPriorityChanged(selected),
+                        );
                       });
                     },
                     child: Container(
@@ -68,7 +70,9 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                         color: isSelected
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.secondary,
-                        borderRadius: BorderRadius.circular(AppSizes.choosePriorityDialogItemRadius),
+                        borderRadius: BorderRadius.circular(
+                          AppSizes.choosePriorityDialogItemRadius,
+                        ),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -80,11 +84,16 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                                 : Colors.grey.shade400,
                             size: AppSizes.choosePriorityDialogItemIconSize,
                           ),
-                          const SizedBox(height: AppSizes.choosePriorityDialogItemSpaceBottom),
+                          const SizedBox(
+                            height:
+                                AppSizes.choosePriorityDialogItemSpaceBottom,
+                          ),
                           Text(
                             "$number",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: isSelected
+                                  ? Colors.white
+                                  : Colors.grey.shade400,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -95,7 +104,9 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                 },
               ),
 
-              const SizedBox(height: AppSizes.choosePriorityDialogButtonSpaceTop),
+              const SizedBox(
+                height: AppSizes.choosePriorityDialogButtonSpaceTop,
+              ),
 
               // Buttons
               Row(
@@ -109,20 +120,28 @@ class _ChoosePriorityDialogState extends State<ChoosePriorityDialog> {
                         height: AppSizes.choosePriorityDialogButtonHeight,
                         child: Center(
                           child: Text(
-                            AppLocalizations.of(context)!.choosePriorityCancelButtonText,
+                            AppLocalizations.of(
+                              context,
+                            )!.choosePriorityCancelButtonText,
                             style: Theme.of(context).textTheme.displayLarge
-                                ?.copyWith(color: Theme.of(context).colorScheme.primary),
+                                ?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: AppSizes.choosePriorityDialogButtonSpaceBetween),
+                  SizedBox(
+                    width: AppSizes.choosePriorityDialogButtonSpaceBetween,
+                  ),
                   Expanded(
                     child: PrimaryButtonWidget(
                       isValid: true,
                       height: AppSizes.choosePriorityDialogButtonHeight,
-                      text: AppLocalizations.of(context)!.choosePrioritySaveButtonText,
+                      text: AppLocalizations.of(
+                        context,
+                      )!.choosePrioritySaveButtonText,
                       width: AppSizes.choosePriorityDialogPrimaryButtonWidth,
                       onPressed: () {
                         context.pop();
