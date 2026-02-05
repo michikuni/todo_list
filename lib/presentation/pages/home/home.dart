@@ -96,15 +96,21 @@ class _HomePageWidgetState extends State<HomePageWidget>
                       avatarUrl.isNotEmpty
                           ? avatarUrl
                           : AssetsPath.defaultImage,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(
+                          Icons.account_circle_rounded,
+                          size: 40,
+                        );
+                      },
                     ),
                   ),
                 ),
               ],
               title: Text(
                 AppLocalizations.of(context)!.homeAppBarTitle,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
               leading: Padding(
                 padding: EdgeInsets.only(left: AppSizes.homeHorizontalPadding),
@@ -137,7 +143,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                               Text(
                                 AppLocalizations.of(context)!.homeEmptyContent,
                                 style: Theme.of(context).textTheme.bodyMedium
-                                    ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                                    ?.copyWith(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
                               ),
                               const SizedBox(
                                 height: AppSizes.homeEmptyInstructionTop,
@@ -147,7 +157,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   context,
                                 )!.homeEmptyInstruction,
                                 style: Theme.of(context).textTheme.displayLarge
-                                    ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                                    ?.copyWith(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onPrimary,
+                                    ),
                               ),
                             ],
                           ),
@@ -163,7 +177,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     width: AppSizes.authTextFieldBorder,
-                                    color: Theme.of(context).colorScheme.outline,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.outline,
                                   ),
                                   borderRadius: BorderRadius.circular(
                                     AppSizes.authTextFieldBorderRadius,
@@ -196,7 +212,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               .textTheme
                                               .displayLarge
                                               ?.copyWith(
-                                                color: Theme.of(context).colorScheme.primaryFixedDim,
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.primaryFixedDim,
                                               ),
                                           decoration: InputDecoration(
                                             hint: Text(
@@ -207,7 +225,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                   .textTheme
                                                   .displayLarge
                                                   ?.copyWith(
-                                                    color: Theme.of(context).colorScheme.onSecondaryContainer,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onSecondaryContainer,
                                                   ),
                                             ),
                                             border: InputBorder.none,
@@ -229,7 +249,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: FilterDropdown(
-                                    textColor: Theme.of(context).colorScheme.onPrimary,
+                                    textColor: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
                                     initialValue: selectedFilter,
                                     onChanged: (value) {
                                       setState(() {
@@ -274,7 +296,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 width: 104,
                                 child: Align(
                                   alignment: Alignment.centerLeft,
-                                  child: CompletedDropdown(textColor: Theme.of(context).colorScheme.onPrimary,),
+                                  child: CompletedDropdown(
+                                    textColor: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
+                                  ),
                                 ),
                               ),
                             ),

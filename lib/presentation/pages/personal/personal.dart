@@ -40,7 +40,15 @@ class PersonalWidget extends StatelessWidget {
                   ClipOval(
                     child: CircleAvatar(
                       radius: 52,
-                      child: Image.network(state.avatar),
+                      child: Image.network(
+                        state.avatar,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Icon(
+                            Icons.account_circle_rounded,
+                            size: 104,
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
@@ -71,7 +79,10 @@ class PersonalWidget extends StatelessWidget {
               SizedBox(height: 24),
               Row(
                 children: [
-                  Icon(Icons.perm_identity, color: Theme.of(context).colorScheme.onPrimary),
+                  Icon(
+                    Icons.perm_identity,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                   SizedBox(width: AppSizes.taskRowTitleSpace),
                   Text(
                     l10n.profileNameText,
@@ -107,7 +118,10 @@ class PersonalWidget extends StatelessWidget {
               SizedBox(height: 24),
               Row(
                 children: [
-                  Icon(Icons.email_outlined, color: Theme.of(context).colorScheme.onPrimary),
+                  Icon(
+                    Icons.email_outlined,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                   SizedBox(width: AppSizes.taskRowTitleSpace),
                   Text(
                     l10n.profileEmailText,
@@ -131,7 +145,10 @@ class PersonalWidget extends StatelessWidget {
                 },
                 child: Row(
                   children: [
-                    Icon(Icons.language_rounded, color: Theme.of(context).colorScheme.onPrimary),
+                    Icon(
+                      Icons.language_rounded,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
                     SizedBox(width: AppSizes.taskRowTitleSpace),
                     Text(
                       l10n.profileLanguageText,
