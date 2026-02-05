@@ -3,7 +3,7 @@ import 'package:todo_list/core/constants/app_colors.dart';
 
 class DarkTheme {
   static ColorScheme darkColorScheme = ColorScheme(
-    brightness: Brightness.dark,  //Theme
+    brightness: Brightness.dark, //Theme
 
     primary: AppColors.mediumSlateBlue, //primary button, FAB
     onPrimary: AppColors.pureWhite87,
@@ -12,23 +12,33 @@ class DarkTheme {
     onPrimaryContainer: AppColors.darkGrey, //item on background
 
     primaryFixed: AppColors.mediumSlateBlue50, //disable button
-    // onPrimaryFixed: ,
+
     onPrimaryFixedVariant: AppColors.pureWhite50, //blur text note
 
     primaryFixedDim: AppColors.pureWhite, //highlight
-    
 
     secondary: AppColors.jetBlack, // card highlight background
     onSecondary: AppColors.pureWhite10, //card background
 
     secondaryContainer: AppColors.pureWhite21, //container dropdown background
     onSecondaryContainer: AppColors.lightGrey, //dropdown background
-    
+
     secondaryFixed: AppColors.eerieBlack, //button task
     secondaryFixedDim: AppColors.grey, //hint
 
+    outline: AppColors.mediumGrey, // border
+    outlineVariant: AppColors.mediumGrey, //divider
+
+    error: AppColors.coralRed,
+    onError: AppColors.pureWhite87, //chưa dùng đến
+
+    surface: AppColors.darkGrey, //several surface (chưa dùng đến)
+    onSurface: AppColors.pureWhite87, //chưa dùng đến
+
     // onSecondaryFixed: ,
     // onSecondaryFixedVariant: ,
+
+    // onPrimaryFixed: ,
 
     // tertiary: , //chart, badge, spot feature
     // tertiaryContainer: ,
@@ -40,14 +50,8 @@ class DarkTheme {
     // onTertiaryFixed: ,
     // onTertiaryFixedVariant: ,
 
-    error: AppColors.coralRed,
-    onError: AppColors.pureWhite87,
-
     // errorContainer: ,
     // onErrorContainer: ,
-
-    surface: AppColors.darkGrey,  //several surface
-    onSurface: AppColors.pureWhite87,
 
     // surfaceBright: , //background bright
     // surfaceContainer: , //card
@@ -65,10 +69,7 @@ class DarkTheme {
 
     // onInverseSurface: ,
 
-    outline: AppColors.mediumGrey, // border
-    outlineVariant: AppColors.mediumGrey, //divider
-    
     // scrim: ,
-    // shadow: ,   
+    // shadow: ,
   );
 }

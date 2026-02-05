@@ -11,6 +11,7 @@ class AppThemes {
       textTheme: _buildDefaultTextTheme(),
       useMaterial3: true,
       colorScheme: DarkTheme.darkColorScheme,
+      // colorScheme: LightTheme.lightColorScheme,
     );
   }
 
